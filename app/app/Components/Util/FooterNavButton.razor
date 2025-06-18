@@ -1,0 +1,21 @@
+<NavLink class="@containerStyles" href="@Href" style="text-decoration: none;">
+    <img src="@icon" class="@iconStyles" alt="">
+    <h5 class="@titleStyles">@title</h5>
+</NavLink>
+
+@code {
+    [Parameter]
+    public string? icon { get; set; } = ""; // Main icon for the nav menu
+    [Parameter]
+    public string? iconStyles { get; set; } = ""; // Main icon for the nav menu
+    [Parameter]
+    public string? containerStyles { get; set; } = ""; // Main icon for the nav menu
+
+    [Parameter]
+    public string? Href { get; set; } = ""; // Additional class for the button
+
+    [Parameter]
+    public string? title { get; set; } = ""; // Additional class for the button
+    [Parameter]
+    public string? titleStyles { get; set; } = ""; // Additional class for the button
+}

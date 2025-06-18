@@ -1,0 +1,95 @@
+﻿@using System.Text.Json;
+@rendermode InteractiveServer
+@inject NavigationManager NavigationManager
+@inject Model Model
+@inject Query Query
+@page "/SignUp"
+
+<PageTitle>Sign Up</PageTitle>
+<PageHeading Heading="Sign Up"/>
+<section class="flex justify-center lg:!mt-[40px] mt-[76px]">
+    <Form 
+        Inputs="@inputs"
+        Buttons="@buttons"
+        FormsClass="flex flex-column items-center text-center w-[420px] ml-auto"
+        LabelsClass="lora-semibold text-[30px] text-[#000] mb-[25px] xl:!mb-[15px]"
+        InputsClass="w-[420px] h-[50px]  lora-semibold !mb-[30px] xl:!mb-[20px] text-[20px] text-[#fff] px-[15px] !rounded-[15px] !bg-[#476F95] focus:!border-[#000] focus:border-[4px] focus:!bg-[#82919F] focus:!scale-[1.03] !outline-none"
+        FormName="SignUpForm"
+        HandleSubmit="HandleSubmit"
+        ButtonTitle="Sign Up "
+        ButtonClass="bg-[#F1DDBF] w-[201px] h-[60px] !rounded-[10px] !mt-[30px] xl:!mt-[20px] !text-[30px] font-semibold hover:scale-[1.05] text-black"
+        ChangeUI="@Model.SwitchUI"
+        InitialUIView="UsernameCheck"
+        TakenEmails="@(GetTakenEmails())"
+        TakenUsernames="@(GetTakenUsernames())"
+    />
+
+    <img src="images/Vertical-Divider-Large.png" alt="" class="mx-[170px] mt-[53px] h-[452px]">
+    <div class="flex flex-column items-center mr-auto">
+        <UsernameCheck Class="@Model.uI.UI_UsernameCheck" status="@Model.status"/>
+        <PasswordCheck Class="@Model.uI.UI_PasswordCheck" status="@Model.status" Strength="@Model.pwdStrength"/>
+        <EmailCheck Class="@Model.uI.UI_EmailCheck" status="@Model.status"/>
+        <FormErrors Class="@(Model.uI.UI_Errors + " w-[300px]")" Errors="Model.errorMessages.ToArray()"/>
+        <Welcome Class="@(Model.uI.UI_Welcome)" Message="Sign Up Successfull" Type="SignUp" />
+    </div>
+</section>
+
+
+@code {
+    private class User
+    {
+        public string name { get; set; }
+        public string email { get; set; }
+        public string username { get; set; }
+    }
+
+    public string data = Query.GetQuery("https://jsonplaceholder.typicode.com/users"); // Replace with your actual data source or qwery
+
+    protected override void OnInitialized(){
+        Model.errorMessages.Clear();
+        Model.SwitchUI("UsernameCheck");
+        Model.uI.UI_Errors = "hidden";
+    }
+
+    public List<Form.Inputs> inputs = new List<Form.Inputs>(){ 
+        new Form.Inputs(){ Name = "Username", Type = "text", Value = "", Placeholder="Username", UniqueStyles = "", LabelUniqueStyles="!mt-0", Label="Username", OnInput="CheckUsername", isError=false },
+        new Form.Inputs(){ Name = "Email", Type = "email", Value = "", Placeholder="Email", UniqueStyles = "", LabelUniqueStyles="!mt-0", Label="Email", OnInput="CheckEmail", isError=false },
+        new Form.Inputs(){ Name = "Password", Type = "password", Value = "", Placeholder="Password", UniqueStyles = "!bg-[#525E75]", LabelUniqueStyles="!mt-0", Label="Password", OnInput="CheckPasswordStrength", isError=false },
+        new Form.Inputs(){ Name = "ConfirmPassword", Type = "password", Value = "", Placeholder="Confirm Password", UniqueStyles = "!bg-[#525E75]", OnInput="CheckIsEmpty", LabelUniqueStyles="!mt-0", Label="Confirm Password", isError=false}
+    };
+
+    public List<Form.Buttons> buttons = new List<Form.Buttons>() {
+        new Form.Buttons() { Title = "Sign Up", UniqueStyles = "cursor-not-allowed opacity-50", Type="submit", isDisabled = true }
+    };
+
+    private List<string> GetTakenEmails()
+    {
+        var users = System.Text.Json.JsonSerializer.Deserialize<List<User>>(data);
+        return users?.Select(user => user.email).ToList() ?? new List<string>();
+    }
+
+    private List<string> GetTakenUsernames()
+    {
+        var users = System.Text.Json.JsonSerializer.Deserialize<List<User>>(data);
+        return users?.Select(user => user.username).ToList() ?? new List<string>();
+    }
+
+    public async Task HandleSubmit(Model Model)
+    {
+        var result = Query.PostQueryAsync("https://jsonplaceholder.typicode.com/posts", JsonSerializer.Serialize(Model.GetAllProperties()));
+        if(result != null && !result.Contains("error"))
+        {
+            Model.errorMessages.Clear();
+            Model.SwitchUI("Welcome");
+            await Task.Delay(3000); // Simulate a delay for the sign-up process
+            NavigationManager.NavigateTo("/Dashboard");
+        }
+        else
+        {
+            Model.errorMessages.Add("An error occurred while submitting the form.");
+            Model.SwitchUI("Errors");
+        }
+        StateHasChanged();
+    }
+}
+ 

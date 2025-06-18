@@ -1,0 +1,37 @@
+@page "/Login/SelectOption"
+@inject NavigationManager NavigationManager
+@layout Layout.Login
+
+<article class="flex flex-column items-center @Class">
+    <h3 class="montserrat-semibold !text-[36px] mb-0">Select one option</h3>
+    <Button 
+        title="Change Username" 
+        Class="bg-[#476F95] w-[354px] text-white !mt-[49px] !text-[23px] montserrat-semibold" 
+        OnClickParamater="ChangeUsername"
+        isLink="true"
+        href="http://localhost:5046/Login/ChangeUsername"
+    />
+    <div class="flex items-center my-[30px]">
+        <img src="images/Divider-Medium.png" class="h-[8px] w-[185px] my-[30px]" alt="" srcset="">
+        <h4 class="mx-[6px] lora-semibold !text-[30px]">OR</h4>
+        <img src="images/Divider-Medium.png" class="h-[8px] w-[185px] my-[30px]" alt="" srcset="">
+    </div>
+    <Button 
+        title="Change Password" 
+        Class="bg-[#D9D9D9] w-[354px] !text-[23px] montserrat-semibold"  
+        isLink="true"
+        href="http://localhost:5046/Login/ChangePassword"
+    />
+    <img src="images/Divider-XLarge.png" class="h-[8px] w-[290px] my-[50px]" alt="" srcset="">
+    <Button 
+        title="Back" 
+        Class="bg-[#F1DDBF] w-[201px] !text-[30px] montserrat-semibold" 
+        isLink="true"
+        href="http://localhost:5046/Login"
+    />
+</article>
+
+@code {
+    [Parameter]
+    public string Class { get; set;} = ""; // Placeholder for password check status
+}

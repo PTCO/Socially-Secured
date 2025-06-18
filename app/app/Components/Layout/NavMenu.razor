@@ -1,0 +1,53 @@
+﻿@inject NavigationManager NavigationManager
+@inject UserService UserService
+<div class="">
+    <nav class="flex flex-column items-center justify-center w-[150px]">
+        <img src="@currentUrl" alt="" class="w-[78px] h-[78px] @profileImage">
+        <img class="mt-[30px]" src="images/Vertical-Divider-Small.png" alt=""> 
+        <NavButton icon="@(iconOne.icon)" Title="@(iconOne.title)"  ContainerClass="!mt-[20px]" Class="@(iconOne.Class)" Href="@(iconOne.Href)"/>
+        <NavButton icon="@(iconTwo.icon)" Title="@(iconTwo.title)" ContainerClass="!mt-[20px]" Class="@(iconTwo.Class)" Href="@(iconTwo.Href)"/>
+        <NavButton icon="@(iconThree.icon)" Title="@(iconThree.title)" ContainerClass="!mt-[20px]"  Class="@(iconThree.Class)"  Href="@(iconThree.Href)"/>
+        <img class="mt-[30px]" src="images/Vertical-Divider-Small.png" alt="">
+    </nav>
+</div>
+
+@code {
+    public class NavIcon
+    {
+        public string icon { get; set; }
+        public string title { get; set; }
+        public string Class { get; set; }
+        public string Href { get; set; } = ""; // URL for navigation
+    }
+
+    [Parameter]
+    public string? mainicon { get; set; } = ""; // Main icon for the nav menu
+    private string currentUrl = "";
+    private NavIcon iconOne = new NavIcon { icon = "images/Nav-Home.png", title = "Home", Href="/", Class="w-[56px] !h-[56px] border-[#F1DDBF] focus:bg-[#E8E8E8] focus:border-[#E8E8E8] hover:bg-[#E8E8E8] hover:border-[#E8E8E8]" }; // Icon for Home page
+    private NavIcon iconTwo = new NavIcon { icon = "images/Nav-SignUp.png", title = "Sign Up", Href="/SignUp", Class="w-[56px] !h-[56px] border-[#476F95] hover:bg-[#E8E8E8] hover:border-[#E8E8E8]" }; // Icon for Sign Up page
+    private NavIcon iconThree = new NavIcon { icon = "images/Nav-Login.png", title = "Login", Href="/Login", Class="w-[56px] !h-[56px] border-[#78938A] hover:bg-[#E8E8E8] hover:border-[#E8E8E8]"}; // Icon for Login page
+
+    public string profileImage = ""; // Class for profile image styling
+    protected override void OnInitialized()
+    {
+        currentUrl = NavigationManager.Uri; // Get the current URL
+        if(currentUrl.Contains("SignUp")) {
+            currentUrl = "images/Welcome-SignUp-Icon.png"; // Set the icon for SignUp page
+        }
+        else if(currentUrl.Contains("Login")) {
+            currentUrl = "images/Welcome-Login-Icon.png"; // Set the icon for Login page
+        }
+        else if (currentUrl.Contains("dashboard")){
+            currentUrl = UserService.CurrentUser.profilePicture;
+            profileImage = "!w-[103px] !h-[103px] rounded-[50%]";
+            iconOne = new NavIcon { icon = "images/Chat-Search-Icon.png", title = "Search", Href="/Search", Class="w-[56px] !h-[56px] border-[#F1DDBF] focus:bg-[#E8E8E8] focus:border-[#E8E8E8] hover:bg-[#E8E8E8] hover:border-[#E8E8E8] !pt-[10px]" }; // Change the icon for Dashboard page
+            iconTwo = new NavIcon { icon = "images/Chats-Icon.png", title = "Chats", Href="/Chats", Class="w-[56px] !h-[56px] border-[#476F95] hover:bg-[#E8E8E8] hover:border-[#E8E8E8]" }; // Change the icon for Profile page 
+            iconThree = new NavIcon { icon = "images/Settings-Cog-Icon.png", Href="/Settings", title = "Settings", Class="w-[56px] !h-[56px] border-[#78938A] hover:bg-[#E8E8E8] hover:border-[#E8E8E8]" }; // Change the icon for Logout action
+        }
+        else{
+            currentUrl = "images/Welcome-Home-Icon.png"; // Set the icon for Home page
+        }
+        StateHasChanged(); // Trigger a state change to update the UI
+    }
+    
+}

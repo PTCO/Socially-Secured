@@ -1,0 +1,48 @@
+@rendermode InteractiveServer
+
+<NavLink href="@Href" class="@ContainerClass" style="text-decoration: none;" @onmouseover="isNotHidden" @onmouseout="isHidden" @onclick="@func">
+    <div class="flex items-center">
+        <button class="hover:scale-[1.1] focus:scale-[1.1] border-[4px] !rounded-[5px] flex items-center justify-center @Class"  >
+            <img src="@icon" alt="">
+        </button>
+        <h3 class="hidden @ishidden ml-[10px] mb-0 !text-[26px] text-black hind-madurai-semibold w-[100px]">@Title</h3>
+    </div>
+</NavLink>
+
+@code {
+    [Parameter]
+    public string? icon { get; set; } = "";
+
+    [Parameter]
+    public string? hoverStyles { get; set; } = ""; // Main icon for the nav menu
+    [Parameter]
+    public string? hoverOffStyles { get; set; } = ""; // Main icon for the nav menu
+
+    [Parameter]
+    public string? Class { get; set; } = "";
+    [Parameter]
+    public string? ContainerClass { get; set; } = "";
+
+    [Parameter]
+    public EventCallback func { get; set; } = default!;
+
+    [Parameter]
+    public string? Href { get; set; } = "#";
+
+    [Parameter]
+    public string? Title { get; set; } = "";
+
+    [Parameter]
+    public string? ishidden { get; set; } = "";
+
+    private void isHidden(MouseEventArgs e)
+    {
+        ishidden = "";
+        ContainerClass = hoverOffStyles != "" ?  hoverOffStyles:"!mt-[20px]";
+    }
+    private void isNotHidden(MouseEventArgs e)
+    {
+        ishidden = "!flex";
+        ContainerClass = hoverStyles != "" ? hoverStyles:"!mt-[20px] !pl-[100px]";
+    }
+}

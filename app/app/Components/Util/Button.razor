@@ -1,0 +1,43 @@
+@rendermode InteractiveAuto
+
+@if (isLink)
+{
+    <NavLink href="@href">
+        <button class="w-[201px] h-[60px] !rounded-[10px] text-[30px] font-semibold hover:scale-[1.1] text-black @Class">
+            @title    
+        </button>
+    </NavLink>
+}
+else
+{
+    <button class="w-[201px] h-[60px] !rounded-[10px] text-[30px] font-semibold hover:scale-[1.1] text-black @Class" @onclick="callOnclick">
+        @title    
+    </button>
+}
+
+@code {
+    [Parameter]
+    public string? title { get; set; } = "Click Me!";
+
+    [Parameter]
+    public bool isLink { get; set; } = false; // Placeholder for password check status
+
+    [Parameter]
+    public string? href { get; set; } = ""; // Placeholder for password check status
+
+    [Parameter]
+    public string? Class { get; set; } = "";
+
+    [Parameter]
+    public string? OnClickParamater { get; set; } = ""; // Placeholder for icon
+
+    [Parameter]
+    public EventCallback<string> OnClick { get; set; } = default!;
+
+    public async Task callOnclick()
+    {
+        await OnClick.InvokeAsync(OnClickParamater);
+        StateHasChanged();
+    }
+        
+}

@@ -1,0 +1,15 @@
+@inject NavigationManager NavigationManager
+@layout Layout.Login
+
+<article class="flex flex-column items-center w-[424px] @Class">
+    <h3 class="montserrat-semibold ">Forgot Username?</h3>
+    <img src="images/Divider-Medium.png" class="h-[8px] w-[185px] my-[30px]" alt="" srcset="">
+    <h3 class="montserrat-semibold">Forgot Password?</h3>
+    <Button title="Recover" Class="bg-[#476F95] text-white !mt-[40px] !text-[30px]" isLink=true href="/Login/EmailVerification"/>
+</article>
+
+@code {
+    [Parameter]
+    public string Class { get; set;} = ""; // Placeholder for password check status
+
+}

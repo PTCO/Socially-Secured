@@ -1,0 +1,33 @@
+<article class="@Class flex !flex-col items-center ">
+    <img src="@imagePath" alt="Welcome Image" class="w-full h-auto max-w-[524px] mx-auto mb-6">
+    <div class="flex items-center !mt-[80px]">
+        <h3 class="hind-madurai-semibold !text-[32px] mr-[30px] !mb-0">@Message</h3>
+        <img src="images/CheckMark-Icon.png" alt="">
+    </div>
+</article>
+
+@code {
+    [Parameter]
+    public string Class { get; set; } = ""; // Placeholder for welcome message class
+    [Parameter]
+    public string Message { get; set; } // Placeholder for welcome message
+    [Parameter]
+    public string Type { get; set; }// Placeholder for welcome type]
+    public string imagePath { get; set; } = "images/Welcome-Logo.png"; // Placeholder for welcome image path
+
+    protected override void OnInitialized()
+    {
+        switch (Type)
+        {
+            case "SignUp":
+                imagePath = "images/Welcome-Logo.png";
+                break;
+            case "Login":
+                imagePath = "images/Welcome-Back-Logo.png";
+                break;
+            default:
+                imagePath = "images/Welcome-Logo.png";
+                break;
+        }
+    }
+}

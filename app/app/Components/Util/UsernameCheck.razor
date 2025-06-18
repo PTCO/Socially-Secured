@@ -1,0 +1,20 @@
+<article class="flex flex-column items-center w-[424px] @Class">
+    <div class="flex items-center">
+        <h3 class="mb-0 montserrat-semibold">Username Check</h3>
+        <div class="bg-[#525E75] lora-semibold text-[30px] text-[#fff] text-center px-[5px] h-[44px] rounded-[5px] ml-[24px]">@status</div>
+    </div>
+    <img src="images/Divider-Medium.png" class="h-[8px] w-[185px] my-[30px]" alt="" srcset="">
+    <div class="flex items-center flex-column">
+        <div class="!mb-[22px] montserrat-semibold !bg-[#78938A] text-[30px] text-[#fff] text-center rounded-[5px] w-[76px] h-[44px]">Tips</div>
+        <p class="hind-madurai-semibold text-[20px] text-center">Username should border- 8-12 characters</p>
+        <p class="hind-madurai-semibold text-[20px] text-center">Username should only include letters & numbers</p>
+    </div>
+</article>
+
+    @code {
+        [Parameter]
+        public string status { get; set; } = ""; // Placeholder for username check status
+        [Parameter]
+        public string Class { get; set;} = ""; // Placeholder for password check status
+    }
+    

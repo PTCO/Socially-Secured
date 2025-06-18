@@ -1,0 +1,35 @@
+﻿@page "/"
+@rendermode InteractiveServer
+
+<PageTitle>Home</PageTitle>
+<PageHeading Heading="Home"/>
+<section class="justify-center flex items mt-[60px]">
+    <article>
+        <image class="hover:animate-[bounce_1s_ease-in-out_infinite] xl:!w-[450px] " src="images/Main-Logo.png" alt=""/>
+        <div class="flex items-center !mt-[140px]">
+            <Button title="Sign Up" Class="bg-[#F1DDBF] !text-[30px]" OnClick="Navigate" OnClickParamater="http://localhost:5046/SignUp"/> 
+            <Button title="Login" Class="bg-[#525E75] !ml-[80px] !text-[30px] text-white " OnClick="Navigate" OnClickParamater="http://localhost:5046/Login"/> 
+        </div>
+    </article>
+    <article class="w-[377px] h-[637px] ml-[125px] ">
+        <div class="flex flex-column hover:scale-[1.075]">
+            <img src="images/Home-Info-Icon-Trending.png" alt="" class="self-end justify-self-end w-[146px] h-[97px] "/>
+            <p class="text-[28px] xl:!text-[24px] !mt-[11px] mb-0 hind-madurai text-center mx-[16px] w-[353px]">Socialize, like and promote the new gossip, what is hot or the new trending question </p>
+            <img src="images/Divider-Three.png" class="mt-[15px] w-[146px] h-[8px]" alt="">
+        </div>
+        <div class="flex flex-column mt-[60px] min-[1920px]:mt-[100px] hover:scale-[1.075]">
+            <img src="images/Home-Info-Icon-Interact.png" alt="" class="w-[146px] h-[110px]"/>
+            <p class="text-[28px] xl:!text-[24px] w-[361px] !mt-[11px] mb-0 hind-madurai text-center mx-[16px]">Interact in engaging conversations and discussions on popular topics and different perspectives </p>
+            <img src="images/Divider-Four.png" class="self-end mt-[15px] w-[146px] h-[8px]" alt="">
+        </div>
+    </article>
+</section>
+
+@inject NavigationManager Navigation
+
+@code {
+    public void Navigate(string page) {
+        Navigation.NavigateTo(page);
+    }
+}
+

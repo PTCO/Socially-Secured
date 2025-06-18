@@ -1,0 +1,14 @@
+<div class="flex items-center justify-center @ContainerClass  @((isError ? "" : "hidden"))">
+    <h3 class="!mb-0 @IconClass">!</h3>
+</div>
+
+@code {
+    [Parameter]
+    public bool isError { get; set; } = false;
+
+    [Parameter]
+    public string ContainerClass { get; set; } = "";
+
+    [Parameter]
+    public string IconClass { get; set; } = "";
+}

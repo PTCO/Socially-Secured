@@ -1,0 +1,52 @@
+@inherits LayoutComponentBase
+@layout Layout.MainLayout
+
+
+<PageTitle>Login</PageTitle>
+<PageHeading Heading="Login"/>
+<section class="flex justify-center mt-[76px]">
+    <Form 
+        Inputs="@inputs"
+        buttons="@buttons"
+        FormsClass="@("flex flex-column items-center text-center w-[420px] ml-auto !opacity-[0.5] " + @Model.uI.UI_None)"
+        LabelsClass="lora-semibold text-[30px] text-[#000] mb-[25px] xl:!mb-[15px]"
+        InputsClass="w-[420px] h-[50px]  lora-semibold !mb-[30px] xl:!mb-[20px] text-[20px] text-[#fff] px-[15px] !rounded-[15px] bg-[#78938A] focus:!border-[#000] focus:border-[4px] focus:!bg-[#82919F] focus:!scale-[1.03] !outline-none"
+        FormName="LoginForm"
+        HandleSubmit="HandleSubmit"
+        ButtonTitle="Login"
+        ButtonClass="bg-[#F1DDBF] w-[201px] h-[60px] !rounded-[10px] !mt-[30px] xl:!mt-[20px] !text-[30px] font-semibold hover:scale-[1.05] text-black"
+        ButtonContainerClass="flex flex-row justify-center w-full"
+        ChangeUI="@Model.SwitchUI"
+    />
+    <img src="images/Vertical-Divider-Large.png" alt="" class="mx-[170px] mt-[53px] h-[452px]">
+    <div class="flex flex-column items-center mr-auto">
+        @Body
+    </div>
+</section>
+
+@code {
+    
+    public List<Form.Inputs> inputs = new List<Form.Inputs>(){ 
+        new Form.Inputs(){ Name = "Username", Type = "text", Value = "", Placeholder="Username", UniqueStyles = "", LabelUniqueStyles="!mt-0", Label="Username", OnInput="", isError=false, isDisabled=true },
+        new Form.Inputs(){ Name = "Password", Type = "password", Value = "", Placeholder="Password", UniqueStyles = "!bg-[#525E75]", LabelUniqueStyles="!mt-0", Label="Password", OnInput="", isError=false, isDisabled=true }
+    };
+
+    public List<Form.Buttons> buttons = new List<Form.Buttons>() {
+        new Form.Buttons() { Title = "Login", UniqueStyles = "foucs:!scale-[1]", Type="submit", isDisabled=true }
+    };
+
+    protected override void OnInitialized()
+    {
+        Model.errorMessages.Clear();
+        Model.SwitchUI("None");
+    }
+
+    public async Task HandleSubmit(Model Model)
+    {
+        buttons[0].isDisabled = true; // Disable the login button to prevent multiple clicks
+        await Task.Delay(2000); // Simulate a delay for the login process
+        buttons[0].isDisabled = false; // Disable the login button to prevent multiple clicks
+        
+        StateHasChanged();
+    }
+}

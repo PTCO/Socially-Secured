@@ -1,0 +1,337 @@
+{
+  "Files": [
+    {
+      "Id": "A:\\Web Applications\\Socially Secured\\app\\app\\obj\\Debug\\net9.0\\scopedcss\\projectbundle\\app.bundle.scp.css",
+      "PackagePath": "staticwebassets\\app.vaah0cb56u.bundle.scp.css"
+    },
+    {
+      "Id": "A:\\Web Applications\\Socially Secured\\app\\app\\wwwroot\\app.css",
+      "PackagePath": "staticwebassets\\app.css"
+    },
+    {
+      "Id": "A:\\Web Applications\\Socially Secured\\app\\app\\wwwroot\\dist.css",
+      "PackagePath": "staticwebassets\\dist.css"
+    },
+    {
+      "Id": "A:\\Web Applications\\Socially Secured\\app\\app\\wwwroot\\favicon.png",
+      "PackagePath": "staticwebassets\\favicon.png"
+    },
+    {
+      "Id": "A:\\Web Applications\\Socially Secured\\app\\app\\wwwroot\\images\\Chat-Search-Icon.png",
+      "PackagePath": "staticwebassets\\images\\Chat-Search-Icon.png"
+    },
+    {
+      "Id": "A:\\Web Applications\\Socially Secured\\app\\app\\wwwroot\\images\\Chats-Icon.png",
+      "PackagePath": "staticwebassets\\images\\Chats-Icon.png"
+    },
+    {
+      "Id": "A:\\Web Applications\\Socially Secured\\app\\app\\wwwroot\\images\\CheckMark-Icon.png",
+      "PackagePath": "staticwebassets\\images\\CheckMark-Icon.png"
+    },
+    {
+      "Id": "A:\\Web Applications\\Socially Secured\\app\\app\\wwwroot\\images\\Copyright-Icon.png",
+      "PackagePath": "staticwebassets\\images\\Copyright-Icon.png"
+    },
+    {
+      "Id": "A:\\Web Applications\\Socially Secured\\app\\app\\wwwroot\\images\\Divider-Four.png",
+      "PackagePath": "staticwebassets\\images\\Divider-Four.png"
+    },
+    {
+      "Id": "A:\\Web Applications\\Socially Secured\\app\\app\\wwwroot\\images\\Divider-Large.png",
+      "PackagePath": "staticwebassets\\images\\Divider-Large.png"
+    },
+    {
+      "Id": "A:\\Web Applications\\Socially Secured\\app\\app\\wwwroot\\images\\Divider-Medium.png",
+      "PackagePath": "staticwebassets\\images\\Divider-Medium.png"
+    },
+    {
+      "Id": "A:\\Web Applications\\Socially Secured\\app\\app\\wwwroot\\images\\Divider-Three.png",
+      "PackagePath": "staticwebassets\\images\\Divider-Three.png"
+    },
+    {
+      "Id": "A:\\Web Applications\\Socially Secured\\app\\app\\wwwroot\\images\\Divider-XLarge.png",
+      "PackagePath": "staticwebassets\\images\\Divider-XLarge.png"
+    },
+    {
+      "Id": "A:\\Web Applications\\Socially Secured\\app\\app\\wwwroot\\images\\Footer-Divider-Small.png",
+      "PackagePath": "staticwebassets\\images\\Footer-Divider-Small.png"
+    },
+    {
+      "Id": "A:\\Web Applications\\Socially Secured\\app\\app\\wwwroot\\images\\Footer-Divider.png",
+      "PackagePath": "staticwebassets\\images\\Footer-Divider.png"
+    },
+    {
+      "Id": "A:\\Web Applications\\Socially Secured\\app\\app\\wwwroot\\images\\Heading-Divider-One.png",
+      "PackagePath": "staticwebassets\\images\\Heading-Divider-One.png"
+    },
+    {
+      "Id": "A:\\Web Applications\\Socially Secured\\app\\app\\wwwroot\\images\\Heading-Divider-Two.png",
+      "PackagePath": "staticwebassets\\images\\Heading-Divider-Two.png"
+    },
+    {
+      "Id": "A:\\Web Applications\\Socially Secured\\app\\app\\wwwroot\\images\\Home-Info-Icon-Interact.png",
+      "PackagePath": "staticwebassets\\images\\Home-Info-Icon-Interact.png"
+    },
+    {
+      "Id": "A:\\Web Applications\\Socially Secured\\app\\app\\wwwroot\\images\\Home-Info-Icon-Trending.png",
+      "PackagePath": "staticwebassets\\images\\Home-Info-Icon-Trending.png"
+    },
+    {
+      "Id": "A:\\Web Applications\\Socially Secured\\app\\app\\wwwroot\\images\\Instagram-Icon.png",
+      "PackagePath": "staticwebassets\\images\\Instagram-Icon.png"
+    },
+    {
+      "Id": "A:\\Web Applications\\Socially Secured\\app\\app\\wwwroot\\images\\Mail-Icon.png",
+      "PackagePath": "staticwebassets\\images\\Mail-Icon.png"
+    },
+    {
+      "Id": "A:\\Web Applications\\Socially Secured\\app\\app\\wwwroot\\images\\Main-Logo.png",
+      "PackagePath": "staticwebassets\\images\\Main-Logo.png"
+    },
+    {
+      "Id": "A:\\Web Applications\\Socially Secured\\app\\app\\wwwroot\\images\\Nav-Home.png",
+      "PackagePath": "staticwebassets\\images\\Nav-Home.png"
+    },
+    {
+      "Id": "A:\\Web Applications\\Socially Secured\\app\\app\\wwwroot\\images\\Nav-Login.png",
+      "PackagePath": "staticwebassets\\images\\Nav-Login.png"
+    },
+    {
+      "Id": "A:\\Web Applications\\Socially Secured\\app\\app\\wwwroot\\images\\Nav-SignUp.png",
+      "PackagePath": "staticwebassets\\images\\Nav-SignUp.png"
+    },
+    {
+      "Id": "A:\\Web Applications\\Socially Secured\\app\\app\\wwwroot\\images\\Settings-Cog-Icon.png",
+      "PackagePath": "staticwebassets\\images\\Settings-Cog-Icon.png"
+    },
+    {
+      "Id": "A:\\Web Applications\\Socially Secured\\app\\app\\wwwroot\\images\\Vertical-Divider-Large.png",
+      "PackagePath": "staticwebassets\\images\\Vertical-Divider-Large.png"
+    },
+    {
+      "Id": "A:\\Web Applications\\Socially Secured\\app\\app\\wwwroot\\images\\Vertical-Divider-Small.png",
+      "PackagePath": "staticwebassets\\images\\Vertical-Divider-Small.png"
+    },
+    {
+      "Id": "A:\\Web Applications\\Socially Secured\\app\\app\\wwwroot\\images\\Welcome-Back-Logo.png",
+      "PackagePath": "staticwebassets\\images\\Welcome-Back-Logo.png"
+    },
+    {
+      "Id": "A:\\Web Applications\\Socially Secured\\app\\app\\wwwroot\\images\\Welcome-Home-Icon.png",
+      "PackagePath": "staticwebassets\\images\\Welcome-Home-Icon.png"
+    },
+    {
+      "Id": "A:\\Web Applications\\Socially Secured\\app\\app\\wwwroot\\images\\Welcome-Login-Icon.png",
+      "PackagePath": "staticwebassets\\images\\Welcome-Login-Icon.png"
+    },
+    {
+      "Id": "A:\\Web Applications\\Socially Secured\\app\\app\\wwwroot\\images\\Welcome-Logo.png",
+      "PackagePath": "staticwebassets\\images\\Welcome-Logo.png"
+    },
+    {
+      "Id": "A:\\Web Applications\\Socially Secured\\app\\app\\wwwroot\\images\\Welcome-SignUp-Icon.png",
+      "PackagePath": "staticwebassets\\images\\Welcome-SignUp-Icon.png"
+    },
+    {
+      "Id": "A:\\Web Applications\\Socially Secured\\app\\app\\wwwroot\\images\\X-Icon.png",
+      "PackagePath": "staticwebassets\\images\\X-Icon.png"
+    },
+    {
+      "Id": "A:\\Web Applications\\Socially Secured\\app\\app\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css"
+    },
+    {
+      "Id": "A:\\Web Applications\\Socially Secured\\app\\app\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css.map"
+    },
+    {
+      "Id": "A:\\Web Applications\\Socially Secured\\app\\app\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css"
+    },
+    {
+      "Id": "A:\\Web Applications\\Socially Secured\\app\\app\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css.map"
+    },
+    {
+      "Id": "A:\\Web Applications\\Socially Secured\\app\\app\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css"
+    },
+    {
+      "Id": "A:\\Web Applications\\Socially Secured\\app\\app\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css.map"
+    },
+    {
+      "Id": "A:\\Web Applications\\Socially Secured\\app\\app\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css"
+    },
+    {
+      "Id": "A:\\Web Applications\\Socially Secured\\app\\app\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css.map"
+    },
+    {
+      "Id": "A:\\Web Applications\\Socially Secured\\app\\app\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css"
+    },
+    {
+      "Id": "A:\\Web Applications\\Socially Secured\\app\\app\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css.map"
+    },
+    {
+      "Id": "A:\\Web Applications\\Socially Secured\\app\\app\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css"
+    },
+    {
+      "Id": "A:\\Web Applications\\Socially Secured\\app\\app\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css.map"
+    },
+    {
+      "Id": "A:\\Web Applications\\Socially Secured\\app\\app\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css"
+    },
+    {
+      "Id": "A:\\Web Applications\\Socially Secured\\app\\app\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css.map"
+    },
+    {
+      "Id": "A:\\Web Applications\\Socially Secured\\app\\app\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css"
+    },
+    {
+      "Id": "A:\\Web Applications\\Socially Secured\\app\\app\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css.map"
+    },
+    {
+      "Id": "A:\\Web Applications\\Socially Secured\\app\\app\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css"
+    },
+    {
+      "Id": "A:\\Web Applications\\Socially Secured\\app\\app\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css.map"
+    },
+    {
+      "Id": "A:\\Web Applications\\Socially Secured\\app\\app\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css"
+    },
+    {
+      "Id": "A:\\Web Applications\\Socially Secured\\app\\app\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css.map"
+    },
+    {
+      "Id": "A:\\Web Applications\\Socially Secured\\app\\app\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css"
+    },
+    {
+      "Id": "A:\\Web Applications\\Socially Secured\\app\\app\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css.map"
+    },
+    {
+      "Id": "A:\\Web Applications\\Socially Secured\\app\\app\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css"
+    },
+    {
+      "Id": "A:\\Web Applications\\Socially Secured\\app\\app\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css.map"
+    },
+    {
+      "Id": "A:\\Web Applications\\Socially Secured\\app\\app\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.css"
+    },
+    {
+      "Id": "A:\\Web Applications\\Socially Secured\\app\\app\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.css.map"
+    },
+    {
+      "Id": "A:\\Web Applications\\Socially Secured\\app\\app\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.min.css"
+    },
+    {
+      "Id": "A:\\Web Applications\\Socially Secured\\app\\app\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.min.css.map"
+    },
+    {
+      "Id": "A:\\Web Applications\\Socially Secured\\app\\app\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css"
+    },
+    {
+      "Id": "A:\\Web Applications\\Socially Secured\\app\\app\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css.map"
+    },
+    {
+      "Id": "A:\\Web Applications\\Socially Secured\\app\\app\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css"
+    },
+    {
+      "Id": "A:\\Web Applications\\Socially Secured\\app\\app\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css.map"
+    },
+    {
+      "Id": "A:\\Web Applications\\Socially Secured\\app\\app\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js"
+    },
+    {
+      "Id": "A:\\Web Applications\\Socially Secured\\app\\app\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js.map"
+    },
+    {
+      "Id": "A:\\Web Applications\\Socially Secured\\app\\app\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js"
+    },
+    {
+      "Id": "A:\\Web Applications\\Socially Secured\\app\\app\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js.map"
+    },
+    {
+      "Id": "A:\\Web Applications\\Socially Secured\\app\\app\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js"
+    },
+    {
+      "Id": "A:\\Web Applications\\Socially Secured\\app\\app\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js.map"
+    },
+    {
+      "Id": "A:\\Web Applications\\Socially Secured\\app\\app\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js"
+    },
+    {
+      "Id": "A:\\Web Applications\\Socially Secured\\app\\app\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js.map"
+    },
+    {
+      "Id": "A:\\Web Applications\\Socially Secured\\app\\app\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.js"
+    },
+    {
+      "Id": "A:\\Web Applications\\Socially Secured\\app\\app\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.js.map"
+    },
+    {
+      "Id": "A:\\Web Applications\\Socially Secured\\app\\app\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.min.js"
+    },
+    {
+      "Id": "A:\\Web Applications\\Socially Secured\\app\\app\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.min.js.map"
+    },
+    {
+      "Id": "obj\\Debug\\net9.0\\staticwebassets\\msbuild.app.Microsoft.AspNetCore.StaticWebAssetEndpoints.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssetEndpoints.props"
+    },
+    {
+      "Id": "obj\\Debug\\net9.0\\staticwebassets\\msbuild.app.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net9.0\\staticwebassets\\msbuild.build.app.props",
+      "PackagePath": "build\\app.props"
+    },
+    {
+      "Id": "obj\\Debug\\net9.0\\staticwebassets\\msbuild.buildMultiTargeting.app.props",
+      "PackagePath": "buildMultiTargeting\\app.props"
+    },
+    {
+      "Id": "obj\\Debug\\net9.0\\staticwebassets\\msbuild.buildTransitive.app.props",
+      "PackagePath": "buildTransitive\\app.props"
+    }
+  ],
+  "ElementsToRemove": []
+}

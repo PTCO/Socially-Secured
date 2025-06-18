@@ -1,0 +1,216 @@
+@using Microsoft.AspNetCore.Components.Forms
+@inject Model Model
+<EditForm Model="Model" OnValidSubmit="handleSubmitFunc" class="@(FormsClass + "" + isSubmitting)" FormName="@FormName"> <!-- The form component -- do not change -->
+    @foreach (var input in inputs)
+    {
+        <label class="@(LabelsClass + " " + input.LabelUniqueStyles)">@input.Label</label> <!-- Add labels for each input -->
+
+        <div class="flex items-center w-[100%]">
+            @if (input.Type == "select")
+            {
+                <InputSelect @bind-Value="input.Value" @oninput="@(e => handleChange(e, input))" placeholder="Test" class="@(InputsClass + " " + input.UniqueStyles)">
+                    @foreach (var option in input.Options)
+                    {
+                        <option value="@option">@option</option>
+                    }
+                </InputSelect>
+            }
+            else if (input.Type == "checkbox"){
+                <InputCheckbox @oninput="@(e => handleChange(e,input))" @bind-Value="@input.ValueBool" />
+            }
+            else if (input.Type == "radio"){
+                <InputRadioGroup @bind-Value="input.Value" @oninput="@(e => handleChange(e, input))" class="@(InputsClass + " " + input.UniqueStyles)">
+                    @foreach (var option in input.Options)
+                    {
+                        <InputRadio Value="@option" /> @option
+                    }
+                </InputRadioGroup>
+            }
+            else if (input.Type == "textarea")
+            {
+                <InputTextArea @bind-Value="input.Value" @oninput="@(e =>handleChange(e, input))" placeholder="@input.Placeholder" class="@(InputsClass + " " + input.UniqueStyles)" />
+            }
+            else if (input.Type == "file"){
+                <InputFile OnChange="@(e => LoadFiles(e, input.FileConfig))" class="@InputsClass" multiple="@(input.FileConfig == "multiple" ? true:false)"/>
+            }
+            else if (input.Type == "date"){
+                <InputDate @bind-Value="input.ValueDate" @oninput="@(e => handleChange(e, input))" class="@(InputsClass + input.UniqueStyles)" />
+            }
+            else
+            {
+                <InputText @bind-Value="input.Value" Disabled="@(input.isDisabled)" @oninput="@(e => handleChange(e, input))" type="@(input.Type)" placeholder="@input.Placeholder" class="@(InputsClass + " " + input.UniqueStyles)" />
+            }   
+            <ErrorIcon  isError="@input.isError" ContainerClass="w-[30px] h-[30px] !bg-[#F52D2D] rounded-[5px] !mb-[30px] xl:!mb-[20px] ml-[11.65px] animate-pulse" IconClass="text-white lora-semibold text-[26px]" />
+        </div>
+    }
+    <div class="@ButtonContainerClass">
+        @foreach (var button in buttons) {
+            <button type="@button.Type" disabled="@button.isDisabled" class="@(ButtonClass + " " + button.UniqueStyles)" @onclick="@(() => button.OnClick.InvokeAsync())">@button.Title</button> <!-- Add buttons for each input -->
+        }
+    </div>
+</EditForm>
+
+@code {
+
+    [Parameter]
+    public string FormsClass { get; set; } = "";
+    [Parameter]
+    public string InputsClass { get; set; } = "";
+    [Parameter]
+    public string ButtonClass { get; set; } = "";
+    [Parameter]
+    public string LabelsClass { get; set; } = "";
+    [Parameter]
+    public string ButtonContainerClass { get; set; } = ""; 
+    [Parameter]
+    public string FormName { get; set; } = "";
+    [Parameter]
+    public string InitialUIView { get; set; } = "";
+    [Parameter]
+    public string ButtonTitle { get; set; } = "";
+    [Parameter]
+    public List<string> TakenUsernames { get; set; } = new List<string>();
+    [Parameter]
+    public List<string> TakenEmails { get; set; } = new List<string>();
+    [Parameter]
+    public EventCallback<Model> HandleSubmit { get; set; }
+    [Parameter]
+    public EventCallback<string> ChangeUI { get; set; }
+    [Parameter]
+    public List<Inputs> inputs { get; set; }
+    [Parameter]
+    public List<Buttons> buttons { get; set; }
+    [SupplyParameterFromForm]
+    private Model formModel {get; set;}
+    public string isSubmitting { get; set; } // Indicates if the form is currently being submitted
+    private int errorCount = 0; // Counter for the number of errors in the form
+
+    public class Inputs // Represents an input field in the form
+    {
+        public string? Name { get; set; }
+        public string? Type { get; set; }
+        public string? Value { get; set; }
+        public string? Label { get; set; }
+        public string? Placeholder {get; set;}
+        public string? UniqueStyles {get; set;}
+        public string? LabelUniqueStyles {get; set;}
+        public string? OnInput  {get; set;}
+        public string[]? Options {get; set;}
+        public bool ValueBool {get; set;}
+        public bool isDisabled {get; set;}
+        public bool isError {get; set;}
+        public string? FileConfig {get; set;}
+        public DateTime? ValueDate { get; set; }  
+    }
+
+    public class Buttons // Represents a button in the form
+    {
+        public string? Title { get; set; }
+        public string? Type { get; set; } // Default type is submit
+        public string? UniqueStyles { get; set; }
+        public bool isDisabled {get; set;}
+        public EventCallback OnClick { get; set; } // Event callback for the button click
+    }
+
+    private async Task handleSubmitFunc() // This function is called when the form is submitted, and it will call the HandleSubmit function passed from the parent component
+    {
+        await HandleSubmit.InvokeAsync(formModel);
+        isSubmitting = " !opacity-50 cursor-not-allowed"; // Add styles to indicate the form is being submitted
+        await Task.Delay(4000); // Simulate a delay for the form submission
+        isSubmitting = "";
+        StateHasChanged();
+    }
+
+    public void handleChange(ChangeEventArgs e, object input) // This function is called when the input value changes, and it will update the formModel with the new value
+    {
+        isFormEmpty(); // Check if the form is empty and disable the submit button if it is
+        switch (((Inputs)input).OnInput) // Check the input callback and call the corresponding function in the Model - verifies the input value
+        {
+            case "CheckUsername":
+                ((Inputs)input).isError = Model.CheckUsername(e.Value?.ToString(), TakenUsernames); // Example list of usernames to check against
+                break;
+            case "CheckPasswordStrength":
+                ((Inputs)input).isError = Model.CheckPasswordStrength(e.Value?.ToString());
+                break;
+            case "CheckEmail":
+                ((Inputs)input).isError = Model.CheckEmail(e.Value?.ToString(), TakenEmails);
+                break;
+            case "CheckIsEmpty":
+                var check = Model.Validation("empty", e.Value?.ToString(), $"{((Inputs)input).Label} is required.", ""); // Check if the input is empty
+                if (check != null && check != "") // If the input is empty, set the error message
+                {
+                    ((Inputs)input).isError = true; // If the input is empty, set the error state to true
+                }
+                else
+                {
+                    ((Inputs)input).isError = false; // If the input is not empty, set the error state to false
+                    Model.removeError($"{((Inputs)input).Placeholder} is required.");
+                }
+                break;
+            default:
+                break;
+        }
+        formModel.UpdateProperty(((Inputs)input).Name, e.Value?.ToString());
+        isFormEmpty();
+        StateHasChanged();
+    }
+    protected override void OnInitialized(){
+        formModel ??= new Model(); // Initialize the formModel if it is null
+        buttons ??= new List<Buttons>(); // Initialize the buttons if it is null
+        inputs ??= new List<Inputs>(); // Initialize the inputs if it is null
+        errorCount = Model.errorMessages.Count; // Set the error count to the current number of error messages
+
+        foreach (var input in inputs){ 
+            if (!string.IsNullOrEmpty(input.Name) && input.Value != null)
+            {
+                formModel.AddProperty(input.Name, input.Value); // Initialize the formModel with the inputs - adds each input and value to the formModel
+            }
+        }
+        StateHasChanged();
+    }
+
+    private async Task LoadFiles(InputFileChangeEventArgs e, string fileconfig) // This function is called when a file is selected, and it will update the formModel with the new value
+    {
+        if (fileconfig == "multiple"){
+            var files = e.GetMultipleFiles(); // Get the list of files selected
+            foreach (var file in files) // filters the files and checks if they are valid
+            {
+                var buffer = new byte[file.Size];
+                await file.OpenReadStream().ReadAsync(buffer);
+                formModel.UpdateProperty(file.Name, Convert.ToBase64String(buffer));
+            }
+        } else {
+            var file = e.File;
+            var buffer = new byte[file.Size];
+            Model.CheckFile(file);
+        }
+    }
+
+    private void isFormEmpty(){ // This function checks if the form is empty and disables the submit button if it is
+            foreach (var inputfield in inputs) {
+                if(string.IsNullOrEmpty(formModel.GetProperty(inputfield.Name))) {
+                    errorCount++;
+                    errorCount--;
+                } 
+                else {
+                    if(errorCount > 0){
+                        errorCount--;
+                    }
+                }
+                if(Model.errorMessages.Count > 0) { // If there are any error messages or the error count is greater than 0, disable the submit button
+                    buttons[buttons.Count - 1].isDisabled = true; // Disable all buttons if any input is empty
+                    buttons[buttons.Count - 1].UniqueStyles = "cursor-not-allowed opacity-50"; // Add styles to indicate the button is disabled
+                    ChangeUI.InvokeAsync("Errors"); // Change the UI to show errors
+                    return;
+                } 
+                else  {
+                    ChangeUI.InvokeAsync(Model.initialUIView); // Change the UI to show the username check
+                    if(errorCount == 0){
+                        buttons[buttons.Count - 1].isDisabled = false; // Enable all buttons if all inputs are filled
+                        buttons[buttons.Count - 1].UniqueStyles = ""; // Remove styles to indicate the button is enabled
+                    }
+                }
+            }
+        }
+    }
+
