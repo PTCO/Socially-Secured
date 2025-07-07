@@ -1,7 +1,7 @@
 ﻿@inject NavigationManager NavigationManager
 @inject UserService UserService
 <div class="">
-    <nav class="flex flex-column items-center justify-center w-[150px]">
+    <nav class="flex flex-column items-center justify-center w-[103px]">
         <img src="@currentUrl" alt="" class="w-[78px] h-[78px] @profileImage">
         <img class="mt-[30px]" src="images/Vertical-Divider-Small.png" alt=""> 
         <NavButton icon="@(iconOne.icon)" Title="@(iconOne.title)"  ContainerClass="!mt-[20px]" Class="@(iconOne.Class)" Href="@(iconOne.Href)"/>
@@ -37,12 +37,12 @@
         else if(currentUrl.Contains("Login")) {
             currentUrl = "images/Welcome-Login-Icon.png"; // Set the icon for Login page
         }
-        else if (currentUrl.Contains("dashboard")){
+        else if (currentUrl.Contains("Dashboard")){
             currentUrl = UserService.CurrentUser.profilePicture;
             profileImage = "!w-[103px] !h-[103px] rounded-[50%]";
-            iconOne = new NavIcon { icon = "images/Chat-Search-Icon.png", title = "Search", Href="/Search", Class="w-[56px] !h-[56px] border-[#F1DDBF] focus:bg-[#E8E8E8] focus:border-[#E8E8E8] hover:bg-[#E8E8E8] hover:border-[#E8E8E8] !pt-[10px]" }; // Change the icon for Dashboard page
-            iconTwo = new NavIcon { icon = "images/Chats-Icon.png", title = "Chats", Href="/Chats", Class="w-[56px] !h-[56px] border-[#476F95] hover:bg-[#E8E8E8] hover:border-[#E8E8E8]" }; // Change the icon for Profile page 
-            iconThree = new NavIcon { icon = "images/Settings-Cog-Icon.png", Href="/Settings", title = "Settings", Class="w-[56px] !h-[56px] border-[#78938A] hover:bg-[#E8E8E8] hover:border-[#E8E8E8]" }; // Change the icon for Logout action
+            iconOne = new NavIcon { icon = "images/Chat-Search-Icon.png", title = "Search", Href="/Dashboard/Search", Class="w-[56px] !h-[56px] border-[#F1DDBF] focus:bg-[#E8E8E8] focus:border-[#E8E8E8] hover:bg-[#E8E8E8] hover:border-[#E8E8E8] !pt-[10px]" }; // Change the icon for Dashboard page
+            iconTwo = new NavIcon { icon = "images/Chats-Icon.png", title = "Chats", Href="/Dashboard/Chats", Class="w-[56px] !h-[56px] border-[#476F95] hover:bg-[#E8E8E8] hover:border-[#E8E8E8]" }; // Change the icon for Profile page 
+            iconThree = new NavIcon { icon = "images/Settings-Cog-Icon.png", Href="/Dashboard/Settings", title = "Settings", Class="w-[56px] !h-[56px] border-[#78938A] hover:bg-[#E8E8E8] hover:border-[#E8E8E8]" }; // Change the icon for Logout action
         }
         else{
             currentUrl = "images/Welcome-Home-Icon.png"; // Set the icon for Home page

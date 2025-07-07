@@ -1,5 +1,3 @@
-A:\Web Applications\Socially Secured\app\app.Client\bin\Debug\net9.0\wwwroot\_framework\app.Client.61n0pkzrd1.pdb
-A:\Web Applications\Socially Secured\app\app.Client\bin\Debug\net9.0\wwwroot\_framework\app.Client.l1118p0ywt.wasm
 A:\Web Applications\Socially Secured\app\app.Client\bin\Debug\net9.0\wwwroot\_framework\blazor.boot.json
 A:\Web Applications\Socially Secured\app\app.Client\bin\Debug\net9.0\wwwroot\_framework\blazor.webassembly.js
 A:\Web Applications\Socially Secured\app\app.Client\bin\Debug\net9.0\wwwroot\_framework\dotnet.js
@@ -316,7 +314,6 @@ A:\Web Applications\Socially Secured\app\app.Client\bin\Debug\net9.0\wwwroot\_fr
 A:\Web Applications\Socially Secured\app\app.Client\bin\Debug\net9.0\wwwroot\_framework\System.Runtime.Serialization.Xml.u3xtkxm1k9.wasm.gz
 A:\Web Applications\Socially Secured\app\app.Client\bin\Debug\net9.0\wwwroot\_framework\System.ComponentModel.Primitives.nl2ixrxcp7.wasm.gz
 A:\Web Applications\Socially Secured\app\app.Client\bin\Debug\net9.0\wwwroot\_framework\System.Memory.80u0qc3eyv.wasm.gz
-A:\Web Applications\Socially Secured\app\app.Client\bin\Debug\net9.0\wwwroot\_framework\app.Client.l1118p0ywt.wasm.gz
 A:\Web Applications\Socially Secured\app\app.Client\bin\Debug\net9.0\wwwroot\_framework\System.ComponentModel.Annotations.w9cu337rh7.wasm.gz
 A:\Web Applications\Socially Secured\app\app.Client\bin\Debug\net9.0\wwwroot\_framework\System.Text.Encoding.Extensions.31quu9rg9b.wasm.gz
 A:\Web Applications\Socially Secured\app\app.Client\bin\Debug\net9.0\wwwroot\_framework\mscorlib.vt9pwshhot.wasm.gz
@@ -328,7 +325,6 @@ A:\Web Applications\Socially Secured\app\app.Client\bin\Debug\net9.0\wwwroot\_fr
 A:\Web Applications\Socially Secured\app\app.Client\bin\Debug\net9.0\wwwroot\_framework\Microsoft.Extensions.Configuration.Binder.ved8dbz2is.wasm.gz
 A:\Web Applications\Socially Secured\app\app.Client\bin\Debug\net9.0\wwwroot\_framework\System.Net.NetworkInformation.wadfcrb4ng.wasm.gz
 A:\Web Applications\Socially Secured\app\app.Client\bin\Debug\net9.0\wwwroot\_framework\Microsoft.VisualBasic.Core.790ssxljcz.wasm.gz
-A:\Web Applications\Socially Secured\app\app.Client\bin\Debug\net9.0\wwwroot\_framework\app.Client.61n0pkzrd1.pdb.gz
 A:\Web Applications\Socially Secured\app\app.Client\bin\Debug\net9.0\wwwroot\_framework\System.Runtime.Serialization.Primitives.fqg5015ygf.wasm.gz
 A:\Web Applications\Socially Secured\app\app.Client\bin\Debug\net9.0\wwwroot\_framework\Microsoft.AspNetCore.Components.Web.ns1lctei4w.wasm.gz
 A:\Web Applications\Socially Secured\app\app.Client\bin\Debug\net9.0\wwwroot\_framework\System.Formats.Tar.twtiqgxl95.wasm.gz
@@ -1014,9 +1010,6 @@ A:\Web Applications\Socially Secured\app\app.Client\obj\Debug\net9.0\compressed\
 A:\Web Applications\Socially Secured\app\app.Client\obj\Debug\net9.0\compressed\7ltodw0r90-tjcz0u77k5.gz
 A:\Web Applications\Socially Secured\app\app.Client\obj\Debug\net9.0\compressed\6e7rns4m6v-tptq2av103.gz
 A:\Web Applications\Socially Secured\app\app.Client\obj\Debug\net9.0\compressed\vybcg8w43r-lfu7j35m59.gz
-A:\Web Applications\Socially Secured\app\app.Client\obj\Debug\net9.0\compressed\iz5ypwxc0s-l1118p0ywt.gz
-A:\Web Applications\Socially Secured\app\app.Client\obj\Debug\net9.0\compressed\kl920nz29i-61n0pkzrd1.gz
-A:\Web Applications\Socially Secured\app\app.Client\obj\Debug\net9.0\compressed\a4b5e25sap-60h2vu59gq.gz
 A:\Web Applications\Socially Secured\app\app.Client\obj\Debug\net9.0\staticwebassets.build.json
 A:\Web Applications\Socially Secured\app\app.Client\obj\Debug\net9.0\staticwebassets.development.json
 A:\Web Applications\Socially Secured\app\app.Client\obj\Debug\net9.0\staticwebassets.build.endpoints.json
@@ -1031,3 +1024,11 @@ A:\Web Applications\Socially Secured\app\app.Client\obj\Debug\net9.0\app.Client.
 A:\Web Applications\Socially Secured\app\app.Client\obj\Debug\net9.0\refint\app.Client.dll
 A:\Web Applications\Socially Secured\app\app.Client\obj\Debug\net9.0\app.Client.pdb
 A:\Web Applications\Socially Secured\app\app.Client\obj\Debug\net9.0\ref\app.Client.dll
+A:\Web Applications\Socially Secured\app\app.Client\bin\Debug\net9.0\wwwroot\_framework\app.Client.xtzkt87pg7.pdb
+A:\Web Applications\Socially Secured\app\app.Client\bin\Debug\net9.0\wwwroot\_framework\app.Client.31hzattjk8.wasm
+A:\Web Applications\Socially Secured\app\app.Client\bin\Debug\net9.0\wwwroot\_framework\app.Client.31hzattjk8.wasm.gz
+A:\Web Applications\Socially Secured\app\app.Client\bin\Debug\net9.0\wwwroot\_framework\app.Client.xtzkt87pg7.pdb.gz
+A:\Web Applications\Socially Secured\app\app.Client\obj\Debug\net9.0\app.Client.sourcelink.json
+A:\Web Applications\Socially Secured\app\app.Client\obj\Debug\net9.0\compressed\iz5ypwxc0s-31hzattjk8.gz
+A:\Web Applications\Socially Secured\app\app.Client\obj\Debug\net9.0\compressed\kl920nz29i-xtzkt87pg7.gz
+A:\Web Applications\Socially Secured\app\app.Client\obj\Debug\net9.0\compressed\a4b5e25sap-ifb6gskxd8.gz

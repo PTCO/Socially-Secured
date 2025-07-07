@@ -1,0 +1,22 @@
+<div class="w-[50px] h-[50px] rounded-[5px] @(IsChecked ? CheckedColor : UnCheckedColor) @Class" @onclick="@(() => ToggleCheck())">
+</div>
+
+@code {
+    [Parameter]
+    public string Class { get; set; } = ""; // Class for styling
+    [Parameter]
+    public string UnCheckedColor { get; set; } = ""; // Class for styling
+    [Parameter]
+    public string CheckedColor { get; set; } = ""; // Class for styling
+
+    public bool IsChecked { get; set; } = false; // State of the checkbox
+
+    [Parameter]
+    public EventCallback<bool> OnCheckChanged { get; set; } // Callback for when the checkbox state changes
+
+    private void ToggleCheck()
+    {
+        IsChecked = !IsChecked;
+        OnCheckChanged.InvokeAsync(IsChecked);
+    }
+}

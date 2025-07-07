@@ -1,7 +1,8 @@
 @inherits LayoutComponentBase
 @layout Layout.MainLayout
+@inject UserService UserService
 
-<PageHeading Heading="Dashboard"/>
+<PageHeading Heading="@UserService.CurrentUser.username"/>
 <section>
     @Body
 </section>

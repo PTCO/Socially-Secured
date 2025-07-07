@@ -25,6 +25,14 @@
       "PackagePath": "staticwebassets\\images\\Chats-Icon.png"
     },
     {
+      "Id": "A:\\Web Applications\\Socially Secured\\app\\app\\wwwroot\\images\\Chats-Title-Icon.png",
+      "PackagePath": "staticwebassets\\images\\Chats-Title-Icon.png"
+    },
+    {
+      "Id": "A:\\Web Applications\\Socially Secured\\app\\app\\wwwroot\\images\\Chats-User-Current-Icon.png",
+      "PackagePath": "staticwebassets\\images\\Chats-User-Current-Icon.png"
+    },
+    {
       "Id": "A:\\Web Applications\\Socially Secured\\app\\app\\wwwroot\\images\\CheckMark-Icon.png",
       "PackagePath": "staticwebassets\\images\\CheckMark-Icon.png"
     },
@@ -101,8 +109,36 @@
       "PackagePath": "staticwebassets\\images\\Nav-SignUp.png"
     },
     {
+      "Id": "A:\\Web Applications\\Socially Secured\\app\\app\\wwwroot\\images\\No-Users-Found.png",
+      "PackagePath": "staticwebassets\\images\\No-Users-Found.png"
+    },
+    {
+      "Id": "A:\\Web Applications\\Socially Secured\\app\\app\\wwwroot\\images\\Notification-Icon.png",
+      "PackagePath": "staticwebassets\\images\\Notification-Icon.png"
+    },
+    {
+      "Id": "A:\\Web Applications\\Socially Secured\\app\\app\\wwwroot\\images\\Profile.png",
+      "PackagePath": "staticwebassets\\images\\Profile.png"
+    },
+    {
+      "Id": "A:\\Web Applications\\Socially Secured\\app\\app\\wwwroot\\images\\Search-Icon.png",
+      "PackagePath": "staticwebassets\\images\\Search-Icon.png"
+    },
+    {
+      "Id": "A:\\Web Applications\\Socially Secured\\app\\app\\wwwroot\\images\\Search-Page-Search-Icon.png",
+      "PackagePath": "staticwebassets\\images\\Search-Page-Search-Icon.png"
+    },
+    {
       "Id": "A:\\Web Applications\\Socially Secured\\app\\app\\wwwroot\\images\\Settings-Cog-Icon.png",
       "PackagePath": "staticwebassets\\images\\Settings-Cog-Icon.png"
+    },
+    {
+      "Id": "A:\\Web Applications\\Socially Secured\\app\\app\\wwwroot\\images\\User-Add-Chat-Icon.png",
+      "PackagePath": "staticwebassets\\images\\User-Add-Chat-Icon.png"
+    },
+    {
+      "Id": "A:\\Web Applications\\Socially Secured\\app\\app\\wwwroot\\images\\User-Chat-Icon.png",
+      "PackagePath": "staticwebassets\\images\\User-Chat-Icon.png"
     },
     {
       "Id": "A:\\Web Applications\\Socially Secured\\app\\app\\wwwroot\\images\\Vertical-Divider-Large.png",

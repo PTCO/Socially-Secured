@@ -36,6 +36,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xMYXlvdXRcTWFpbkZvb3Rlci5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
+[A:/Web Applications/Socially Secured/app/app/Components/Pages/Chats.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xDaGF0cy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
 [A:/Web Applications/Socially Secured/app/app/Components/Pages/Dashboard.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xEYXNoYm9hcmQucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
@@ -62,6 +66,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [A:/Web Applications/Socially Secured/app/app/Components/Util/Button.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xVdGlsXEJ1dHRvbi5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[A:/Web Applications/Socially Secured/app/app/Components/Util/CheckBox.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xVdGlsXENoZWNrQm94LnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
 [A:/Web Applications/Socially Secured/app/app/Components/Util/EmailCheck.razor]
@@ -114,6 +122,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [A:/Web Applications/Socially Secured/app/app/Components/Util/PasswordCheck.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xVdGlsXFBhc3N3b3JkQ2hlY2sucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[A:/Web Applications/Socially Secured/app/app/Components/Util/Queries/Result.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xVdGlsXFF1ZXJpZXNcUmVzdWx0LnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
 [A:/Web Applications/Socially Secured/app/app/Components/Util/UsernameCheck.razor]
