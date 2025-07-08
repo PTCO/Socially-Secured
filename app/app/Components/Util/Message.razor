@@ -1,0 +1,21 @@
+@inject UserService UserService
+<div class="w-[209px] h-auto rounded-[15px] text-[#fff] !mb-[8px] px-[13px] py-[8px] montserrat-semibold text-[16px] @senderStyles">
+    <p class="mb-0">@MessageText</p>
+</div>
+
+@code {
+    [Parameter]
+    public string MessageText { get; set; }
+    [Parameter]
+    public int SenderID { get; set; } // Default sender
+    public string senderStyles { get; set; } = "bg-[#92BA92] !ml-auto"; // Default
+
+
+
+    protected override void OnInitialized()
+    {
+        if(SenderID != UserService.CurrentUser.id){
+            senderStyles = "bg-[#476F95] !mr-auto";
+        }
+    }
+}

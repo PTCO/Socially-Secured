@@ -1,77 +1,21 @@
 @page "/Dashboard/Chats"
-@layout Layout.Dashboard
-@rendermode InteractiveServer
+@layout Layout.Chats
 @inject IJSRuntime JS
 
-<section class="flex justify-center lg:!mt-[40px] mt-[75px]">
-    <article class="flex flex-column !ml-[178px]">
-        <div class="flex items-center mx-auto">
-            <h2 class="mr-[10px] text-[40px] lora-semibold">Chats</h2>
-            <img src="images/Chats-Title-Icon.png" class="" alt="" srcset="">
-        </div>
-        <div class="flex flex-column !mt-[30px] overflow-y-auto overflow-x-hidden max-h-[643px] overscroll-contain" style="scrollbar-width: none;">
-            @if(results.Count > 0){
-                @foreach ((var result, var index) in results.Select((value, i) => (value, i)))
-                {
-                    var colorClass = colorClasses[index % colorClasses.Count];
-                        <Result 
-                            Username="@result.username" 
-                            NamePlateClass="@(colorClass)" 
-                            ProfilePicture="@result.ProfilePicture" 
-                            ChatID="@result.id" 
-                            IsSelected="@(isSelected)" 
-                            IsSearchResult=false
-                            OnChatSelected="@(setCurrentChat)"
-                        />
-                }
-            }
-            else {
-                <img src="images/No-Users-Found.png" alt="No Results Found" class="w-[365px] h-[104px] mx-auto mt-[25px]">
-            }
-        </div>
-    </article>
-    <img src="images/Vertical-Divider-Large.png" alt="" class="mx-[170px] mt-[53px] h-[452px]">
-    <article class="flex flex-column items-center mr-auto">
-        <h2 class="montserrat-semibold !text-[40px]">Pending Requests</h2>
-        <div class="flex items-center mt-[20px]">
-            <img src="images/User-Add-Chat-Icon-Large.png" class="w-[50px] !h-[44px]" alt="">
-            <h3 class="hind-madurai-semibold !text-[36px] !ml-[20px] mb-0">1</h3>
-            <button class="w-[125px] !h-[48px] bg-[#92BA92] montserrat-semibold !text-[30px] !rounded-[10px] !ml-[35px] hover:!scale-[1.05] transition-all">View</button>
-        </div>
-        <div class="flex items-center my-[50px]">
-            <img src="images/Divider-Medium.png" class="h-[8px] w-[185px] my-[30px]" alt="" srcset="">
-            <h4 class="mx-[6px] lora-semibold !text-[30px]">OR</h4>
-            <img src="images/Divider-Medium.png" class="h-[8px] w-[185px] my-[30px]" alt="" srcset="">
-        </div>
-        <img src="images/Chats-Select-A-Chat.png" alt="" class="w-[480px] h-[116px] mx-auto">
-    </article>
-</section>
+<article class="flex flex-column items-center mr-auto mt-[99px]">
+    <h2 class="montserrat-semibold !text-[40px]">Pending Requests</h2>
+    <div class="flex items-center mt-[20px]">
+        <img src="images/User-Add-Chat-Icon-Large.png" class="w-[50px] !h-[44px]" alt="">
+        <h3 class="hind-madurai-semibold !text-[36px] !ml-[20px] mb-0">1</h3>
+        <button class="w-[125px] !h-[48px] bg-[#92BA92] montserrat-semibold !text-[30px] !rounded-[10px] !ml-[35px] hover:!scale-[1.05] transition-all">View</button>
+    </div>
+    <div class="flex items-center my-[50px]">
+        <img src="images/Divider-Medium.png" class="h-[8px] w-[185px] my-[30px]" alt="" srcset="">
+        <h4 class="mx-[6px] lora-semibold !text-[30px]">OR</h4>
+        <img src="images/Divider-Medium.png" class="h-[8px] w-[185px] my-[30px]" alt="" srcset="">
+    </div>
+    <img src="images/Chats-Select-A-Chat.png" alt="" class="w-[480px] h-[116px] mx-auto">
+</article>
 
 @code {
-    public List<string> colorClasses = new List<string> { "bg-[#F1DDBF]", "bg-[#78938A]", "bg-[#E8E8E8]"};
-    public class Result {
-        public string username { get; set; }
-        public string ProfilePicture { get; set; }
-        public int id { get; set; }
-        public bool IsSelected { get; set; }
-        public string NamePlateStyle {get; set;}
-    }
-    public int isSelected = 0;
-    public List<Result> results = new List<Result>();
-
-    protected async override void OnInitialized()
-    {
-        Model.errorMessages.Clear();
-        Model.SwitchUI("None");
-        // Assuming Query.GetQuery returns a JSON string, use System.Text.Json to deserialize
-        var json = Query.GetQuery("https://jsonplaceholder.typicode.com/users");
-        results = System.Text.Json.JsonSerializer.Deserialize<List<Result>>(json) ?? new List<Result>();
-    }
-
-
-    public void setCurrentChat(int chatID)
-    {
-        isSelected = chatID;
-        StateHasChanged();
-    }
 }

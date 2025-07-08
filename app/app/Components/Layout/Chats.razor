@@ -1,0 +1,63 @@
+@layout Layout.Dashboard
+@inherits LayoutComponentBase
+@inject IJSRuntime JS
+
+<section class="flex justify-center lg:!mt-[40px] mt-[75px]">
+    <article class="flex flex-column !ml-[178px]">
+        <div class="flex items-center mx-auto">
+            <h2 class="mr-[10px] text-[40px] lora-semibold">Chats</h2>
+            <img src="images/Chats-Title-Icon.png" class="" alt="" srcset="">
+        </div>
+        <div class="flex flex-column !mt-[30px] overflow-y-auto overflow-x-hidden max-h-[643px] overscroll-contain" style="scrollbar-width: none;">
+            @if(results.Count > 0){
+                @foreach ((var result, var index) in results.Select((value, i) => (value, i)))
+                {
+                    var colorClass = colorClasses[index % colorClasses.Count];
+                        <Result 
+                            Username="@result.username" 
+                            NamePlateClass="@(colorClass)" 
+                            ProfilePicture="@result.ProfilePicture" 
+                            ChatID="@result.id" 
+                            IsSelected="@(isSelected)" 
+                            IsSearchResult=false
+                            OnChatSelected="@(setCurrentChat)"
+                        />
+                }
+            }
+            else {
+                <img src="images/No-Users-Found.png" alt="No Results Found" class="w-[365px] h-[104px] mx-auto mt-[25px]">
+            }
+        </div>
+    </article>
+    <img src="images/Vertical-Divider-Large.png" alt="" class="mx-[170px] mt-[53px] h-[452px]">
+    @Body
+</section>
+
+@code {
+    public List<string> colorClasses = new List<string> { "bg-[#F1DDBF]", "bg-[#78938A]", "bg-[#E8E8E8]"};
+    public class Result {
+        public string username { get; set; }
+        public string ProfilePicture { get; set; }
+        public int id { get; set; }
+        public bool IsSelected { get; set; }
+        public string NamePlateStyle {get; set;}
+    }
+    public int isSelected = 0;
+    public List<Result> results = new List<Result>();
+
+    protected async override void OnInitialized()
+    {
+        Model.errorMessages.Clear();
+        Model.SwitchUI("None");
+        // Assuming Query.GetQuery returns a JSON string, use System.Text.Json to deserialize
+        var json = Query.GetQuery("https://jsonplaceholder.typicode.com/users");
+        results = System.Text.Json.JsonSerializer.Deserialize<List<Result>>(json) ?? new List<Result>();
+    }
+
+
+    public void setCurrentChat(int chatID)
+    {
+        isSelected = chatID;
+        StateHasChanged();
+    }
+}

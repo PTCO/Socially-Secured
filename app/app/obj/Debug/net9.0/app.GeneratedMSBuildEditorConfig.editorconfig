@@ -24,6 +24,10 @@ build_property.EnableCodeStyleSeverity =
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xBcHAucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
+[A:/Web Applications/Socially Secured/app/app/Components/Layout/Chats.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xMYXlvdXRcQ2hhdHMucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
 [A:/Web Applications/Socially Secured/app/app/Components/Layout/Dashboard.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xMYXlvdXRcRGFzaGJvYXJkLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
@@ -38,6 +42,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [A:/Web Applications/Socially Secured/app/app/Components/Pages/Chats.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xDaGF0cy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[A:/Web Applications/Socially Secured/app/app/Components/Pages/ChatSession.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xDaGF0U2Vzc2lvbi5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
 [A:/Web Applications/Socially Secured/app/app/Components/Pages/Dashboard.razor]
@@ -110,6 +118,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [A:/Web Applications/Socially Secured/app/app/Components/Util/Forms/Form.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xVdGlsXEZvcm1zXEZvcm0ucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[A:/Web Applications/Socially Secured/app/app/Components/Util/Message.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xVdGlsXE1lc3NhZ2UucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
 [A:/Web Applications/Socially Secured/app/app/Components/Util/NavButton.razor]

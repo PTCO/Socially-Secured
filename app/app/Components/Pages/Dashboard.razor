@@ -1,7 +1,7 @@
 @page "/Dashboard/Search"
 @layout Layout.Dashboard
-@rendermode InteractiveServer
 @inject IJSRuntime JS
+@inject NavigationManager NavigationManager
 
 <section class="flex justify-center lg:!mt-[40px] mt-[75px]">
     <article class="flex flex-column !ml-[178px]">
@@ -74,7 +74,7 @@
         new Form.Inputs(){ Name = "Query", Type = "text", Value = "", Placeholder="Enter a username", UniqueStyles = "", LabelUniqueStyles="!mt-0 !w-auto !hidden", Label="", isError=false },
 
     };
-    public List<string> colorClasses = new List<string> { "bg-[#F1DDBF]", "bg-[#78938A]", "bg-[#E8E8E8]"};
+    public List<string> colorClasses = new List<string> { "bg-[#F1DDBF]", "bg-[#78938A]", "bg-[#E8E8E8]", "bg-[#476F95]"};
 
 
     public class Result {

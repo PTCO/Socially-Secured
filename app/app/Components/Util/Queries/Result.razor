@@ -1,10 +1,12 @@
 @rendermode InteractiveServer
 @inject IJSRuntime JS
+@inject NavigationManager NavigationManager
 
 <article class="mb-[20px] flex items-center transition-all hover:cursor-pointer @(IsSelected == ChatID ? "!bg-[#525E75] rounded-[15px]  pl-[4px] ml-[30px]" : "ml-[5px] hover:scale-[1.02] ")" @onclick="@(() => OnChatSelected.InvokeAsync(ChatID))">
+    <a href="@($"/Dashboard/Chats/Session/{ChatID}")"    class="flex items-center w-full h-full text-decoration-none">
     <img src="@ProfilePicture" alt="" srcset="" class="w-[72px] h-[72px] !mr-[10px] rounded-[50%] shadow-md border">
     <div class="flex items-center !px-[20px] !w-[380px] !h-[72px] rounded-[15px]  shadow-md @NamePlateClass @(IsSelected == ChatID ? "!bg-[#525E75] shadow-none !h-[80px]" : "")">
-        <h2 class="montserrat-semibold !text-[40px] mb-0 ">@Username</h2>
+        <h2 class="montserrat-semibold !text-[40px] mb-0 !text-[#000]">@Username</h2>
         @if(IsSearchResult && IsSelected == ChatID){
             <button class="bg-[#F1DDBF] w-[80px] h-[37px] !rounded-[10px] !ml-[auto] !text-[18px] font-semibold hover:scale-[1.05] text-black @(isButtonClicked ? "!bg-[#E8E8E8]" : "")" @onclick="@(() => isButtonClicked = !isButtonClicked)">@(isButtonClicked ? "Sent" : "Invite")</button>
         }
@@ -12,6 +14,7 @@
             <img src="@(IsSelected == ChatID ? "images/Chats-User-Current-Icon.png" : IsSearchResult ? "images/User-Add-Chat-Icon.png":"images/User-Chat-Icon.png")" alt="" class="!w-[34px] !h-[29px] self-start mt-[24px] ml-auto @(IsSelected == ChatID ? "!w-[31px] !h-[42px] !mt-[19px]" : "")">
         }
     </div>
+    </a>
 </article>
 
 @code {

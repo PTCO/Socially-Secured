@@ -1,5 +1,6 @@
 public class User
 {
+    public int id { get; set; } = 1; // Default user ID
     public string username { get; set; } = "Brandon"; // Default username
     public string password { get; set; }
     public string email { get; set; }

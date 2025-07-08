@@ -1,0 +1,66 @@
+@page "/Dashboard/Chats/Session/{ChatID:int}"
+@layout Layout.Chats
+@inject IJSRuntime JS
+@inject NavigationManager NavigationManager
+
+    <article>
+        <div class="w-[450px] h-[470px] !mb-[30px] mx-auto overflow-y-auto" style="scrollbar-width: none;">
+            @foreach (var message in AllMessages)
+            {
+                <Message MessageText="@message.body" SenderID="@message.id"/>
+            }
+        </div>
+        <img src="images/Divider-XLarge-2.png" class="mb-[30px]" alt="">
+        <div class="flex items-center">
+            <Form 
+                Inputs="@inputs"
+                FormsClass="flex flex-column w-[420px]"
+                LabelsClass="lora-semibold text-[30px] text-[#000] mb-[25px] xl:!mb-[15px]"
+                InputsClass="w-[420px] h-[50px]  lora-semibold text-[20px] text-[#fff] px-[15px] !rounded-[15px] !bg-[#525E75] focus:!border-[#476F95] focus:!text-[#fff] focus:border-[4px] focus:!scale-[1.03] !outline-none"
+                FormName="SignUpForm"
+                HandleSubmit="HandleSubmit"
+                ButtonTitle="Sign Up "
+                ButtonClass="bg-[#F1DDBF] w-[201px] h-[60px] !rounded-[10px] !mt-[30px] xl:!mt-[20px] !text-[30px] font-semibold hover:scale-[1.05] text-black"
+                ChangeUI="@Model.SwitchUI"
+            />
+            <button class="flex items-center justify-center bg-[#D9D9D9] w-[50px] h-[50px] !ml-[10px] !rounded-[10px] hover:scale-[1.05] transition-all">
+                <img src="images/Send-Arrow-Icon.png" alt="" srcset="">
+            </button>
+
+        </div>
+        <button class="bg-[#E8E8E8] w-[135px] h-[48px] !rounded-[10px] !mt-[15px] !text-[26px] montserrat-semibold hover:scale-[1.05] text-black" @onclick="@(() => NavigationManager.NavigateTo("/Dashboard/Chats"))">Close</button>
+    </article>
+    <article class="flex items-end !h-[642px]">
+        <img src="images/Profile.png" class="w-[72px] h-[72px] ml-[25px] mb-[53px]" alt="">
+    </article>
+
+
+@code {
+    [Parameter]
+    public int ChatID { get; set; }
+    public List<Form.Inputs> inputs = new List<Form.Inputs>(){ 
+        new Form.Inputs(){ Name = "Query", Type = "text", Value = "", Placeholder="Enter a username", UniqueStyles = "", LabelUniqueStyles="!mt-0 !w-auto !hidden", Label="", isError=false },
+
+    };
+
+    public List<Message> AllMessages { get; set; } = new List<Message>();
+    public class Message
+    {
+        public int id { get; set; }
+        public string body { get; set; }
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        var json = Query.GetQuery("https://jsonplaceholder.typicode.com/comments");
+        var messages = System.Text.Json.JsonSerializer.Deserialize<List<Message>>(json) ?? new List<Message>();
+        AllMessages = messages;
+    }
+
+
+    private void HandleSubmit()
+    {
+        // Handle form submission logic here
+        Console.WriteLine($"Form submitted with ChatID: {ChatID}");
+    }
+}

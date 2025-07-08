@@ -25,6 +25,10 @@
       "PackagePath": "staticwebassets\\images\\Chats-Icon.png"
     },
     {
+      "Id": "A:\\Web Applications\\Socially Secured\\app\\app\\wwwroot\\images\\Chats-Select-A-Chat.png",
+      "PackagePath": "staticwebassets\\images\\Chats-Select-A-Chat.png"
+    },
+    {
       "Id": "A:\\Web Applications\\Socially Secured\\app\\app\\wwwroot\\images\\Chats-Title-Icon.png",
       "PackagePath": "staticwebassets\\images\\Chats-Title-Icon.png"
     },
@@ -55,6 +59,10 @@
     {
       "Id": "A:\\Web Applications\\Socially Secured\\app\\app\\wwwroot\\images\\Divider-Three.png",
       "PackagePath": "staticwebassets\\images\\Divider-Three.png"
+    },
+    {
+      "Id": "A:\\Web Applications\\Socially Secured\\app\\app\\wwwroot\\images\\Divider-XLarge-2.png",
+      "PackagePath": "staticwebassets\\images\\Divider-XLarge-2.png"
     },
     {
       "Id": "A:\\Web Applications\\Socially Secured\\app\\app\\wwwroot\\images\\Divider-XLarge.png",
@@ -129,8 +137,16 @@
       "PackagePath": "staticwebassets\\images\\Search-Page-Search-Icon.png"
     },
     {
+      "Id": "A:\\Web Applications\\Socially Secured\\app\\app\\wwwroot\\images\\Send-Arrow-Icon.png",
+      "PackagePath": "staticwebassets\\images\\Send-Arrow-Icon.png"
+    },
+    {
       "Id": "A:\\Web Applications\\Socially Secured\\app\\app\\wwwroot\\images\\Settings-Cog-Icon.png",
       "PackagePath": "staticwebassets\\images\\Settings-Cog-Icon.png"
+    },
+    {
+      "Id": "A:\\Web Applications\\Socially Secured\\app\\app\\wwwroot\\images\\User-Add-Chat-Icon-Large.png",
+      "PackagePath": "staticwebassets\\images\\User-Add-Chat-Icon-Large.png"
     },
     {
       "Id": "A:\\Web Applications\\Socially Secured\\app\\app\\wwwroot\\images\\User-Add-Chat-Icon.png",

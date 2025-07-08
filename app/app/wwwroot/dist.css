@@ -463,6 +463,9 @@
   .\!mt-\[11px\] {
     margin-top: 11px !important;
   }
+  .\!mt-\[15px\] {
+    margin-top: 15px !important;
+  }
   .\!mt-\[19px\] {
     margin-top: 19px !important;
   }
@@ -480,9 +483,6 @@
   }
   .\!mt-\[49px\] {
     margin-top: 49px !important;
-  }
-  .\!mt-\[53px\] {
-    margin-top: 53px !important;
   }
   .\!mt-\[60px\] {
     margin-top: 60px !important;
@@ -535,9 +535,6 @@
   .mt-\[32px\] {
     margin-top: 32px;
   }
-  .mt-\[45px\] {
-    margin-top: 45px;
-  }
   .mt-\[53px\] {
     margin-top: 53px;
   }
@@ -550,14 +547,17 @@
   .mt-\[76px\] {
     margin-top: 76px;
   }
-  .mt-\[100px\] {
-    margin-top: 100px;
+  .mt-\[99px\] {
+    margin-top: 99px;
   }
   .mt-auto {
     margin-top: auto;
   }
   .\!mr-\[10px\] {
     margin-right: 10px !important;
+  }
+  .\!mr-auto {
+    margin-right: auto !important;
   }
   .mr-\[10px\] {
     margin-right: 10px;
@@ -592,6 +592,9 @@
   .\!mb-\[0px\] {
     margin-bottom: 0px !important;
   }
+  .\!mb-\[8px\] {
+    margin-bottom: 8px !important;
+  }
   .\!mb-\[22px\] {
     margin-bottom: 22px !important;
   }
@@ -619,20 +622,23 @@
   .mb-6 {
     margin-bottom: calc(var(--spacing) * 6);
   }
-  .mb-\[0\] {
-    margin-bottom: 0;
-  }
   .mb-\[20px\] {
     margin-bottom: 20px;
   }
   .mb-\[25px\] {
     margin-bottom: 25px;
   }
+  .mb-\[30px\] {
+    margin-bottom: 30px;
+  }
   .mb-\[35px\] {
     margin-bottom: 35px;
   }
   .mb-\[40px\] {
     margin-bottom: 40px;
+  }
+  .mb-\[53px\] {
+    margin-bottom: 53px;
   }
   .mb-auto {
     margin-bottom: auto;
@@ -693,9 +699,6 @@
   }
   .ml-\[125px\] {
     margin-left: 125px;
-  }
-  .ml-\[auto\] {
-    margin-left: auto;
   }
   .ml-auto {
     margin-left: auto;
@@ -772,6 +775,9 @@
   .\!h-\[103px\] {
     height: 103px !important;
   }
+  .\!h-\[642px\] {
+    height: 642px !important;
+  }
   .h-25 {
     height: calc(var(--spacing) * 25);
   }
@@ -792,9 +798,6 @@
   }
   .h-\[37px\] {
     height: 37px;
-  }
-  .h-\[40px\] {
-    height: 40px;
   }
   .h-\[44px\] {
     height: 44px;
@@ -832,11 +835,11 @@
   .h-\[116px\] {
     height: 116px;
   }
-  .h-\[300px\] {
-    height: 300px;
-  }
   .h-\[452px\] {
     height: 452px;
+  }
+  .h-\[470px\] {
+    height: 470px;
   }
   .h-\[637px\] {
     height: 637px;
@@ -844,23 +847,14 @@
   .h-auto {
     height: auto;
   }
+  .h-full {
+    height: 100%;
+  }
   .max-h-\[50px\] {
     max-height: 50px;
   }
-  .max-h-\[625px\] {
-    max-height: 625px;
-  }
-  .max-h-\[640px\] {
-    max-height: 640px;
-  }
   .max-h-\[643px\] {
     max-height: 643px;
-  }
-  .max-h-\[645px\] {
-    max-height: 645px;
-  }
-  .max-h-\[650px\] {
-    max-height: 650px;
   }
   .\!w-\[31px\] {
     width: 31px !important;
@@ -946,6 +940,9 @@
   .w-\[125px\] {
     width: 125px;
   }
+  .w-\[135px\] {
+    width: 135px;
+  }
   .w-\[146px\] {
     width: 146px;
   }
@@ -954,6 +951,9 @@
   }
   .w-\[201px\] {
     width: 201px;
+  }
+  .w-\[209px\] {
+    width: 209px;
   }
   .w-\[290px\] {
     width: 290px;
@@ -981,6 +981,9 @@
   }
   .w-\[424px\] {
     width: 424px;
+  }
+  .w-\[450px\] {
+    width: 450px;
   }
   .w-\[480px\] {
     width: 480px;
@@ -1066,11 +1069,8 @@
   .items-center {
     align-items: center;
   }
-  .items-start {
-    align-items: flex-start;
-  }
-  .\!justify-center {
-    justify-content: center !important;
+  .items-end {
+    align-items: flex-end;
   }
   .justify-between {
     justify-content: space-between;
@@ -1235,29 +1235,14 @@
   .\!bg-\[\#78938A\] {
     background-color: #78938A !important;
   }
-  .\!bg-\[\#A0C4FF\] {
-    background-color: #A0C4FF !important;
-  }
-  .\!bg-\[\#D5F0C1\] {
-    background-color: #D5F0C1 !important;
-  }
   .\!bg-\[\#D9D9D9\] {
     background-color: #D9D9D9 !important;
   }
   .\!bg-\[\#E8E8E8\] {
     background-color: #E8E8E8 !important;
   }
-  .\!bg-\[\#F1DDBF\] {
-    background-color: #F1DDBF !important;
-  }
-  .\!bg-\[\#F9AFAE\] {
-    background-color: #F9AFAE !important;
-  }
   .\!bg-\[\#F52D2D\] {
     background-color: #F52D2D !important;
-  }
-  .\!bg-\[\#fff\] {
-    background-color: #fff !important;
   }
   .bg-\[\#92BA92\] {
     background-color: #92BA92;
@@ -1337,8 +1322,8 @@
   .px-\[5px\] {
     padding-inline: 5px;
   }
-  .px-\[10px\] {
-    padding-inline: 10px;
+  .px-\[13px\] {
+    padding-inline: 13px;
   }
   .px-\[15px\] {
     padding-inline: 15px;
@@ -1361,8 +1346,8 @@
   .py-5 {
     padding-block: calc(var(--spacing) * 5);
   }
-  .py-\[5px\] {
-    padding-block: 5px;
+  .py-\[8px\] {
+    padding-block: 8px;
   }
   .ps-0 {
     padding-inline-start: calc(var(--spacing) * 0);
@@ -1421,12 +1406,6 @@
   .pt-5 {
     padding-top: calc(var(--spacing) * 5);
   }
-  .pt-\[5px\] {
-    padding-top: 5px;
-  }
-  .pt-\[10px\] {
-    padding-top: 10px;
-  }
   .pb-0 {
     padding-bottom: calc(var(--spacing) * 0);
   }
@@ -1478,9 +1457,6 @@
   .align-top {
     vertical-align: top;
   }
-  .\!text-\[16px\] {
-    font-size: 16px !important;
-  }
   .\!text-\[18px\] {
     font-size: 18px !important;
   }
@@ -1508,6 +1484,9 @@
   .\!text-\[48px\] {
     font-size: 48px !important;
   }
+  .text-\[16px\] {
+    font-size: 16px;
+  }
   .text-\[20px\] {
     font-size: 20px;
   }
@@ -1526,9 +1505,6 @@
   .text-\[32px\] {
     font-size: 32px;
   }
-  .text-\[36px\] {
-    font-size: 36px;
-  }
   .text-\[40px\] {
     font-size: 40px;
   }
@@ -1545,6 +1521,9 @@
   }
   .text-wrap {
     text-wrap: wrap;
+  }
+  .\!text-\[\#000\] {
+    color: #000 !important;
   }
   .text-\[\#000\] {
     color: #000;
@@ -1649,46 +1628,6 @@
   .\!outline-none {
     --tw-outline-style: none !important;
     outline-style: none !important;
-  }
-  .odd\:\!bg-\[\#476F95\] {
-    &:nth-child(odd) {
-      background-color: #476F95 !important;
-    }
-  }
-  .odd\:\!bg-\[\#F1DDBF\] {
-    &:nth-child(odd) {
-      background-color: #F1DDBF !important;
-    }
-  }
-  .odd\:\!bg-\[\#fff\] {
-    &:nth-child(odd) {
-      background-color: #fff !important;
-    }
-  }
-  .odd\:bg-\[\#476F95\] {
-    &:nth-child(odd) {
-      background-color: #476F95;
-    }
-  }
-  .odd\:bg-\[\#F1DDBF\] {
-    &:nth-child(odd) {
-      background-color: #F1DDBF;
-    }
-  }
-  .odd\:text-\[\#000\] {
-    &:nth-child(odd) {
-      color: #000;
-    }
-  }
-  .even\:bg-\[\#476F95\] {
-    &:nth-child(even) {
-      background-color: #476F95;
-    }
-  }
-  .even\:text-\[\#fff\] {
-    &:nth-child(even) {
-      color: #fff;
-    }
   }
   .hover\:\!scale-\[1\.05\] {
     &:hover {
