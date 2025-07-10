@@ -10,6 +10,7 @@ builder.Services.AddRazorComponents()
 builder.Services.AddSingleton<Model>();
 builder.Services.AddSingleton<Query>();
 builder.Services.AddSingleton<UserService>();
+builder.Services.AddSingleton<ChatService>();
 
 var app = builder.Build();
 

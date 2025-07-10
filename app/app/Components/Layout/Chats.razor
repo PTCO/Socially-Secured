@@ -3,7 +3,7 @@
 @inject IJSRuntime JS
 
 <section class="flex justify-center lg:!mt-[40px] mt-[75px]">
-    <article class="flex flex-column !ml-[178px]">
+    <article class="flex flex-column !ml-[178px] w-[480px]">
         <div class="flex items-center mx-auto">
             <h2 class="mr-[10px] text-[40px] lora-semibold">Chats</h2>
             <img src="images/Chats-Title-Icon.png" class="" alt="" srcset="">
@@ -21,20 +21,23 @@
                             IsSelected="@(isSelected)" 
                             IsSearchResult=false
                             OnChatSelected="@(setCurrentChat)"
+                            hasLink=true
                         />
                 }
             }
             else {
-                <img src="images/No-Users-Found.png" alt="No Results Found" class="w-[365px] h-[104px] mx-auto mt-[25px]">
+                <img src="images/No-Users-Found.png" alt="No Results Found" class="w-[365px] h-[104px] mx-auto">
             }
         </div>
     </article>
     <img src="images/Vertical-Divider-Large.png" alt="" class="mx-[170px] mt-[53px] h-[452px]">
-    @Body
+    <CascadingValue Value="this">
+        @Body
+    </CascadingValue>
 </section>
 
 @code {
-    public List<string> colorClasses = new List<string> { "bg-[#F1DDBF]", "bg-[#78938A]", "bg-[#E8E8E8]"};
+    public List<string> colorClasses = new List<string> { "bg-[#F1DDBF]", "bg-[#78938A]  !text-[#fff]", "bg-[#E8E8E8]", "bg-[#476F95] !text-[#fff]"};
     public class Result {
         public string username { get; set; }
         public string ProfilePicture { get; set; }
@@ -51,7 +54,7 @@
         Model.SwitchUI("None");
         // Assuming Query.GetQuery returns a JSON string, use System.Text.Json to deserialize
         var json = Query.GetQuery("https://jsonplaceholder.typicode.com/users");
-        results = System.Text.Json.JsonSerializer.Deserialize<List<Result>>(json) ?? new List<Result>();
+        @* results = System.Text.Json.JsonSerializer.Deserialize<List<Result>>(json) ?? new List<Result>(); *@
     }
 
 

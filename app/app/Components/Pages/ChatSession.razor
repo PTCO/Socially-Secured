@@ -2,6 +2,8 @@
 @layout Layout.Chats
 @inject IJSRuntime JS
 @inject NavigationManager NavigationManager
+@inject ChatService ChatService
+@using System.Text.RegularExpressions;
 
     <article>
         <div class="w-[450px] h-[470px] !mb-[30px] mx-auto overflow-y-auto" style="scrollbar-width: none;">
@@ -12,25 +14,19 @@
         </div>
         <img src="images/Divider-XLarge-2.png" class="mb-[30px]" alt="">
         <div class="flex items-center">
-            <Form 
-                Inputs="@inputs"
-                FormsClass="flex flex-column w-[420px]"
-                LabelsClass="lora-semibold text-[30px] text-[#000] mb-[25px] xl:!mb-[15px]"
-                InputsClass="w-[420px] h-[50px]  lora-semibold text-[20px] text-[#fff] px-[15px] !rounded-[15px] !bg-[#525E75] focus:!border-[#476F95] focus:!text-[#fff] focus:border-[4px] focus:!scale-[1.03] !outline-none"
-                FormName="SignUpForm"
-                HandleSubmit="HandleSubmit"
-                ButtonTitle="Sign Up "
-                ButtonClass="bg-[#F1DDBF] w-[201px] h-[60px] !rounded-[10px] !mt-[30px] xl:!mt-[20px] !text-[30px] font-semibold hover:scale-[1.05] text-black"
-                ChangeUI="@Model.SwitchUI"
-            />
-            <button class="flex items-center justify-center bg-[#D9D9D9] w-[50px] h-[50px] !ml-[10px] !rounded-[10px] hover:scale-[1.05] transition-all">
+            <InputText @bind-value="newMessage" @onclick="@(() => {hasError = false; errorMessage = string.Empty;})"
+            class="@($"w-[420px] h-[50px]  lora-semibold text-[20px] text-[#fff] px-[15px] !rounded-[15px] !bg-[#525E75] focus:!border-[#476F95] focus:!text-[#fff] focus:border-[4px] focus:!scale-[1.03] !outline-none {(hasError ? "!border-[#F52D2D] !border-[4px]" : null)}")"/>
+            <button class="flex items-center justify-center bg-[#D9D9D9] w-[50px] h-[50px] !ml-[10px] !rounded-[10px] hover:scale-[1.05] transition-all" @onclick="HandleSubmit">
                 <img src="images/Send-Arrow-Icon.png" alt="" srcset="">
             </button>
 
         </div>
-        <button class="bg-[#E8E8E8] w-[135px] h-[48px] !rounded-[10px] !mt-[15px] !text-[26px] montserrat-semibold hover:scale-[1.05] text-black" @onclick="@(() => NavigationManager.NavigateTo("/Dashboard/Chats"))">Close</button>
+        <div class="flex items-center">
+            <button class="bg-[#E8E8E8] w-[135px] h-[48px] !rounded-[10px] !mt-[15px] !text-[26px] montserrat-semibold hover:scale-[1.05] text-black" @onclick="@(() => CloseChat(ChatID))">Close</button>
+            <p class="text-[#F52D2D] !text-[20px] hind-madurai-semibold ml-[25px] !mb-0">@errorMessage</p>
+        </div>
     </article>
-    <article class="flex items-end !h-[642px]">
+    <article class="flex items-end !h-[642px] mr-auto">
         <img src="images/Profile.png" class="w-[72px] h-[72px] ml-[25px] mb-[53px]" alt="">
     </article>
 
@@ -42,6 +38,14 @@
         new Form.Inputs(){ Name = "Query", Type = "text", Value = "", Placeholder="Enter a username", UniqueStyles = "", LabelUniqueStyles="!mt-0 !w-auto !hidden", Label="", isError=false },
 
     };
+
+
+    [CascadingParameter]
+    public Layout.Chats? ChatLayout { get; set; }
+
+    public bool hasError { get; set; } = false;
+    public string newMessage { get; set; } = string.Empty;
+    public string errorMessage { get; set; } = string.Empty;
 
     public List<Message> AllMessages { get; set; } = new List<Message>();
     public class Message
@@ -57,10 +61,40 @@
         AllMessages = messages;
     }
 
+    public void CloseChat(int chatID)
+    {
+        ChatLayout?.setCurrentChat(0); // Reset the selected chat
+        NavigationManager.NavigateTo("/Dashboard/Chats");
+        StateHasChanged(); // Refresh the UI
+    }
 
     private void HandleSubmit()
     {
-        // Handle form submission logic here
-        Console.WriteLine($"Form submitted with ChatID: {ChatID}");
+        switch (newMessage)
+        {
+            case null:
+                return;
+            case "":
+                return;
+            default:
+                if (CheckMessage()) {
+                    Console.WriteLine($"Message sent: {newMessage}");
+                }
+                return;
+        }
+    }
+
+    public bool CheckMessage()
+    {
+        // Check if message contains only letters and numbers (no special characters)
+        if (!Regex.IsMatch(newMessage, @"^[a-zA-Z0-9\s.,!?@#\-_:()']+$"))
+        {
+            newMessage = string.Empty; // Clear the message if it contains invalid characters
+            errorMessage = "Invalid Characters";
+            hasError = true; // Set error state
+            StateHasChanged(); // Refresh the UI
+            return false;
+        }
+        return true;
     }
 }

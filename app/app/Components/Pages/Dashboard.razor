@@ -1,4 +1,4 @@
-@page "/Dashboard/Search"
+@page "/Dashboard/Search/{query?}"
 @layout Layout.Dashboard
 @inject IJSRuntime JS
 @inject NavigationManager NavigationManager
@@ -70,11 +70,14 @@
 </section>
 
 @code {
+    [Parameter]
+    public string? query { get; set; }
+
     public List<Form.Inputs> inputs = new List<Form.Inputs>(){ 
         new Form.Inputs(){ Name = "Query", Type = "text", Value = "", Placeholder="Enter a username", UniqueStyles = "", LabelUniqueStyles="!mt-0 !w-auto !hidden", Label="", isError=false },
 
     };
-    public List<string> colorClasses = new List<string> { "bg-[#F1DDBF]", "bg-[#78938A]", "bg-[#E8E8E8]", "bg-[#476F95]"};
+    public List<string> colorClasses = new List<string> { "bg-[#F1DDBF]", "bg-[#78938A]  !text-[#fff]", "bg-[#E8E8E8]", "bg-[#476F95] !text-[#fff]"};
 
 
     public class Result {
