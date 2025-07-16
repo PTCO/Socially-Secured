@@ -1,28 +1,40 @@
 ﻿@using System.Text.Json;
+@using System.ComponentModel.DataAnnotations;
+
 @rendermode InteractiveServer
 @inject NavigationManager NavigationManager
 @inject Model Model
 @inject Query Query
+@inject UserService UserService
 @page "/SignUp"
 
 <PageTitle>Sign Up</PageTitle>
 <PageHeading Heading="Sign Up"/>
 <section class="flex justify-center lg:!mt-[40px] mt-[76px]">
-    <Form 
-        Inputs="@inputs"
-        Buttons="@buttons"
-        FormsClass="flex flex-column items-center text-center w-[420px] ml-auto"
-        LabelsClass="lora-semibold text-[30px] text-[#000] mb-[25px] xl:!mb-[15px]"
-        InputsClass="w-[420px] h-[50px]  lora-semibold !mb-[30px] xl:!mb-[20px] text-[20px] text-[#fff] px-[15px] !rounded-[15px] !bg-[#476F95] focus:!border-[#000] focus:border-[4px] focus:!bg-[#82919F] focus:!scale-[1.03] !outline-none"
-        FormName="SignUpForm"
-        HandleSubmit="HandleSubmit"
-        ButtonTitle="Sign Up "
-        ButtonClass="bg-[#F1DDBF] w-[201px] h-[60px] !rounded-[10px] !mt-[30px] xl:!mt-[20px] !text-[30px] font-semibold hover:scale-[1.05] text-black"
-        ChangeUI="@Model.SwitchUI"
-        InitialUIView="UsernameCheck"
-        TakenEmails="@(GetTakenEmails())"
-        TakenUsernames="@(GetTakenUsernames())"
-    />
+    <EditForm EditContext="@editContext" OnSubmit="@HandleSubmit" class="flex flex-column items-center text-center w-[420px] ml-auto">
+        <DataAnnotationsValidator />
+        <label class="lora-semibold text-[30px] text-[#000] mb-[25px] xl:!mb-[15px]">Username</label>
+        <div class="flex items-center">
+            <InputText @bind-Value="Form.Username" @oninput="@((e) => {Form.isUsernameError = Model.CheckUsername(e.Value?.ToString(), GetTakenUsernames());})" class="w-[420px] h-[50px]  lora-semibold !mb-[30px] xl:!mb-[20px] text-[20px] text-[#fff] px-[15px] !rounded-[15px] bg-[#78938A] focus:!border-[#000] focus:border-[4px] focus:!bg-[#82919F] focus:!scale-[1.03] !outline-none" />
+            <ErrorIcon  isError="@Form.isUsernameError" ContainerClass="w-[30px] h-[30px] !bg-[#F52D2D] rounded-[5px] !mb-[30px] xl:!mb-[20px] ml-[11.65px] animate-pulse" IconClass="text-white lora-semibold text-[26px]" />
+        </div>
+        <label class="lora-semibold text-[30px] text-[#000] mb-[25px] xl:!mb-[15px]">Email</label>
+        <div class="flex items-center">
+            <InputText @bind-Value="Form.Email" @oninput="@((e) => {Form.isEmailError = Model.CheckEmail(e.Value?.ToString(), GetTakenEmails());})" class="w-[420px] h-[50px]  lora-semibold !mb-[30px] xl:!mb-[20px] text-[20px] text-[#fff] px-[15px] !rounded-[15px] bg-[#476F95] focus:!border-[#000] focus:border-[4px] focus:!bg-[#82919F] focus:!scale-[1.03] !outline-none" />
+            <ErrorIcon  isError="@Form.isEmailError" ContainerClass="w-[30px] h-[30px] !bg-[#F52D2D] rounded-[5px] !mb-[30px] xl:!mb-[20px] ml-[11.65px] animate-pulse" IconClass="text-white lora-semibold text-[26px]" />
+        </div>
+        <label class="lora-semibold text-[30px] text-[#000] mb-[25px] xl:!mb-[15px]">Password</label>
+        <div class="flex items-center">
+            <InputText @bind-Value="Form.Password" @oninput="@((e) => {Form.isPasswordError = Model.CheckPasswordStrength(e.Value?.ToString());})" class="w-[420px] h-[50px]  lora-semibold !mb-[30px] xl:!mb-[20px] text-[20px] text-[#fff] px-[15px] !rounded-[15px] bg-[#525E75] focus:!border-[#000] focus:border-[4px] focus:!bg-[#82919F] focus:!scale-[1.03] !outline-none" />
+            <ErrorIcon  isError="@Form.isPasswordError" ContainerClass="w-[30px] h-[30px] !bg-[#F52D2D] rounded-[5px] !mb-[30px] xl:!mb-[20px] ml-[11.65px] animate-pulse" IconClass="text-white lora-semibold text-[26px]" />
+        </div>
+        <label class="lora-semibold text-[30px] text-[#000] mb-[25px] xl:!mb-[15px]">Confirm Password</label>
+        <div class="flex items-center">
+            <InputText @bind-Value="Form.ConfirmPassword" @oninput="@((e) => {Form.isConfirmPasswordError = Model.CheckIsEmpty(e.Value?.ToString(), "Confirm Password", "UsernameCheck");})" class="w-[420px] h-[50px]  lora-semibold !mb-[30px] xl:!mb-[20px] text-[20px] text-[#fff] px-[15px] !rounded-[15px] bg-[#525E75] focus:!border-[#000] focus:border-[4px] focus:!bg-[#82919F] focus:!scale-[1.03] !outline-none" />
+            <ErrorIcon  isError="@Form.isConfirmPasswordError" ContainerClass="w-[30px] h-[30px] !bg-[#F52D2D] rounded-[5px] !mb-[30px] xl:!mb-[20px] ml-[11.65px] animate-pulse" IconClass="text-white lora-semibold text-[26px]" />
+        </div>
+        <button type="submit" class="bg-[#F1DDBF] w-[201px] h-[60px] !rounded-[10px] !mt-[30px] xl:!mt-[20px] !text-[30px] font-semibold hover:scale-[1.05] text-black @(Form.isButtonDisabled ? "opacity-50 cursor-not-allowed" : "")" disabled="@Form.isButtonDisabled">Login</button>
+    </EditForm>
 
     <img src="images/Vertical-Divider-Large.png" alt="" class="mx-[170px] mt-[53px] h-[452px]">
     <div class="flex flex-column items-center mr-auto">
@@ -36,31 +48,35 @@
 
 
 @code {
-    private class User
-    {
-        public string name { get; set; }
-        public string email { get; set; }
-        public string username { get; set; }
+    private class SignUpModel {
+        [Required(ErrorMessage = "Username is required.")]
+        public string Username { get; set; }
+        
+        [Required(ErrorMessage = "Email is required.")]
+        public string Email { get; set; }
+        [Required(ErrorMessage = "Password is required.")]
+        public string Password { get; set; }
+        [Required(ErrorMessage = "Confirm Password is required.")]
+        [Compare("Password", ErrorMessage = "Passwords do not match.")]
+        public string ConfirmPassword { get; set; }
+
+        public bool isUsernameError {get; set; } = false;
+        public bool isPasswordError {get; set; } = false;
+        public bool isEmailError {get; set; } = false;
+        public bool isConfirmPasswordError {get; set; } = false;
+        public bool isButtonDisabled { get; set; } = true; // Initially disable the button until all fields are valid
     }
 
     public string data = Query.GetQuery("https://jsonplaceholder.typicode.com/users"); // Replace with your actual data source or qwery
+    private EditContext editContext;
+    private SignUpModel Form { get; set; } = new SignUpModel();
 
     protected override void OnInitialized(){
         Model.errorMessages.Clear();
         Model.SwitchUI("UsernameCheck");
         Model.uI.UI_Errors = "hidden";
+        editContext = new EditContext(Form);
     }
-
-    public List<Form.Inputs> inputs = new List<Form.Inputs>(){ 
-        new Form.Inputs(){ Name = "Username", Type = "text", Value = "", Placeholder="Username", UniqueStyles = "", LabelUniqueStyles="!mt-0", Label="Username", OnInput="CheckUsername", isError=false },
-        new Form.Inputs(){ Name = "Email", Type = "email", Value = "", Placeholder="Email", UniqueStyles = "", LabelUniqueStyles="!mt-0", Label="Email", OnInput="CheckEmail", isError=false },
-        new Form.Inputs(){ Name = "Password", Type = "password", Value = "", Placeholder="Password", UniqueStyles = "!bg-[#525E75]", LabelUniqueStyles="!mt-0", Label="Password", OnInput="CheckPasswordStrength", isError=false },
-        new Form.Inputs(){ Name = "ConfirmPassword", Type = "password", Value = "", Placeholder="Confirm Password", UniqueStyles = "!bg-[#525E75]", OnInput="CheckIsEmpty", LabelUniqueStyles="!mt-0", Label="Confirm Password", isError=false}
-    };
-
-    public List<Form.Buttons> buttons = new List<Form.Buttons>() {
-        new Form.Buttons() { Title = "Sign Up", UniqueStyles = "cursor-not-allowed opacity-50", Type="submit", isDisabled = true }
-    };
 
     private List<string> GetTakenEmails()
     {
@@ -73,23 +89,22 @@
         var users = System.Text.Json.JsonSerializer.Deserialize<List<User>>(data);
         return users?.Select(user => user.username).ToList() ?? new List<string>();
     }
-
-    public async Task HandleSubmit(Model Model)
+    public async Task HandleSubmit()
     {
-        var result = Query.PostQueryAsync("https://jsonplaceholder.typicode.com/posts", JsonSerializer.Serialize(Model.GetAllProperties()));
-        if(result != null && !result.Contains("error"))
+        editContext.Validate();
+        foreach(var message in editContext.GetValidationMessages())
         {
-            Model.errorMessages.Clear();
+            Model.errorMessages.Add(message);
+        }
+
+        if(Model.errorMessages.Count == 0){
+            var user = Query.PostQueryAsync("https://jsonplaceholder.typicode.com/posts", System.Text.Json.JsonSerializer.Serialize(Form));
+            UserService.SetUser(user);
+            await Task.Delay(3000); // Simulate a delay for the login process
             Model.SwitchUI("Welcome");
-            await Task.Delay(3000); // Simulate a delay for the sign-up process
             NavigationManager.NavigateTo("/Dashboard");
         }
-        else
-        {
-            Model.errorMessages.Add("An error occurred while submitting the form.");
-            Model.SwitchUI("Errors");
-        }
-        StateHasChanged();
+        StateHasChanged(); // Trigger a state change to update the UI
     }
 }
  

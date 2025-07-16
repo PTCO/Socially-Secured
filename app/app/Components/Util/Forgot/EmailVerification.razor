@@ -5,21 +5,20 @@
 @inject Model Model
 @inject Query Query
 @inject UserService UserService
+@using System.ComponentModel.DataAnnotations;
 
 <article class="flex flex-column items-center w-[424px] @Class">
-    <Form 
-        Inputs="@inputs"
-        Buttons="@buttons"
-        FormsClass="flex flex-column items-center text-center w-[420px] ml-auto"
-        LabelsClass="montserrat-semibold text-[30px] text-[#000] mb-[25px] xl:!mb-[15px]"
-        InputsClass="w-[420px] h-[50px]  lora-semibold !mb-[30px] xl:!mb-[20px] text-[20px] text-[#fff] px-[15px] !rounded-[15px] bg-[#476F95] focus:!border-[#000] focus:border-[4px] focus:!bg-[#82919F] focus:!scale-[1.03] !outline-none"
-        FormName="LoginForm"
-        HandleSubmit="HandleSubmit"
-        ButtonTitle="Verify"
-        ButtonClass="bg-[#F1DDBF] w-[201px] h-[60px] !rounded-[10px] !mt-[30px] xl:!mt-[20px] !text-[30px] font-semibold hover:scale-[1.05] text-black"
-        ButtonContainerClass="flex flex-row justify-between w-full" 
-        ChangeUI="@Model.SwitchUI"
-    />
+    <EditForm Model="@EmailForm" OnSubmit="HandleSubmit" class="flex flex-column items-center text-center w-[420px] ml-auto">
+        <DataAnnotationsValidator />
+
+        <label class="montserrat-semibold text-[30px] text-[#000]  mb-[25px] xl:!mb-[15px]">Enter email associated with account</label>
+        <InputText @bind-Value="EmailForm.Email" class="w-[420px] h-[50px]  lora-semibold !mb-[30px] xl:!mb-[20px] text-[20px] text-[#fff] px-[15px] !mt-0 !rounded-[15px] bg-[#476F95] focus:!border-[#000] focus:border-[4px] focus:!bg-[#82919F] focus:!scale-[1.03] !outline-none" />
+
+        <div class="flex flex-row justify-between w-full">
+            <button class=" w-[201px] h-[60px] !rounded-[10px] !mt-[30px] xl:!mt-[20px] !text-[30px] font-semibold hover:scale-[1.05] text-black bg-[#D9D9D9]" @onclick="@(() => NavigationManager.NavigateTo("/Login"))">Back</button>
+            <button type="submit" class="bg-[#F1DDBF] w-[201px] h-[60px] !rounded-[10px] !mt-[30px] xl:!mt-[20px] !text-[30px] font-semibold hover:scale-[1.05] text-black">Verify</button>
+        </div>
+    </EditForm>
     <div class="flex flex-column items-center !mt-[70px] @(!verified ? "hidden" : "")">
         <h4 class="!text-[32px] hind-madurai-semibold  !mb-[30px]">Email verified</h4>
         <img src="images/CheckMark-Icon.png" class="w-[47px] h-[45px]" alt="">
@@ -30,46 +29,51 @@
 
 @code {
     [Parameter]
-    public string Class { get; set;} = ""; // Placeholder for email check status
-    [Parameter]
-    public EventCallback<string> OnClick { get; set; } // Placeholder for email check status
+    public string Class { get; set; } = ""; // Placeholder for email verification status
+    public class EmailVerificationModel
+    {
+        [Required(ErrorMessage = "Email is required.")]
+        [EmailAddress(ErrorMessage = "Invalid email address.")]
+        public string Email { get; set; }
+    }
 
-    public List<Form.Inputs> inputs = new List<Form.Inputs>(){ 
-        new Form.Inputs(){ Name = "Email", Type = "email", Value = "", Placeholder="", UniqueStyles = "", LabelUniqueStyles="!mt-0", Label="Enter email associated with account", OnInput="CheckEmail", isError=false }
-    };
-
-    public List<Form.Buttons> buttons = new List<Form.Buttons>() {
-        new Form.Buttons() { Title = "Back", UniqueStyles = "!bg-[#D9D9D9]", Type="button" },
-        new Form.Buttons() { Title = "Verify", UniqueStyles = "cursor-not-allowed opacity-50", Type="submit", isDisabled = false }
-    };
+    private EditContext editContext;
+    public EmailVerificationModel EmailForm { get; set; }
 
     public bool verified { get; set; } = false; // Placeholder for email check status
 
     protected override void OnInitialized()
     {
+        EmailForm = new EmailVerificationModel(); // Ensure it's initialized
+        editContext = new EditContext(EmailForm);
         Model.errorMessages.Clear();
         Model.SwitchUI("None");
-        Model.AddProperty("Email", Model.GetProperty("Email") ?? "");
-        buttons[0].OnClick = EventCallback.Factory.Create(this, () => { NavigationManager.NavigateTo("/Login"); StateHasChanged(); });
-        buttons[1].OnClick = EventCallback.Factory.Create(this, () => { StateHasChanged(); });
+
     }
 
-    public async Task HandleSubmit(Model Model)
+    public async Task HandleSubmit()
     {
-        var query = Query.GetQuery("https://jsonplaceholder.typicode.com/users");
-        var emailList = System.Text.Json.JsonSerializer.Deserialize<List<User>>(query);
-        foreach (var value in emailList)
+        editContext.Validate();
+        foreach (var message in editContext.GetValidationMessages()){
+            if(message == "Invalid email address." || message == "Email is required.")
+            {
+                Model.errorMessages.Add(message);
+            }
+        }
+
+        if(Model.errorMessages.Count > 0)
         {
-            if (value.email.Equals(Model.GetProperty("Email")))
+            return;
+        }
+        @* var query = Query.GetQuery("https://jsonplaceholder.typicode.com/users");
+        var emailList = System.Text.Json.JsonSerializer.Deserialize<List<User>>(query);
+        foreach (var user in emailList)
+        {
+            if (user.email.Equals(EmailForm.Email))
             {
                 verified = true; // Simulate successful verification
                 await Task.Delay(3000); // Simulate a delay for verification
-                UserService.CurrentUser = new User
-                {
-                    username = value.username,
-                    email = value.email,
-                    password = value.password
-                };
+                UserService.SetUser(System.Text.Json.JsonSerializer.Serialize(user));
                 NavigationManager.NavigateTo("/Login/SelectOption");
                 Model.errorMessages.Clear();
                 break;
@@ -80,10 +84,9 @@
                 Model.SwitchUI("Errors");
                 await Task.Delay(3000); // Simulate a delay for error display
                 Model.errorMessages.Clear();
-                Model.SwitchUI("None");
                 break;
             }
-        }
+        } *@
         StateHasChanged();
     }
 

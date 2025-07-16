@@ -1,13 +1,9 @@
-using System.ComponentModel.DataAnnotations;
 using System.Text.RegularExpressions;
 public class Model
 {
-    // Dynamically adds a property to the Model class using a dictionary
-    private Dictionary<string, object> _dynamicProperties = new Dictionary<string, object>();
-    public List<object> properties = new List<object>(); // List to store all properties of the Model class
     public class UI // Class to manage the UI state - will change the visibility of UI elements based on the current state
     {
-        public string UI_UsernameCheck { get; set; } = "flex"; 
+        public string UI_UsernameCheck { get; set; } = "flex";
         public string UI_PasswordCheck { get; set; } = "hidden";
         public string UI_EmailCheck { get; set; } = "hidden";
         public string UI_Forgot { get; set; } = "hidden";
@@ -26,93 +22,6 @@ public class Model
     public static string initialUIView = ""; // Initial UI view to be displayed
     public static UI uI = new UI();
 
-
-    // Functions to manage the Model class properties and UI state
-    public void AddProperty(string key, object value) // Add a new property to the Model class
-    {
-        if (!_dynamicProperties.ContainsKey(key))
-        {
-            _dynamicProperties.Add(key, value);
-        }
-        else
-        {
-            _dynamicProperties[key] = value;
-        }
-    }
-    public string GetProperty(string key) // Get the value of a property
-    {
-        if (_dynamicProperties.ContainsKey(key))
-        {
-            return _dynamicProperties[key]?.ToString();
-        }
-        return null;
-    }
-    public void UpdateProperty(string key, string value) // Update the value of a property
-    {
-        if (_dynamicProperties.ContainsKey(key))
-        {
-            _dynamicProperties[key] = value;
-        }
-        else
-        {
-            _dynamicProperties.Add(key, value);
-        }
-    }
-    public object GetAllProperties() // Get all properties of the Model class
-    {
-        return _dynamicProperties;
-    }
-    public static string Validation(string type, string value, string errorMsg, string matchValue) // Validate the input based on the type
-    {
-        string pattern = string.Empty; // Initialize the pattern to check with regex
-        if (errorMessages.Contains(errorMsg))
-        {
-            errorMessages.Remove(errorMsg); // Remove the error message if it already exists
-        }
-        switch (type)
-        {
-            case "empty":
-                if (string.IsNullOrWhiteSpace(value)) // Check if the value is empty
-                {
-                    errorMessages.Add(errorMsg);
-                    return errorMsg;
-                }
-                break;
-            case "match":
-                Console.WriteLine("Match Value: " + matchValue);
-                if (value != matchValue) // Check if the value matches the given value
-                {
-                    return errorMsg;
-                }
-                break;
-            case "email":
-                pattern = @"^[^@\s]+@[^@\s]+\.[^@\s]+$";
-                break;
-            case "phone":
-                pattern = @"^\+?[1-9]\d{1,14}$";
-                break;
-            case "url":
-                pattern = @"^(http|https)://[a-zA-Z0-9\-\.]+\.[a-zA-Z]{2,3}(/S*)?$";
-                break;
-            case "date":
-                pattern = @"^(0[1-9]|[12][0-9]|3[01])/(0[1-9]|1[0-2])/\d{4}$";
-                break;
-            case "password":
-                pattern = @"^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&_]+$";
-                break;
-            case "username":
-                pattern = @"^[a-zA-Z0-9_]{3,16}$";
-                break;
-            default:
-                return "Invalid type";
-        }
-
-        if (!Regex.IsMatch(value, pattern)) // Check if the value matches the pattern
-        {
-            return errorMsg;
-        }
-        return "";
-    }
     public static void SwitchUI(string text) // Switch the UI based on the text parameter
     {
         initialUIView = text != "Errors" ? text : initialUIView; // Set the initial UI view if not already set
@@ -137,7 +46,7 @@ public class Model
     {
         pwdStrength = 0;
         SwitchUI("PasswordCheck");
-        
+
         status = "Invalid";
         if (string.IsNullOrWhiteSpace(password))
         {
@@ -195,6 +104,7 @@ public class Model
     }
     public static bool CheckUsername(string username, List<string> takenUsernames) // Check the username for validity
     {
+        Console.WriteLine("Checking username: " + username);
         SwitchUI("UsernameCheck");
         status = "Invalid";
         if (string.IsNullOrWhiteSpace(username))
@@ -275,7 +185,7 @@ public class Model
         {
             removeError("Invalid email format.");
         }
-        
+
         if (takenemails.Contains(email))
         {
             status = "Taken";
@@ -299,7 +209,8 @@ public class Model
             removeError("File size is too large");
         }
 
-        foreach (var type in ContentTypes) {
+        foreach (var type in ContentTypes)
+        {
             if (!file.ContentType.Contains(type))
             {
                 errorMessages.Add("Invalid file type");
@@ -312,6 +223,17 @@ public class Model
             }
         }
     }
-};
 
+    public static bool CheckIsEmpty(string value, string fieldName, string ui)
+    {
+        if (string.IsNullOrWhiteSpace(value)) // Check if the value is empty
+        {
+            errorMessages.Add($"{fieldName} is required.");
+            SwitchUI("Errors");
+            return true;
+        }
+        SwitchUI(ui);
+        return false;
+    }
+}
 

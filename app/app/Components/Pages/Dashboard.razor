@@ -2,28 +2,21 @@
 @layout Layout.Dashboard
 @inject IJSRuntime JS
 @inject NavigationManager NavigationManager
+@using Chat
 
 <section class="flex justify-center lg:!mt-[40px] mt-[75px]">
     <article class="flex flex-column !ml-[178px]">
         <div class="flex max-h-[50px] ">
-            <Form 
-                Inputs="@inputs"
-                FormsClass="flex flex-column items-center text-center w-[420px] ml-auto"
-                LabelsClass="lora-semibold text-[30px] text-[#000] mb-[25px] xl:!mb-[15px]"
-                InputsClass="w-[420px] h-[50px]  lora-semibold !mb-[30px] xl:!mb-[20px] text-[20px] text-[#fff] px-[15px] !rounded-[15px] !bg-[#476F95] focus:!border-[#476F95] focus:!text-[#fff] focus:border-[4px] focus:!scale-[1.03] !outline-none"
-                FormName="SignUpForm"
-                HandleSubmit="HandleSubmit"
-                ButtonTitle="Sign Up "
-                ButtonClass="bg-[#F1DDBF] w-[201px] h-[60px] !rounded-[10px] !mt-[30px] xl:!mt-[20px] !text-[30px] font-semibold hover:scale-[1.05] text-black"
-                ChangeUI="@Model.SwitchUI"
-            />
+            <EditForm EditContext="@editContext" OnSubmit="HandleSubmit" class="flex flex-column items-center text-center w-[420px] ml-auto">
+                <InputText @bind-Value="query" class="w-[420px] h-[50px]  lora-semibold !mb-[30px] xl:!mb-[20px] text-[20px] text-[#fff] px-[15px] !rounded-[15px] !bg-[#476F95] focus:!border-[#476F95] focus:!text-[#fff] focus:border-[4px] focus:!scale-[1.03] !outline-none" placeholder="Enter a username" />
+            </EditForm>
             <button class="flex items-center justify-center !w-[50px] !h-[50px] bg-[#E8E8E8] !rounded-[4px] !ml-[10px] hover:!scale-[1.05] transition-all">
                 <img src="images/Search-Icon.png" alt="">
             </button>
         </div>
         <div class="flex flex-column !mt-[30px] overflow-y-auto overflow-x-hidden max-h-[643px] overscroll-contain" style="scrollbar-width: none;">
-            @if(results.Count > 0){
-                @foreach ((var result, var index) in results.Select((value, i) => (value, i)))
+            @if(Chat.Users.Count > 0){
+                @foreach ((var result, var index) in Chat.Users.Select((value, i) => (value, i)))
                 {
                     var colorClass = colorClasses[index % colorClasses.Count];
                         <Result 
@@ -73,24 +66,9 @@
     [Parameter]
     public string? query { get; set; }
 
-    public List<Form.Inputs> inputs = new List<Form.Inputs>(){ 
-        new Form.Inputs(){ Name = "Query", Type = "text", Value = "", Placeholder="Enter a username", UniqueStyles = "", LabelUniqueStyles="!mt-0 !w-auto !hidden", Label="", isError=false },
-
-    };
     public List<string> colorClasses = new List<string> { "bg-[#F1DDBF]", "bg-[#78938A]  !text-[#fff]", "bg-[#E8E8E8]", "bg-[#476F95] !text-[#fff]"};
-
-
-    public class Result {
-        public string username { get; set; }
-        public string ProfilePicture { get; set; }
-        public int id { get; set; }
-        public bool IsSelected { get; set; }
-        public string NamePlateStyle {get; set;}
-    }
-
     public int isSelected = 0;
-
-    public List<Result> results = new List<Result>();
+    private EditContext editContext = new EditContext(new { });
 
     protected async override void OnInitialized()
     {
@@ -98,7 +76,7 @@
         Model.SwitchUI("None");
         // Assuming Query.GetQuery returns a JSON string, use System.Text.Json to deserialize
         var json = Query.GetQuery("https://jsonplaceholder.typicode.com/users");
-        results = System.Text.Json.JsonSerializer.Deserialize<List<Result>>(json) ?? new List<Result>();
+        Chat.Users = System.Text.Json.JsonSerializer.Deserialize<List<Chat.ChatUser>>(json) ?? new List<Chat.ChatUser>();
     }
 
     public void setCurrentChat(int chatID)
@@ -107,14 +85,10 @@
         StateHasChanged();
     }
 
-    public async Task HandleSubmit(Model Model)
+    public async Task HandleSubmit()
     {
-        // Simulate a query to fetch user data based on the input
-        var query = Model.GetProperty("Query");
         if (!string.IsNullOrEmpty(query))
         {
-            // Here you would typically call a service to get the user data
-            // For demonstration, we will just simulate a successful query
             Model.errorMessages.Clear();
             Model.errorMessages.Add($"Query for '{query}' executed successfully.");
         }

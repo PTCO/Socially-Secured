@@ -3,18 +3,29 @@ using app.Components;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+// 🔧 Add essential services
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents()
     .AddInteractiveWebAssemblyComponents();
+
+// 🧠 App services
 builder.Services.AddSingleton<Model>();
 builder.Services.AddSingleton<Query>();
-builder.Services.AddSingleton<UserService>();
 builder.Services.AddSingleton<ChatService>();
+builder.Services.AddSingleton<UserService>();
+
+// 🗂 Add session support
+builder.Services.AddDistributedMemoryCache(); // Required for session backing store
+builder.Services.AddSession(options =>
+{
+    options.IdleTimeout = TimeSpan.FromMinutes(30);
+    options.Cookie.HttpOnly = true;
+    options.Cookie.IsEssential = true;
+});
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
+// 🌐 Configure middleware
 if (app.Environment.IsDevelopment())
 {
     app.UseWebAssemblyDebugging();
@@ -22,13 +33,13 @@ if (app.Environment.IsDevelopment())
 else
 {
     app.UseExceptionHandler("/Error", createScopeForErrors: true);
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
 
 app.UseHttpsRedirection();
-
-
+// 🧵 Session must be added before routing
+app.UseRouting(); // Needed for session routing context
+app.UseSession();
 app.UseAntiforgery();
 
 app.MapStaticAssets();

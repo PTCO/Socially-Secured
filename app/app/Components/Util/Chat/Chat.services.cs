@@ -1,4 +1,4 @@
 public class ChatService
 {
-    public Chat CurrentChat { get; set; } = new Chat();
+    public Chat.Chat CurrentChat { get; set; } = new Chat.Chat();
 }

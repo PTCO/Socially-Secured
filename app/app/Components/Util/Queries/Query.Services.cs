@@ -18,13 +18,11 @@ public class Query
             }
             else
             {
-                Console.WriteLine("Error: " + result.Result.StatusCode);
-                return "";
+                return string.Empty;
             }
         }
         catch (System.Text.Json.JsonException ex)
         {
-            Console.WriteLine("Failed to parse JSON: " + ex.Message);
             return ex.Message;
         }
     }
@@ -38,18 +36,15 @@ public class Query
             if (results.Result.IsSuccessStatusCode)
             {
                 var content = results.Result.Content.ReadAsStringAsync().Result;
-                Console.WriteLine("Post successful: " + content);
                 return content;
             }
             else
             {
-                Console.WriteLine("Error: " + results.Result.StatusCode + " - " + results.Result.Content.ReadAsStringAsync().Result);
-                return string.Empty;
+                return null;
             }
         }
         catch (System.Text.Json.JsonException ex)
         {
-            Console.WriteLine("Failed to parse JSON: " + ex.Message);
             return ex.Message;
         }
     }

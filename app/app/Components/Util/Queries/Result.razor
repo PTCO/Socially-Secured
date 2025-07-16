@@ -1,6 +1,7 @@
 @rendermode InteractiveServer
 @inject IJSRuntime JS
 @inject NavigationManager NavigationManager
+@using Chat
 
 <article class="mb-[20px]  flex items-center transition-all hover:cursor-pointer @(IsSelected == ChatID ? IsRequest ? "!bg-[#E8E8E8] rounded-[15px] hover:!cursor-default h-[80px]" : "!bg-[#525E75] rounded-[15px]  pl-[4px] ml-[30px]" : "ml-[5px] hover:scale-[1.02] ")" @onclick="@(() => {OnChatSelected.InvokeAsync(ChatID); if(hasLink) NavigationManager.NavigateTo($"/Dashboard/Chats/Session/{ChatID}");})">
     <img src="@ProfilePicture" alt="" srcset="" class="w-[72px] h-[72px] mr-[10px] rounded-[50%] shadow-md border @(IsSelected == ChatID ? "shadow-none ml-[10px] !mr-[7px]":"")">
@@ -11,8 +12,8 @@
         }
         else if (IsRequest){
             <div class="flex items-center !justify-self-end ml-[10px]">
-                <img src="images/Chats-Request-Accept-Icon.png" alt="" srcset="" class="!mr-[10px] hover:scale-[1.05] hover:cursor-pointer">
-                <img src="images/Chats-Request-Decline-Icon.png" alt="" srcset="" class="hover:scale-[1.05] hover:cursor-pointer">
+                <img src="images/Chats-Request-Accept-Icon.png" alt="" srcset="" class="!mr-[10px] hover:scale-[1.05] hover:cursor-pointer" @onclick="OnAcceptRequest">
+                <img src="images/Chats-Request-Decline-Icon.png" alt="" srcset="" class="hover:scale-[1.05] hover:cursor-pointer" @onclick="OnDeclineRequest">
             </div>
         }
         else {
@@ -48,10 +49,16 @@
     public bool hasLink { get; set; } = false; // Flag to indicate if the chat has a link
 
     public bool isButtonClicked = false; // Flag to indicate if the button is clicked
-    
-    protected override void OnInitialized()
+
+    public void OnAcceptRequest()
     {
-        Console.WriteLine($"ChatID: {NamePlateClass}, Username: {Username}, ProfilePicture: {ProfilePicture}");
+        Chat.Users.Add(new Chat.ChatUser() { username = Username, ProfilePicture = ProfilePicture, id = ChatID });
+        Chat.Requests.RemoveAll(r => r.id == ChatID);
+    }
+    public void OnDeclineRequest()
+    {
+        Chat.Users.RemoveAll(u => u.id == ChatID);
+        Chat.Requests.RemoveAll(r => r.id == ChatID);
     }
         
 }

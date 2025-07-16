@@ -1,4 +1,4 @@
-@using Microsoft.AspNetCore.Components.Forms
+@* @using Microsoft.AspNetCore.Components.Forms
 @inject Model Model
 <EditForm Model="Model" OnValidSubmit="handleSubmitFunc" class="@(FormsClass + "" + isSubmitting)" FormName="@FormName"> <!-- The form component -- do not change -->
     @foreach (var input in inputs)
@@ -213,4 +213,4 @@
             }
         }
     }
-
+ *@

@@ -1,60 +1,119 @@
 ﻿@page "/login"
 @rendermode InteractiveServer
 @inject NavigationManager NavigationManager
+@inject UserService UserService
+@inject Model Model
+
+@using Microsoft.AspNetCore.Http
+@using System.ComponentModel.DataAnnotations
 
 <PageTitle>Login</PageTitle>
 <PageHeading Heading="Login"/>
 <section class="flex justify-center mt-[76px]" @onclick="@(e => Model.SwitchUI("Forgot"))">
-    <Form 
-        Inputs="@inputs"
-        buttons="@buttons"
-        FormsClass="flex flex-column items-center text-center w-[420px] ml-auto"
-        LabelsClass="lora-semibold text-[30px] text-[#000] mb-[25px] xl:!mb-[15px]"
-        InputsClass="w-[420px] h-[50px]  lora-semibold !mb-[30px] xl:!mb-[20px] text-[20px] text-[#fff] px-[15px] !rounded-[15px] bg-[#78938A] focus:!border-[#000] focus:border-[4px] focus:!bg-[#82919F] focus:!scale-[1.03] !outline-none"
-        FormName="LoginForm"
-        HandleSubmit="HandleSubmit"
-        ButtonTitle="Login"
-        ButtonClass="bg-[#F1DDBF] w-[201px] h-[60px] !rounded-[10px] !mt-[30px] xl:!mt-[20px] !text-[30px] font-semibold hover:scale-[1.05] text-black"
-        ButtonContainerClass="flex flex-row justify-center w-full"
-        ChangeUI="@Model.SwitchUI"
-    />
+
+    <EditForm EditContext="@editContext" OnSubmit="@HandleSubmit" class="flex flex-column items-center text-center w-[420px] ml-auto">
+        <DataAnnotationsValidator />
+        <label class="lora-semibold text-[30px] text-[#000] mb-[25px] xl:!mb-[15px]">Username</label>
+        <div class="flex items-center">
+            <InputText @bind-Value="@(Form.Username)" @onchange="@(HandleUsername)" class="w-[420px] h-[50px]  lora-semibold !mb-[30px] xl:!mb-[20px] text-[20px] text-[#fff] px-[15px] !rounded-[15px] bg-[#78938A] focus:!border-[#000] focus:border-[4px] focus:!bg-[#82919F] focus:!scale-[1.03] !outline-none" />
+            <ErrorIcon  isError="@Form.isUsernameError" ContainerClass="w-[30px] h-[30px] !bg-[#F52D2D] rounded-[5px] !mb-[30px] xl:!mb-[20px] ml-[11.65px] animate-pulse" IconClass="text-white lora-semibold text-[26px]" />
+        </div>
+        <label class="lora-semibold text-[30px] text-[#000] mb-[25px] xl:!mb-[15px]">Password</label>
+        <div class="flex items-center">
+            <InputText @bind-Value="Form.Password" @onchange="@(HandlePassword)" class="w-[420px] h-[50px]  lora-semibold !mb-[30px] xl:!mb-[20px] text-[20px] text-[#fff] px-[15px] !rounded-[15px] bg-[#525E75] focus:!border-[#000] focus:border-[4px] focus:!bg-[#82919F] focus:!scale-[1.03] !outline-none" />
+            <ErrorIcon  isError="@Form.isPasswordError" ContainerClass="w-[30px] h-[30px] !bg-[#F52D2D] rounded-[5px] !mb-[30px] xl:!mb-[20px] ml-[11.65px] animate-pulse" IconClass="text-white lora-semibold text-[26px]" />
+        </div>
+        <button type="submit" class="bg-[#F1DDBF] w-[201px] h-[60px] !rounded-[10px] !mt-[30px] xl:!mt-[20px] !text-[30px] font-semibold hover:scale-[1.05] text-black">Login</button>
+    </EditForm>
+
     <img src="images/Vertical-Divider-Large.png" alt="" class="mx-[170px] mt-[53px] h-[452px]">
     <div class="flex flex-column items-center mr-auto">
         <Forgot Class="@Model.uI.UI_Forgot" />
-        <FormErrors Class="@(Model.uI.UI_Errors + " w-[300px]")" Errors="Model.errorMessages.ToArray()" hasBtn="true" btnTitle="Forgot?" btnCallback="@(() => Model.SwitchUI("Forgot"))"/>
+        <FormErrors Class="@(Model.uI.UI_Errors + " w-[300px]")" Errors="Model.errorMessages.ToArray()" hasBtn="true" btnTitle="Forgot?" btnCallback="@(() => {Model.SwitchUI("Forgot"); Form.isPasswordError = false; Form.isUsernameError = false;})"/>
         <Welcome Class="@(Model.uI.UI_Welcome)" Message="Login Successfull" Type="Login" />
     </div>
 </section>
 
 @code {
-    
-    public List<Form.Inputs> inputs = new List<Form.Inputs>(){ 
-        new Form.Inputs(){ Name = "Username", Type = "text", Value = "", Placeholder="Username", UniqueStyles = "", LabelUniqueStyles="!mt-0", Label="Username", OnInput="CheckIsEmpty", isError=false },
-        new Form.Inputs(){ Name = "Password", Type = "password", Value = "", Placeholder="Password", UniqueStyles = "!bg-[#525E75]", LabelUniqueStyles="!mt-0", Label="Password", OnInput="CheckIsEmpty", isError=false }
-    };
+    private EditContext editContext;
+    public class LoginModel {
+        [Required(ErrorMessage = "Username is required.")]
+        public string Username { get; set; }
+        [Required(ErrorMessage = "Password is required.")]
+        [MinLength(8, ErrorMessage = "Password must be at least 8 characters long.")]
+        [RegularExpression(@"[^()*&^#$%~`/\\|]+$", ErrorMessage = "Password contains invalid characters.")]
+        public string Password { get; set; }
 
-    public List<Form.Buttons> buttons = new List<Form.Buttons>() {
-        new Form.Buttons() { Title = "Login", UniqueStyles = "cursor-not-allowed opacity-50", Type="submit",isDisabled=false }
-    };
-
+        public bool isUsernameError {get; set; } = false;
+        public bool isPasswordError {get; set; } = false;
+    }
+    public LoginModel Form { get; set; } = new LoginModel();
     protected override void OnInitialized()
     {
         Model.errorMessages.Clear();
         Model.SwitchUI("Forgot");
+        editContext = new EditContext(Form);
     }
-    public async Task HandleSubmit(Model Model)
+
+    public void HandleUsername()
     {
-        var json = System.Text.Json.JsonSerializer.Serialize(Model.GetAllProperties()); // Convert the model data to JSON
-        var result = Query.PostQueryAsync("https://jsonplaceholder.typicode.com/posts", json);
-        if(result != null && !result.Contains("error")) {
-            Model.SwitchUI("Welcome");
-            await Task.Delay(3000); // Simulate a delay for the welcome message
-            NavigationManager.NavigateTo("/Dashboard"); // Redirect to home page after successful login
-        }
-        else{
-            Model.errorMessages.Add("Login failed. Please check your credentials.");
+        editContext.Validate();
+        if(editContext.GetValidationMessages().Contains("Username is required."))
+        {
+            Model.errorMessages.Add("Username is required.");
             Model.SwitchUI("Errors");
+            Form.isUsernameError = true;
         }
-        StateHasChanged();
+        else
+        {
+            Form.isUsernameError = false;
+            Model.errorMessages.Remove("Username is required.");
+        }
+    }
+
+    public void HandlePassword(){
+        editContext.Validate();
+        Model.errorMessages.Remove("Password is required.");
+        Model.errorMessages.Remove("Password must be at least 8 characters long.");
+        Model.errorMessages.Remove("Password contains invalid characters.");
+
+        if(editContext.GetValidationMessages().Contains("Password is required."))
+        {
+            Model.errorMessages.Add("Password is required.");
+            Model.SwitchUI("Errors");
+            Form.isPasswordError = true;
+        }
+        else if(editContext.GetValidationMessages().Contains("Password must be at least 8 characters long."))
+        {
+            Model.errorMessages.Add("Password must be at least 8 characters long.");
+            Model.SwitchUI("Errors");
+            Form.isPasswordError = true;
+        }
+        else if(editContext.GetValidationMessages().Contains("Password contains invalid characters."))
+        {
+            Model.errorMessages.Add("Password contains invalid characters.");
+            Model.SwitchUI("Errors");
+            Form.isPasswordError = true;
+        }
+        else
+        {
+            Form.isPasswordError = false;
+            
+        }
+    }
+
+    public async Task HandleSubmit()
+    {
+        HandleUsername();
+        HandlePassword();
+
+        if(Model.errorMessages.Count == 0){
+            var user = Query.PostQueryAsync("https://jsonplaceholder.typicode.com/posts", System.Text.Json.JsonSerializer.Serialize(Form));
+            UserService.SetUser(user);
+            await Task.Delay(3000); // Simulate a delay for the login process
+            Model.SwitchUI("Welcome");
+            NavigationManager.NavigateTo("/Dashboard");
+        }
+        StateHasChanged(); // Trigger a state change to update the UI
     }
 }

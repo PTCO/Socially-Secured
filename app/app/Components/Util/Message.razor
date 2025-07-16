@@ -1,6 +1,9 @@
 @inject UserService UserService
-<div class="w-[209px] h-auto rounded-[15px] text-[#fff] !mb-[8px] px-[13px] py-[8px] montserrat-semibold text-[16px] @senderStyles">
+<div class="w-[209px] h-auto rounded-[15px] text-[#fff] px-[13px] py-[8px] montserrat-semibold text-[16px] bg-[#92BA92] ml-auto @(SenderID != UserService.CurrentUser.id ? "bg-[#476F95] !mr-auto !ml-0":"")">
     <p class="mb-0">@MessageText</p>
+</div>
+<div class="ml-auto mr-[10px] w-fit rounded-bl-[10px] rounded-br-[10px] bg-[#D9D9D9] px-[7px] !mb-[5px] @(SenderID != UserService.CurrentUser.id ? "mr-auto !ml-[10px] !mr-auto":"")">
+    <p class="flex text-wrap mb-0 hind-madurai-semibold !text-[14px] w-[130px]">@TimeStamp.ToString("hh:mmtt | dd/MM/yyyy")</p>
 </div>
 
 @code {
@@ -8,14 +11,9 @@
     public string MessageText { get; set; }
     [Parameter]
     public int SenderID { get; set; } // Default sender
+
+    [Parameter]
+    public DateTime TimeStamp { get; set; } // Default timestamp
     public string senderStyles { get; set; } = "bg-[#92BA92] !ml-auto"; // Default
 
-
-
-    protected override void OnInitialized()
-    {
-        if(SenderID != UserService.CurrentUser.id){
-            senderStyles = "bg-[#476F95] !mr-auto";
-        }
-    }
 }

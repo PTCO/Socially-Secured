@@ -2,19 +2,20 @@
 @layout Layout.Chats
 @inject IJSRuntime JS
 @inject NavigationManager NavigationManager
+@using Chat
 
 <article class="flex flex-column items-center !h-[723px] mr-auto !overflow-y-hidden ">
     <div class="flex items-center">
         <h2 class="mb-0 !text-[40px] montserrat-semibold !mr-[15px]">Pending Requests</h2>
         <div class="relative flex items-center">
             <img src="images/Chats-Pending-Requests-Icon-Title.png" class="w-[72px] !h-[67px]" alt="">
-            <h3 class="hind-madurai-semibold !text-[24px] absolute top-[10px] left-[5px] !text-[#fff] @(requests.Count <= 9 ? "!left-[19px]": requests.Count <= 99 ? "!left-[12px]" : "")">@requests.Count</h3>
+            <h3 class="hind-madurai-semibold !text-[24px] absolute top-[10px] left-[5px] !text-[#fff] @(Chat.Requests.Count <= 9 ? "!left-[19px]": Chat.Requests.Count <= 99 ? "!left-[12px]" : "")">@Chat.Requests.Count</h3>
         </div>
     </div>
     <img src="images/Divider-Blue-Medium.png" alt="No Requests Found" class="mt-[10px] !mb-[25px]">
     <div class="flex flex-column overflow-y-auto overflow-x-hidden overscroll-contain h-[460px]" style="scrollbar-width: none;">
-        @if(requests.Count > 0){
-            @foreach ((var result, var index) in requests.Select((value, i) => (value, i)))
+        @if(Chat.Requests.Count > 0){
+            @foreach ((var result, var index) in Chat.Requests.Select((value, i) => (value, i)))
             {
                 <Result 
                     Username="@result.Username" 
@@ -22,7 +23,7 @@
                     ProfilePicture="@result.ProfilePicture" 
                     ChatID="@result.id" 
                     IsSelected="@result.id"
-                    IsRequest=@(IsRequest)
+                    IsRequest=true
                     IsSearchResult=false
                     hasLink=false
                 />
@@ -36,22 +37,4 @@
 </article>
 
 @code {
-    public class ChatRequest
-    {
-        public int id {get; set;}
-        public string Username { get; set; }
-        public string ProfilePicture { get; set; }
-    }
-    private List<ChatRequest> requests = new List<ChatRequest>
-    {
-        new ChatRequest {id = 1, Username = "Userdaaaaaaa", ProfilePicture = "images/User1.png" },
-        new ChatRequest {id = 2, Username = "User2", ProfilePicture = "images/User2.png" },
-        new ChatRequest {id = 3, Username = "User3", ProfilePicture = "images/User3.png" },
-        new ChatRequest {id = 4, Username = "User3", ProfilePicture = "images/User3.png" },
-        new ChatRequest {id = 5, Username = "User3", ProfilePicture = "images/User3.png" },
-        new ChatRequest {id = 6, Username = "User3", ProfilePicture = "images/User3.png" },
-        new ChatRequest {id = 7, Username = "User3", ProfilePicture = "images/User3.png" }
-    };
-
-    public bool IsRequest = true;
 }
