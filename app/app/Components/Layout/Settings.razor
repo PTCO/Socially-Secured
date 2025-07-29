@@ -1,0 +1,58 @@
+@inherits LayoutComponentBase
+@layout Layout.MainLayout
+@inject UserService UserService
+@inject NavigationManager NavigationManager
+
+<PageHeading Heading="@UserService.CurrentUser.username"/>
+<section class="flex justify-center lg:!mt-[40px] mt-[75px]">
+    <article class="flex items-center">
+        <article class="flex flex-column h-full">
+            <div class="flex items-center justify-center h-fit mb-[25px]">
+                <h2 class="text-[40px] lora-semibold mr-[10px] h-fit mb-0">Settings</h2>
+                <img src="images/Settings-Title-Icon.png" class="w-[50px] h-[50px]" alt="">
+            </div>
+            <SettingOption Href="/Dashboard/Settings/Account" IsSelected="@Options.isAccount"  IconClass="w-[65px] h-[65px] ml-[15px]" OptionIcon="images/Avatar-Profile.png" OptionTitle="Account" OnClick="OnClick"/>
+            <SettingOption Href="/Dashboard/Settings/Notifications" IsSelected="@Options.isNotifications" IconClass="w-[37px] h-[45px] ml-[26px]" OptionIcon="images/Settings-Notifications-Icon.png" OptionIconSelected="images/Settings-Notifications-Icon-Selected.png" OptionTitle="Notifications" OnClick="OnClick"/>
+            <SettingOption Href="/Dashboard/Settings/Security" IsSelected="@Options.isSecurity" IconClass="w-[42px] h-[49px] ml-[21px]" OptionIcon="images/Settings-Icon-Lock.png" OptionTitle="Security" OnClick="OnClick" OptionIconSelected="images/Settings-Icon-Lock-Selected.png"/>
+        </article>
+
+        <img src="images/Vertical-Divider-Large.png" alt="" class="mx-[170px] mt-[53px] h-[452px]">
+
+        <article class="flex flex-column h-full">
+            <CascadingValue Value="OnClick">
+                @Body
+            </CascadingValue>
+        </article>
+    </article>
+</section>
+
+@code {
+    public class SettingOptions {
+        public bool isAccount { get; set; } = false; // To indicate if the option is selected
+        public bool isNotifications { get; set; } = false; // To indicate if the option is selected
+        public bool isSecurity { get; set; } = false; // To indicate if the option is selected
+    }
+
+    public SettingOptions Options { get; set; } = new SettingOptions();
+
+    public void OnClick(string href)
+    {
+        Console.WriteLine($"Navigating to: {href}");
+        Options.isAccount = false;
+        Options.isNotifications = false;
+        Options.isSecurity = false;
+        if(href.Contains("Account"))
+        {
+            Options.isAccount = true;
+        }
+        else if(href.Contains("Notifications"))
+        {
+            Options.isNotifications = true;
+        }
+        else if(href.Contains("Security"))
+        {
+            Options.isSecurity = true;
+        }
+        NavigationManager.NavigateTo(href);
+    }
+}

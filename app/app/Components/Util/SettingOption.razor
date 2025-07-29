@@ -1,0 +1,28 @@
+@inject NavigationManager NavigationManager
+
+<div class="flex items-center w-[380px] h-[80px] !mb-[20px] rounded-[15px] hover:scale-[1.02] hover:cursor-pointer @(!IsSelected ? "bg-[#D9D9D9]" : "bg-[#525E75] !ml-[30px] text-[#fff]")" @onclick="@(e => { IsSelected = true; OnClick.InvokeAsync(Href); })">
+    <img src="@(!IsSelected ? OptionIcon : OptionIconSelected == "" ? OptionIcon : OptionIconSelected)" class="@IconClass" alt="">
+    <h3 class="text-[32px] montserrat-semibold mb-0 ml-[25px]">@OptionTitle</h3>
+    <img src="images/Settings-Option-Arrow.png" class="ml-auto mr-[22px]" alt="">
+</div>
+
+@code {
+    [Parameter]
+    public string OptionTitle { get; set; } = "";
+
+    [Parameter]
+    public string OptionIcon { get; set; } = ""; // Default icon path
+
+    [Parameter]
+    public string OptionIconSelected { get; set; } = ""; // Icon when selected, if different
+
+    [Parameter]
+    public string IconClass { get; set; } = "";
+    [Parameter]
+    public string Href { get; set; } = ""; // URL for navigation
+    [Parameter]
+    public EventCallback<string> OnClick { get; set; }
+
+    [Parameter]
+    public bool IsSelected { get; set; } = false; // To indicate if the option is selected
+}

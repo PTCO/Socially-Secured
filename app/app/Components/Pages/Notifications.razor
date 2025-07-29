@@ -1,0 +1,30 @@
+@page "/Dashboard/Settings/Notifications"
+
+@inject UserService UserService
+@inject NavigationManager NavigationManager
+@layout Layout.Settings
+
+<article class="flex flex-column items-center">
+    <div class="flex items-center self-start">
+        <img src="images/Settings-Notifications-Main-Icon.png" alt="">
+        <h2 class="montserrat-semibold !text-[50px] ml-[25px] !mb-[15px]">Controls</h2>
+    </div>
+</article>
+<img src="images/Divider-Horizontal-Large.png" class="mb-[30px]" alt="">
+<article>
+    <div class="flex items-center">
+        <CheckBox Class="mr-[10px] hover:scale-[1.05] hover:cursor-pointer" UnCheckedColor="bg-[#E8E8E8]" CheckedColor="bg-[#92BA92]" />
+        <label class="montserrat-semibold text-[32px] text-[#000] ml-[15px] mb-0">Mute Notifications</label>
+    </div>
+    <button class="!mt-[50px] bg-[#E8E8E8] w-[135px] h-[48px] !rounded-[10px] !mr-auto !text-[26px] montserrat-semibold hover:scale-[1.05] text-black" @onclick="@(() => HandleClick("/Dashboard/Settings"))">Close</button>
+</article>
+
+@code {
+    [CascadingParameter]
+    public Action<string> OnClick { get; set; }
+
+    public void HandleClick(string href)
+    {
+        OnClick?.Invoke(href);
+    }
+}

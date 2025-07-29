@@ -2,20 +2,21 @@
 @layout Layout.Chats
 @inject IJSRuntime JS
 @inject NavigationManager NavigationManager
+@inject UserService UserService
 @using Chat
 @using System.Text.RegularExpressions;
 
     <article>
-        <div class="w-[450px] h-[480px] !mb-[30px] mx-auto overflow-y-auto" style="scrollbar-width: none;">
+        <div class="w-[450px] h-[480px] !mb-[30px] mx-auto overflow-y-auto @(isBlocked ? "opacity-[0.5]":"")" style="scrollbar-width: none;">
             @foreach (var message in Chat.Messages)
             {
                 <Message MessageText="@message.body" SenderID="@message.id" TimeStamp="@message.Timestamp"/>
             }
         </div>
-        <img src="images/Divider-XLarge-2.png" class="mb-[30px]" alt="">
+        <img src="images/Divider-XLarge-2.png" class="mb-[30px] opacity-[0.5]" alt="">
         <div class="flex items-center">
             <InputText @bind-value="newMessage" @onclick="@(() => {hasError = false; errorMessage = string.Empty;})"
-            class="@($"w-[420px] h-[50px]  lora-semibold text-[20px] text-[#fff] px-[15px] !rounded-[15px] !bg-[#525E75] focus:!border-[#476F95] focus:!text-[#fff] focus:border-[4px] focus:!scale-[1.03] !outline-none {(hasError ? "!border-[#F52D2D] !border-[4px]" : null)}")"/>
+            class="@($"w-[420px] h-[50px]  lora-semibold text-[20px] text-[#fff] px-[15px] !rounded-[15px] !bg-[#525E75] focus:!border-[#476F95] focus:!text-[#fff] focus:border-[4px] focus:!scale-[1.03] !outline-none {(hasError ? "!border-[#F52D2D] !border-[4px]" : null)} {(isBlocked ? "!opacity-[0.5]" : null)}")"/>
             <button class="flex items-center justify-center bg-[#D9D9D9] w-[50px] h-[50px] !ml-[10px] !rounded-[10px] hover:scale-[1.05] transition-all" @onclick="HandleSubmit">
                 <img src="images/Send-Arrow-Icon.png" alt="" srcset="">
             </button>
@@ -23,11 +24,12 @@
         </div>
         <div class="flex items-center">
             <button class="bg-[#E8E8E8] w-[135px] h-[48px] !rounded-[10px] !mt-[15px] !text-[26px] montserrat-semibold hover:scale-[1.05] text-black" @onclick="@(() => CloseChat(ChatID))">Close</button>
-            <p class="text-[#F52D2D] !text-[20px] hind-madurai-semibold ml-[25px] !mt-[15px] !mb-0">@errorMessage</p>
+            <button class="@($"bg-[#E8E8E8] w-[135px] h-[48px] !rounded-[10px] !ml-[25px] !mt-[15px] {(!isBlocked ? "!bg-[#F52D2D]" : "!bg-[#78938A]")} !text-[#fff] !text-[26px] montserrat-semibold hover:scale-[1.05]")" @onclick="@(() => BlockChat(ChatID))">@(isBlocked ? "Unblock" : "Block")</button>
+            <p class="text-[#F52D2D] !text-[20px] hind-madurai-semibold ml-[30px] !mt-[15px] !mb-0">@errorMessage</p>
         </div>
     </article>
-    <article class="flex items-end !h-[642px] mr-auto">
-        <img src="@(Chat.Users.Select(u => u.ProfilePicture).FirstOrDefault())" class="w-[72px] h-[72px] ml-[25px] mb-[53px]" alt="">
+    <article class="flex items-end !h-[642px] mr-auto @(isBlocked ? "opacity-[0.5]":"")">
+        <img src="@(Chat.Users.Select(u => u.ProfilePicture).FirstOrDefault() != null ? Chat.Users.Select(u => u.ProfilePicture).FirstOrDefault() : "images/Avatar-Profile.png")" class="w-[72px] h-[72px] ml-[25px] mb-[45px]" alt="">
     </article>
 
 
@@ -39,22 +41,48 @@
     public Layout.Chats? ChatLayout { get; set; }
 
     public bool hasError { get; set; } = false;
+    public bool isBlocked { get; set; } = false;
     public string newMessage { get; set; } = string.Empty;
     public string errorMessage { get; set; } = string.Empty;
 
     protected override async Task OnInitializedAsync()
     {
+        NavigationManager.LocationChanged += UpdateChat;
+        UpdateChat(this, new LocationChangedEventArgs(NavigationManager.Uri, false));
+        @* Chat.Messages = System.Text.Json.JsonSerializer.Deserialize<List<Chat.ChatMessage>>(json) ?? new List<Chat.ChatMessage>(); *@
+    }
+
+    public void UpdateChat(object sender, LocationChangedEventArgs e){
+        isBlocked = UserService.CurrentUser.blockedUsers.Contains(ChatID);
         Chat.Messages = new List<Chat.ChatMessage>()
         {
             new Chat.ChatMessage() { body = "Hello, how are you?", id = 1, Timestamp = DateTime.Now.AddMinutes(-10) },
         };
         var json = Query.GetQuery("https://jsonplaceholder.typicode.com/comments");
-        @* Chat.Messages = System.Text.Json.JsonSerializer.Deserialize<List<Chat.ChatMessage>>(json) ?? new List<Chat.ChatMessage>(); *@
+        StateHasChanged(); // Refresh the UI
+    }
+
+    public void BlockChat(int chatID)
+    {
+        if (UserService.CurrentUser.blockedUsers.Contains(chatID))
+        {
+            UserService.CurrentUser.blockedUsers.Remove(chatID);
+            isBlocked = false;
+        }
+        else
+        {
+            UserService.CurrentUser.blockedUsers.Add(chatID);
+            isBlocked = true;
+        }
+        ChatLayout?.UpdateChats(); // Update the chat list in the parent component
+        UpdateChat(this, new LocationChangedEventArgs(NavigationManager.Uri, false));
+        StateHasChanged(); // Refresh the UI
     }
 
     public void CloseChat(int chatID)
     {
         ChatLayout?.setCurrentChat(0); // Reset the selected chat
+        Chat.Messages.Clear(); // Clear the messages for the chat
         NavigationManager.NavigateTo("/Dashboard/Chats");
         StateHasChanged(); // Refresh the UI
     }
@@ -69,7 +97,6 @@
                 return;
             default:
                 if (CheckMessage()) {
-                    Console.WriteLine($"Message sent: {newMessage}");
                 }
                 return;
         }

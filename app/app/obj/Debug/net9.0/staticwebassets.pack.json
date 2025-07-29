@@ -17,6 +17,18 @@
       "PackagePath": "staticwebassets\\favicon.png"
     },
     {
+      "Id": "A:\\Web Applications\\Socially Secured\\app\\app\\wwwroot\\images\\Avatar-Profile.png",
+      "PackagePath": "staticwebassets\\images\\Avatar-Profile.png"
+    },
+    {
+      "Id": "A:\\Web Applications\\Socially Secured\\app\\app\\wwwroot\\images\\Block-Icon.png",
+      "PackagePath": "staticwebassets\\images\\Block-Icon.png"
+    },
+    {
+      "Id": "A:\\Web Applications\\Socially Secured\\app\\app\\wwwroot\\images\\Blocked-Icon.png",
+      "PackagePath": "staticwebassets\\images\\Blocked-Icon.png"
+    },
+    {
       "Id": "A:\\Web Applications\\Socially Secured\\app\\app\\wwwroot\\images\\Chat-Search-Icon.png",
       "PackagePath": "staticwebassets\\images\\Chat-Search-Icon.png"
     },
@@ -61,8 +73,16 @@
       "PackagePath": "staticwebassets\\images\\Divider-Blue-Medium.png"
     },
     {
+      "Id": "A:\\Web Applications\\Socially Secured\\app\\app\\wwwroot\\images\\Divider-Blue-Small.png",
+      "PackagePath": "staticwebassets\\images\\Divider-Blue-Small.png"
+    },
+    {
       "Id": "A:\\Web Applications\\Socially Secured\\app\\app\\wwwroot\\images\\Divider-Four.png",
       "PackagePath": "staticwebassets\\images\\Divider-Four.png"
+    },
+    {
+      "Id": "A:\\Web Applications\\Socially Secured\\app\\app\\wwwroot\\images\\Divider-Horizontal-Large.png",
+      "PackagePath": "staticwebassets\\images\\Divider-Horizontal-Large.png"
     },
     {
       "Id": "A:\\Web Applications\\Socially Secured\\app\\app\\wwwroot\\images\\Divider-Large.png",
@@ -77,12 +97,24 @@
       "PackagePath": "staticwebassets\\images\\Divider-Three.png"
     },
     {
+      "Id": "A:\\Web Applications\\Socially Secured\\app\\app\\wwwroot\\images\\Divider-Vertical-Small-Blue.png",
+      "PackagePath": "staticwebassets\\images\\Divider-Vertical-Small-Blue.png"
+    },
+    {
+      "Id": "A:\\Web Applications\\Socially Secured\\app\\app\\wwwroot\\images\\Divider-Vertical-Small-Gray.png",
+      "PackagePath": "staticwebassets\\images\\Divider-Vertical-Small-Gray.png"
+    },
+    {
       "Id": "A:\\Web Applications\\Socially Secured\\app\\app\\wwwroot\\images\\Divider-XLarge-2.png",
       "PackagePath": "staticwebassets\\images\\Divider-XLarge-2.png"
     },
     {
       "Id": "A:\\Web Applications\\Socially Secured\\app\\app\\wwwroot\\images\\Divider-XLarge.png",
       "PackagePath": "staticwebassets\\images\\Divider-XLarge.png"
+    },
+    {
+      "Id": "A:\\Web Applications\\Socially Secured\\app\\app\\wwwroot\\images\\Divider-Yellow-Small.png",
+      "PackagePath": "staticwebassets\\images\\Divider-Yellow-Small.png"
     },
     {
       "Id": "A:\\Web Applications\\Socially Secured\\app\\app\\wwwroot\\images\\Footer-Divider-Small.png",
@@ -109,12 +141,20 @@
       "PackagePath": "staticwebassets\\images\\Home-Info-Icon-Trending.png"
     },
     {
+      "Id": "A:\\Web Applications\\Socially Secured\\app\\app\\wwwroot\\images\\Instagram-Icon-Medium.png",
+      "PackagePath": "staticwebassets\\images\\Instagram-Icon-Medium.png"
+    },
+    {
       "Id": "A:\\Web Applications\\Socially Secured\\app\\app\\wwwroot\\images\\Instagram-Icon.png",
       "PackagePath": "staticwebassets\\images\\Instagram-Icon.png"
     },
     {
       "Id": "A:\\Web Applications\\Socially Secured\\app\\app\\wwwroot\\images\\Mail-Icon.png",
       "PackagePath": "staticwebassets\\images\\Mail-Icon.png"
+    },
+    {
+      "Id": "A:\\Web Applications\\Socially Secured\\app\\app\\wwwroot\\images\\Mail-Medium-Icon.png",
+      "PackagePath": "staticwebassets\\images\\Mail-Medium-Icon.png"
     },
     {
       "Id": "A:\\Web Applications\\Socially Secured\\app\\app\\wwwroot\\images\\Main-Logo.png",
@@ -159,6 +199,46 @@
     {
       "Id": "A:\\Web Applications\\Socially Secured\\app\\app\\wwwroot\\images\\Settings-Cog-Icon.png",
       "PackagePath": "staticwebassets\\images\\Settings-Cog-Icon.png"
+    },
+    {
+      "Id": "A:\\Web Applications\\Socially Secured\\app\\app\\wwwroot\\images\\Settings-Icon-Lock-Selected.png",
+      "PackagePath": "staticwebassets\\images\\Settings-Icon-Lock-Selected.png"
+    },
+    {
+      "Id": "A:\\Web Applications\\Socially Secured\\app\\app\\wwwroot\\images\\Settings-Icon-Lock.png",
+      "PackagePath": "staticwebassets\\images\\Settings-Icon-Lock.png"
+    },
+    {
+      "Id": "A:\\Web Applications\\Socially Secured\\app\\app\\wwwroot\\images\\Settings-Logo.png",
+      "PackagePath": "staticwebassets\\images\\Settings-Logo.png"
+    },
+    {
+      "Id": "A:\\Web Applications\\Socially Secured\\app\\app\\wwwroot\\images\\Settings-Notifications-Icon-Selected.png",
+      "PackagePath": "staticwebassets\\images\\Settings-Notifications-Icon-Selected.png"
+    },
+    {
+      "Id": "A:\\Web Applications\\Socially Secured\\app\\app\\wwwroot\\images\\Settings-Notifications-Icon.png",
+      "PackagePath": "staticwebassets\\images\\Settings-Notifications-Icon.png"
+    },
+    {
+      "Id": "A:\\Web Applications\\Socially Secured\\app\\app\\wwwroot\\images\\Settings-Notifications-Main-Icon.png",
+      "PackagePath": "staticwebassets\\images\\Settings-Notifications-Main-Icon.png"
+    },
+    {
+      "Id": "A:\\Web Applications\\Socially Secured\\app\\app\\wwwroot\\images\\Settings-Option-Arrow.png",
+      "PackagePath": "staticwebassets\\images\\Settings-Option-Arrow.png"
+    },
+    {
+      "Id": "A:\\Web Applications\\Socially Secured\\app\\app\\wwwroot\\images\\Settings-Security-Main-Icon.png",
+      "PackagePath": "staticwebassets\\images\\Settings-Security-Main-Icon.png"
+    },
+    {
+      "Id": "A:\\Web Applications\\Socially Secured\\app\\app\\wwwroot\\images\\Settings-Title-Icon.png",
+      "PackagePath": "staticwebassets\\images\\Settings-Title-Icon.png"
+    },
+    {
+      "Id": "A:\\Web Applications\\Socially Secured\\app\\app\\wwwroot\\images\\Stop-Circle.png",
+      "PackagePath": "staticwebassets\\images\\Stop-Circle.png"
     },
     {
       "Id": "A:\\Web Applications\\Socially Secured\\app\\app\\wwwroot\\images\\User-Add-Chat-Icon-Large.png",
@@ -207,6 +287,10 @@
     {
       "Id": "A:\\Web Applications\\Socially Secured\\app\\app\\wwwroot\\images\\X-Icon.png",
       "PackagePath": "staticwebassets\\images\\X-Icon.png"
+    },
+    {
+      "Id": "A:\\Web Applications\\Socially Secured\\app\\app\\wwwroot\\images\\X-Medium-Icon.png",
+      "PackagePath": "staticwebassets\\images\\X-Medium-Icon.png"
     },
     {
       "Id": "A:\\Web Applications\\Socially Secured\\app\\app\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css",

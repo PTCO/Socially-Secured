@@ -1,0 +1,54 @@
+ @page "/Dashboard/Settings/Security"
+@layout Layout.Settings
+@inject UserService UserService
+@inject NavigationManager NavigationManager
+
+<article class="flex items-center">
+    <img src="images/Settings-Security-Main-Icon.png" class="" alt="">
+    <h2 class="montserrat-semibold !text-[50px] ml-[25px] mr-[95px]">Setup</h2>
+    <button class=" bg-[#E8E8E8] w-[135px] h-[48px] !rounded-[10px] !mr-auto !text-[26px] montserrat-semibold hover:scale-[1.05] text-black" @onclick="@(() => HandleClick("/Dashboard/Settings"))">Close</button>
+</article>
+<img src="images/Divider-Horizontal-Large.png" class="mt-[20px] mb-[30px] xl:!mb-[20px]" alt="">
+<EditForm Model="@ChangePassword" class="flex flex-column items-center justify-center">
+    <label class="lora-semibold text-[30px] text-[#000] mb-[25px] xl:!mb-[15px]" for="currentPassword">Current Password</label>
+    <div class="flex items-center  w-[420px]">
+        <InputText id="currentPassword" @bind-Value="@ChangePassword.CurrentPassword" @oninput="@(e => ValidateCurrentPassword())" class="w-[100%] h-[50px]  lora-semibold  text-[20px] text-[#fff] px-[15px] !rounded-[15px] bg-[#D9D9D9] focus:!border-[#000] focus:border-[4px] focus:!bg-[#82919F] focus:!scale-[1.03] !outline-none" />
+        <img src="@(!isCurrentPasswordValid ? "images/Chats-Request-Accept-Icon.png" : "images/Chats-Request-Decline-Icon.png")" class="ml-[15px]" alt="">
+    </div>
+    <img src="images/Divider-large.png" class="mt-[30px] mb-[25px]" alt="">
+    <label class="lora-semibold text-[30px] text-[#000] mb-[25px] xl:!mb-[15px]" for="newPassword">New Password</label>
+    <InputText id="newPassword" @bind-Value="@ChangePassword.NewPassword" class="w-[100%] h-[50px]  lora-semibold  text-[20px] text-[#fff] px-[15px] !rounded-[15px] bg-[#D9D9D9] focus:!border-[#000] focus:border-[4px] focus:!bg-[#82919F] focus:!scale-[1.03] !outline-none" />
+    <label class="lora-semibold text-[30px] text-[#000] mb-[25px] mt-[30px] xl:!mb-[15px]" for="confirmPassword">Confirm Password</label>
+    <InputText id="confirmPassword" @bind-Value="@ChangePassword.ConfirmPassword" class="w-[100%] h-[50px]  lora-semibold  text-[20px] text-[#fff] px-[15px] !rounded-[15px] bg-[#D9D9D9] focus:!border-[#000] focus:border-[4px] focus:!bg-[#82919F] focus:!scale-[1.03] !outline-none" />
+    <button class="bg-[#92BA92] w-[201px] h-[60px] !rounded-[10px] !mt-[40px] xl:!mt-[30px] !text-[30px] font-semibold hover:scale-[1.05] text-white">Change</button>
+</EditForm>
+
+@code {
+    public class ChangePasswordForm {
+        public string CurrentPassword { get; set; }
+        public string NewPassword { get; set; }
+        public string ConfirmPassword { get; set; }
+    }
+    public ChangePasswordForm ChangePassword { get; set; } = new ChangePasswordForm();
+    public bool isCurrentPasswordValid = false;
+
+    [CascadingParameter]
+    public Action<string> OnClick { get; set; }
+    public void HandleClick(string href)
+    {
+        OnClick?.Invoke(href);
+    }
+    protected override void OnInitialized()
+    {
+        // Initialize any necessary data or services here
+        ValidateCurrentPassword();
+        isCurrentPasswordValid = ChangePassword.CurrentPassword == UserService.CurrentUser.password;
+        StateHasChanged();
+    }
+
+    public void ValidateCurrentPassword()
+    {
+        isCurrentPasswordValid = ChangePassword.CurrentPassword == UserService.CurrentUser.password;
+        StateHasChanged();
+    }
+}

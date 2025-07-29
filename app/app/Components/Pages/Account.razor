@@ -1,0 +1,48 @@
+@page "/Dashboard/Settings/Account"
+
+@inject UserService UserService
+@inject NavigationManager NavigationManager
+@layout Layout.Settings
+
+<article class="flex items-center">
+    <img src="images/Avatar-Profile.png" class="w-[103px] h-[103px]" alt="">
+    <button class="w-[201px] !h-[60px] bg-[#F1DDBF] montserrat-semibold !text-[30px] !rounded-[10px] !ml-[35px] !mr-[25px] hover:!scale-[1.05] transition-all">Update</button>
+    <div class="flex flex-column items-center mt-auto">
+        <h3 class="!mb-0 montserrat-semibold !text-[30px]">Changed</h3>
+        <img src="images/CheckMark-Icon.png" class="mt-[15px] !w-[37px] !h-[37px]" alt="">
+    </div>
+</article>
+<img src="images/Divider-Horizontal-Large.png" class="mt-[27px] mb-[30px]" alt="">
+<article class="flex flex-column items-center">
+    <div class="flex justify-center items-center mb-[40px]">
+        <h2 class="montserrat-semibold !text-[48px]">@UserService.CurrentUser.username</h2>
+        <img src="images/Divider-Vertical-Small-Blue.png" class="mx-[35px]" alt="" srcset="">
+        <button class="w-[201px] !h-[60px] !bg-[#92BA92] montserrat-semibold !text-[30px] text-[#fff] !rounded-[10px] hover:!scale-[1.05] transition-all">Change</button>
+    </div>
+    <EditForm Model="@UserService.CurrentUser" class="flex items-center w-[500px]">
+        <img src="images/Instagram-Icon-Medium.png" class="mr-[28px] !w-[60px] !h-[60px]" alt="">
+        <InputText @bind-Value="UserService.CurrentUser.username" class="w-[100%] !h-[50px] lora-semibold text-[20px] text-[#000] px-[15px] !rounded-[15px] !mr-[15px] !bg-[#E8E8E8] focus:!border-[#476F95] focus:!text-[#000] focus:border-[4px] focus:!scale-[1.03] !outline-none" placeholder="Username" />
+        <button type="submit" class="!min-w-[69px] !h-[50px] !rounded-[10px] bg-[#82919F] text-[#fff] montserrat-semibold !text-[28px]">Set</button>
+    </EditForm>
+    <EditForm Model="@UserService.CurrentUser" class="flex items-center w-[500px] my-[30px]">
+        <img src="images/X-Medium-Icon.png" class="mr-[30px] !w-[60px] !h-[60px]" alt="">
+        <InputText @bind-Value="UserService.CurrentUser.username" class="w-[100%] !h-[50px] lora-semibold text-[20px] text-[#000] px-[15px] !rounded-[15px] !mr-[15px] !bg-[#E8E8E8] focus:!border-[#476F95] focus:!text-[#000] focus:border-[4px] focus:!scale-[1.03] !outline-none" placeholder="Username" />
+        <button type="submit" class="!min-w-[69px] !h-[50px] !rounded-[10px] bg-[#476F95] text-[#fff] montserrat-semibold !text-[28px]">Set</button>
+    </EditForm>
+    <EditForm Model="@UserService.CurrentUser" class="flex items-center w-[500px]">
+        <img src="images/Mail-Medium-Icon.png" class="mr-[28px] !w-[60px] !h-[44px]" alt="">
+        <InputText @bind-Value="UserService.CurrentUser.username" class="w-[100%] !h-[50px] lora-semibold text-[20px] text-[#000] px-[15px] !rounded-[15px] !mr-[15px] !bg-[#E8E8E8] focus:!border-[#476F95] focus:!text-[#000] focus:border-[4px] focus:!scale-[1.03] !outline-none" placeholder="Username" />
+        <button type="submit" class="!min-w-[69px] !h-[50px] !rounded-[10px] bg-[#F1DDBF] text-[#111] montserrat-semibold !text-[28px]">Set</button>
+    </EditForm>
+    <button class="!mt-[50px] bg-[#E8E8E8] w-[135px] h-[48px] !rounded-[10px] !mr-auto !text-[26px] montserrat-semibold hover:scale-[1.05] text-black" @onclick="@(() => HandleClick("/Dashboard/Settings"))">Close</button>
+</article>
+
+@code {
+    [CascadingParameter]
+    public Action<string> OnClick { get; set; }
+
+    public void HandleClick (string href)
+    {
+        OnClick?.Invoke(href);
+    }
+}

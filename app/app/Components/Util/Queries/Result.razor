@@ -3,21 +3,25 @@
 @inject NavigationManager NavigationManager
 @using Chat
 
-<article class="mb-[20px]  flex items-center transition-all hover:cursor-pointer @(IsSelected == ChatID ? IsRequest ? "!bg-[#E8E8E8] rounded-[15px] hover:!cursor-default h-[80px]" : "!bg-[#525E75] rounded-[15px]  pl-[4px] ml-[30px]" : "ml-[5px] hover:scale-[1.02] ")" @onclick="@(() => {OnChatSelected.InvokeAsync(ChatID); if(hasLink) NavigationManager.NavigateTo($"/Dashboard/Chats/Session/{ChatID}");})">
-    <img src="@ProfilePicture" alt="" srcset="" class="w-[72px] h-[72px] mr-[10px] rounded-[50%] shadow-md border @(IsSelected == ChatID ? "shadow-none ml-[10px] !mr-[7px]":"")">
-    <div class="flex items-center px-[20px] !w-[380px] !h-[72px] rounded-[15px]  shadow-md @NamePlateClass @(IsSelected == ChatID ?  IsRequest ? "!px-[0px] shadow-none" : "!bg-[#525E75] shadow-none !h-[80px]":"")">
-        <h2 class="montserrat-semibold  mb-0 text-[#000] w-[268px] @(IsSelected == ChatID ? "!text-[36px]" : "!text-[40px]")">@Username</h2>
+<article 
+    class="mb-[20px] w-fit  flex items-center transition-all hover:cursor-pointer @(IsSelected == ChatID ? IsRequest ? "!bg-[#E8E8E8] rounded-[15px] hover:!cursor-default h-[65px] max-w-[380px]" : "!bg-[#525E75] rounded-[15px]  pl-[4px] ml-[30px] !w-[380px] relative" : "hover:scale-[1.02] ") @(IsBlocked && IsSelected == ChatID ? "!bg-[#FE5757]" : "")" @onclick="@(() => {OnChatSelected.InvokeAsync(ChatID); if(hasLink) NavigationManager.NavigateTo($"/Dashboard/Chats/Session/{ChatID}");})">
+    <img src="@ProfilePicture" alt="" srcset="" class="w-[48px] h-[48px] mr-[10px] rounded-[50%] shadow-md border @(IsSelected == ChatID ? "shadow-none ml-[20px]":"")">
+    <div class="flex items-center px-[15px] !w-[302px] !h-[65px] rounded-[15px]  shadow-md @NamePlateClass @(IsSelected == ChatID ?  IsRequest ? "shadow-none !pl-[0px]" : "!bg-[#525E75] shadow-none !h-[65px] !w-full":"") @(IsBlocked ? "!bg-[#FE5757]" : "")">
+        <h2 class="montserrat-semibold w-fit  mb-0 text-[#000] !text-[26px] @(IsBlocked ? "!text-[#fff]" : "") @(IsSelected == ChatID && !IsRequest ? "!text-[#fff]" : "")">@Username</h2>
         @if(IsSearchResult && IsSelected == ChatID){
             <button class="bg-[#F1DDBF] w-[80px] h-[37px] !rounded-[10px] !ml-[auto] !text-[18px] font-semibold hover:scale-[1.05] text-black @(isButtonClicked ? "!bg-[#E8E8E8]" : "")" @onclick="@(() => isButtonClicked = !isButtonClicked)">@(isButtonClicked ? "Sent" : "Invite")</button>
         }
         else if (IsRequest){
-            <div class="flex items-center !justify-self-end ml-[10px]">
+            <div class="flex items-center !justify-self-end ml-auto">
                 <img src="images/Chats-Request-Accept-Icon.png" alt="" srcset="" class="!mr-[10px] hover:scale-[1.05] hover:cursor-pointer" @onclick="OnAcceptRequest">
                 <img src="images/Chats-Request-Decline-Icon.png" alt="" srcset="" class="hover:scale-[1.05] hover:cursor-pointer" @onclick="OnDeclineRequest">
             </div>
         }
+        else if (IsBlocked) {
+            <img src="images/Block-Icon.png" alt="" class=" ml-auto">
+        }
         else {
-            <img src="@(IsSelected == ChatID ? "images/Chats-User-Current-Icon.png" : IsSearchResult ? "images/User-Add-Chat-Icon.png":"images/User-Chat-Icon.png")" alt="" class="!w-[34px] !h-[29px] self-start mt-[24px] ml-auto @(IsSelected == ChatID ? "!w-[31px] !h-[42px] !mt-[19px]" : "")">
+            <img src="@(IsSelected == ChatID ? "images/Chats-User-Current-Icon.png" : IsSearchResult ? "images/User-Add-Chat-Icon.png":"images/User-Chat-Icon.png")" alt="" class="!w-[34px] !h-[29px] ml-auto @(IsSelected == ChatID ? "!w-[31px] !h-[42px]" : "")">
         }
     </div>
 </article>
@@ -47,6 +51,8 @@
 
     [Parameter]
     public bool hasLink { get; set; } = false; // Flag to indicate if the chat has a link
+    [Parameter]
+    public bool IsBlocked { get; set; } = false;
 
     public bool isButtonClicked = false; // Flag to indicate if the button is clicked
 
@@ -54,11 +60,13 @@
     {
         Chat.Users.Add(new Chat.ChatUser() { username = Username, ProfilePicture = ProfilePicture, id = ChatID });
         Chat.Requests.RemoveAll(r => r.id == ChatID);
+        OnChatSelected.InvokeAsync(0); // Reset the selected chat
     }
     public void OnDeclineRequest()
     {
         Chat.Users.RemoveAll(u => u.id == ChatID);
         Chat.Requests.RemoveAll(r => r.id == ChatID);
+        OnChatSelected.InvokeAsync(0); // Reset the selected chat
     }
         
 }

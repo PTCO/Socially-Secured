@@ -2,15 +2,20 @@
 @inherits LayoutComponentBase
 @inject IJSRuntime JS
 @inject ChatService ChatService
+@inject UserService UserService
 @using Chat
 
-<section class="flex justify-center lg:!mt-[40px] mt-[75px]">
-    <article class="flex flex-column !ml-[178px] w-[480px]">
-        <div class="flex items-center mx-auto">
-            <h2 class="mr-[10px] text-[40px] lora-semibold">Chats</h2>
+<section class="flex justify-center lg:!mt-[40px] mt-[75px] ">
+    <article class="flex flex-column !ml-[178px]">
+        <div class="flex justify-center items-center w-fit">
+            <h2 class="mr-[15px] !text-[36px] mb-0 lora-semibold">Chats</h2>
             <img src="images/Chats-Title-Icon.png" class="" alt="" srcset="">
+            <img src="images/Divider-Vertical-Small-Gray.png" class="!mx-[20px]" alt="" srcset="">
+            <h2 class="mr-[15px] !text-[36px] mb-0 lora-semibold">Blocked</h2>
+            <img src="images/Blocked-Icon.png" class="" alt="" srcset="">
+            <h3 class="!text-[32px] w-[56px] ml-[12px] lora-semibold mb-0">@blockedNumber</h3>
         </div>
-        <div class="flex flex-column !mt-[30px] overflow-y-auto overflow-x-hidden max-h-[643px] overscroll-contain" style="scrollbar-width: none;">
+        <div class="flex flex-column w-fit ml-[30px] !mt-[30px] overflow-y-auto overflow-x-hidden max-h-[643px] overscroll-contain " style="scrollbar-width: none;">
             @if(Chat.Users.Count > 0){
                 @foreach ((Chat.ChatUser result, int index) in Chat.Users.Select((value, i) => (value, i)))
                 {
@@ -22,6 +27,7 @@
                             ChatID="@result.id" 
                             IsSelected="@(isSelected)" 
                             IsSearchResult=false
+                            IsBlocked="@(UserService.CurrentUser.blockedUsers.Contains(result.id))"
                             OnChatSelected="@(setCurrentChat)"
                             hasLink=true
                         />
@@ -41,15 +47,22 @@
 @code {
     public List<string> colorClasses = new List<string> { "bg-[#F1DDBF]", "bg-[#78938A]  !text-[#fff]", "bg-[#E8E8E8]", "bg-[#476F95] !text-[#fff]"};
     public int isSelected = 0;
+    public int blockedNumber = 0;
 
     protected async override void OnInitialized()
     {
+        blockedNumber = UserService.CurrentUser.blockedUsers.Count;
         Model.errorMessages.Clear();
         Model.SwitchUI("None");
         var json = Query.GetQuery("https://jsonplaceholder.typicode.com/users");
         Chat.Users = System.Text.Json.JsonSerializer.Deserialize<List<Chat.ChatUser>>(json) ?? new List<Chat.ChatUser>();
+        StateHasChanged();
     }
 
+    public void UpdateChats(){
+        blockedNumber = UserService.CurrentUser.blockedUsers.Count;
+        StateHasChanged();
+    }
 
     public void setCurrentChat(int chatID)
     {

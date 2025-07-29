@@ -108,11 +108,11 @@
         HandlePassword();
 
         if(Model.errorMessages.Count == 0){
-            var user = Query.PostQueryAsync("https://jsonplaceholder.typicode.com/posts", System.Text.Json.JsonSerializer.Serialize(Form));
+            var user = Query.PostQueryAsync("https://jsonplaceholder.typicode.com/users", System.Text.Json.JsonSerializer.Serialize(Form));
             UserService.SetUser(user);
             await Task.Delay(3000); // Simulate a delay for the login process
             Model.SwitchUI("Welcome");
-            NavigationManager.NavigateTo("/Dashboard");
+            NavigationManager.NavigateTo("/Dashboard/Search/Home");
         }
         StateHasChanged(); // Trigger a state change to update the UI
     }

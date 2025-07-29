@@ -8,7 +8,7 @@
 @using System.ComponentModel.DataAnnotations;
 
 <article class="flex flex-column items-center w-[424px] @Class">
-    <EditForm Model="@EmailForm" OnSubmit="HandleSubmit" class="flex flex-column items-center text-center w-[420px] ml-auto">
+    <EditForm EditContext="@editContext" OnSubmit="HandleSubmit" class="flex flex-column items-center text-center w-[420px] ml-auto">
         <DataAnnotationsValidator />
 
         <label class="montserrat-semibold text-[30px] text-[#000]  mb-[25px] xl:!mb-[15px]">Enter email associated with account</label>
@@ -53,11 +53,21 @@
 
     public async Task HandleSubmit()
     {
-        editContext.Validate();
+        var isValid = editContext.Validate();
+        Model.errorMessages.Clear();
+
         foreach (var message in editContext.GetValidationMessages()){
-            if(message == "Invalid email address." || message == "Email is required.")
+            if(message == "Email is required.")
             {
+                Model.errorMessages.Remove("Invalid email address.");
                 Model.errorMessages.Add(message);
+                Model.SwitchUI("Errors");
+            }
+            else if (message == "Invalid email address.")
+            {
+                Model.errorMessages.Remove("Email is required.");
+                Model.errorMessages.Add(message);
+                Model.SwitchUI("Errors");
             }
         }
 
@@ -65,7 +75,8 @@
         {
             return;
         }
-        @* var query = Query.GetQuery("https://jsonplaceholder.typicode.com/users");
+
+        var query = Query.GetQuery("https://jsonplaceholder.typicode.com/users");
         var emailList = System.Text.Json.JsonSerializer.Deserialize<List<User>>(query);
         foreach (var user in emailList)
         {
@@ -83,10 +94,11 @@
                 Model.errorMessages.Add("Email not found. Please try again.");
                 Model.SwitchUI("Errors");
                 await Task.Delay(3000); // Simulate a delay for error display
+                Model.SwitchUI("None");
                 Model.errorMessages.Clear();
                 break;
             }
-        } *@
+        }
         StateHasChanged();
     }
 

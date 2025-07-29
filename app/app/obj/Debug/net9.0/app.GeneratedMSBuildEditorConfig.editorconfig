@@ -40,6 +40,14 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xMYXlvdXRcTWFpbkZvb3Rlci5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
+[A:/Web Applications/Socially Secured/app/app/Components/Layout/Settings.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xMYXlvdXRcU2V0dGluZ3MucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[A:/Web Applications/Socially Secured/app/app/Components/Pages/Account.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xBY2NvdW50LnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
 [A:/Web Applications/Socially Secured/app/app/Components/Pages/ChatRequests.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xDaGF0UmVxdWVzdHMucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
@@ -66,6 +74,18 @@ build_metadata.AdditionalFiles.CssScope =
 
 [A:/Web Applications/Socially Secured/app/app/Components/Pages/Login.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xMb2dpbi5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[A:/Web Applications/Socially Secured/app/app/Components/Pages/Notifications.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xOb3RpZmljYXRpb25zLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[A:/Web Applications/Socially Secured/app/app/Components/Pages/Security.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xTZWN1cml0eS5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[A:/Web Applications/Socially Secured/app/app/Components/Pages/Settings.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xTZXR0aW5ncy5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
 [A:/Web Applications/Socially Secured/app/app/Components/Pages/SignUp.razor]
@@ -142,6 +162,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [A:/Web Applications/Socially Secured/app/app/Components/Util/Queries/Result.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xVdGlsXFF1ZXJpZXNcUmVzdWx0LnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[A:/Web Applications/Socially Secured/app/app/Components/Util/SettingOption.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xVdGlsXFNldHRpbmdPcHRpb24ucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
 [A:/Web Applications/Socially Secured/app/app/Components/Util/UsernameCheck.razor]
