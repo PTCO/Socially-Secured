@@ -2,12 +2,13 @@
 @layout Layout.Chats
 @inject IJSRuntime JS
 @inject NavigationManager NavigationManager
+@inject UserService UserService
 
-<article class="flex flex-column items-center mr-auto mt-[99px]">
+<article class="flex flex-column items-center mt-[99px] !w-[480px] !h-[400x]">
     <h2 class="montserrat-semibold !text-[40px]">Pending Requests</h2>
     <div class="flex items-center mt-[20px]">
         <img src="images/User-Add-Chat-Icon-Large.png" class="w-[50px] !h-[44px]" alt="">
-        <h3 class="hind-madurai-semibold !text-[36px] !ml-[20px] mb-0">1</h3>
+        <h3 class="hind-madurai-semibold !text-[36px] !ml-[20px] mb-0">@UserService.CurrentUser.Requests.Count</h3>
         <button class="w-[125px] !h-[48px] bg-[#92BA92] montserrat-semibold !text-[30px] !rounded-[10px] !ml-[35px] hover:!scale-[1.05] transition-all" @onclick="@(() => NavigationManager.NavigateTo("/Dashboard/Chats/Requests"))">View</button>
     </div>
     <div class="flex items-center my-[50px]">

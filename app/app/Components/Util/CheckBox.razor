@@ -8,12 +8,9 @@
     public string UnCheckedColor { get; set; } = ""; // Class for styling
     [Parameter]
     public string CheckedColor { get; set; } = ""; // Class for styling
-
     public bool IsChecked { get; set; } = false; // State of the checkbox
-
     [Parameter]
     public EventCallback<bool> OnCheckChanged { get; set; } // Callback for when the checkbox state changes
-
     private void ToggleCheck()
     {
         IsChecked = !IsChecked;

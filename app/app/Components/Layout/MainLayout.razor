@@ -1,4 +1,6 @@
 ﻿@inherits LayoutComponentBase
+@inject NavigationManager NavigationManager
+@inject UserService UserService
 
 <div class="page h-[100vh]">
     <div class="ml-[25px] mt-[25px]">
@@ -17,3 +19,20 @@
     <a href="." class="reload">Reload</a>
     <span class="dismiss">🗙</span>
 </div>
+
+@code {
+    protected override void OnInitialized()
+    {
+        if(UserService.CurrentUser == null && !NavigationManager.Uri.Contains("/Login") && !NavigationManager.Uri.Contains("/Signup"))
+        {
+            // Redirect to login if the user is not authenticated
+            NavigationManager.NavigateTo("/Login");
+        }
+        else if (UserService.CurrentUser != null && (NavigationManager.Uri.Contains("/Login") || NavigationManager.Uri.Contains("/SignUp")))
+        {
+            // Redirect to dashboard if the user is already authenticated
+            NavigationManager.NavigateTo("/Dashboard/Search/");
+        }
+        StateHasChanged();
+    }
+}

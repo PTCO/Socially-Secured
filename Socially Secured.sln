@@ -5,15 +5,15 @@ VisualStudioVersion = 17.5.2.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "program", "program\program.csproj", "{65B79B6F-C561-E134-A46F-E7F910EF4039}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "program", "program", "{511FBB2F-302C-50F8-C590-63AE51149CBF}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "program.core", "program", "{511FBB2F-302C-50F8-C590-63AE51149CBF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "program", "program\program\program.csproj", "{8728CF0E-2DD1-40CE-AC95-F3F9DF12B79E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "program.shared", "program\program\program.csproj", "{8728CF0E-2DD1-40CE-AC95-F3F9DF12B79E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "program.Client", "program\program.Client\program.Client.csproj", "{26B13DFB-DDEF-4324-A379-4356A6C4F5E4}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "program-2", "program-2", "{2CD76340-44D8-8134-9D03-94F8836D602D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "program-2", "program-2\program-2\program-2.csproj", "{F1DC1190-C151-44C8-A9D5-4389A0504A9F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "program-2.core", "program-2\program-2\program-2.csproj", "{F1DC1190-C151-44C8-A9D5-4389A0504A9F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "program-2.Client", "program-2\program-2.Client\program-2.Client.csproj", "{7EF49861-DEA3-4815-BB18-FB7391F173B8}"
 EndProject

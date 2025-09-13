@@ -4,45 +4,163 @@
 @inject NavigationManager NavigationManager
 @layout Layout.Settings
 
-<article class="flex items-center">
-    <img src="images/Avatar-Profile.png" class="w-[103px] h-[103px]" alt="">
-    <button class="w-[201px] !h-[60px] bg-[#F1DDBF] montserrat-semibold !text-[30px] !rounded-[10px] !ml-[35px] !mr-[25px] hover:!scale-[1.05] transition-all">Update</button>
-    <div class="flex flex-column items-center mt-auto">
-        <h3 class="!mb-0 montserrat-semibold !text-[30px]">Changed</h3>
-        <img src="images/CheckMark-Icon.png" class="mt-[15px] !w-[37px] !h-[37px]" alt="">
-    </div>
+<article class="flex @(isUpdate ? "" : "items-center")">
+    <img src="@(Form.ProfilePicture)" class="min-w-[97px] max-w-[97px] h-[97px] rounded-circle" alt="">
+    @if (isUpdate) {
+        <div class="!ml-[30px] w-[100%]">
+            <InputText @bind-Value="Form.ProfilePicture" class="!h-[50px] w-100 montserrat-semibold !text-[20px] text-[#000] px-[15px] !mb-[13px] !rounded-[15px]  !bg-[#E8E8E8] focus:!border-[#476F95] focus:!text-[#000] focus:border-[4px] focus:!scale-[1.03] !outline-none mt-[15px] " placeholder="Bio" />
+            <label class="!flex items-center hover:cursor-pointer" for="profilePicture">
+                <h2 class="montserrat-semibold text-[30px] w-fit !mr-[20.5px] mb-0">Select A File</h2>
+                <img src="images/Account-Select-File-Icon.png" alt="">
+            </label>
+            <InputFile class="hidden" id="profilePicture" OnChange="HandleFileSelected" />
+        </div>
+    } else {
+        <button class="w-[201px] !h-[60px] bg-[#F1DDBF] montserrat-semibold !text-[30px] !rounded-[10px] !ml-[30px] !mr-[25px] hover:!scale-[1.05] transition-all" @onclick="() => isUpdate = !isUpdate">Update</button>
+    }
 </article>
-<img src="images/Divider-Horizontal-Large.png" class="mt-[27px] mb-[30px]" alt="">
-<article class="flex flex-column items-center">
-    <div class="flex justify-center items-center mb-[40px]">
-        <h2 class="montserrat-semibold !text-[48px]">@UserService.CurrentUser.username</h2>
-        <img src="images/Divider-Vertical-Small-Blue.png" class="mx-[35px]" alt="" srcset="">
-        <button class="w-[201px] !h-[60px] !bg-[#92BA92] montserrat-semibold !text-[30px] text-[#fff] !rounded-[10px] hover:!scale-[1.05] transition-all">Change</button>
+<img src="images/Divider-Horizontal-Large.png" class="mt-[25px] mb-[15px] !w-[100%]" alt="">
+<article class="flex flex-column">
+    <div class="flex flex-column mb-[10px] w-fit ">
+        <h2 class="montserrat-semibold !text-[30px] mb-0">Username</h2>
+        <img src="images/Divider-Horizontal-Account.png" class="mt-[5px] w-[100%]" alt="" srcset="">
     </div>
-    <EditForm Model="@UserService.CurrentUser" class="flex items-center w-[500px]">
+    <div class="@(!isUpdate ? "!opacity-[0.5]" : "")">
+        <InputText @oninput="@(e => ValidateForm(e, "username"))" style="@(Form.UsernameHasError ? "border: 4px red solid;":"")" @bind-Value="UserService.CurrentUser.Username" disabled="@(isUpdate ? false : true)" class="w-[100%] !h-[55px] montserrat-semibold !text-[36px] text-[#000] px-[15px] !mb-[30px] !rounded-[15px]  !bg-[#E8E8E8] focus:!border-[#476F95] focus:!text-[#000] focus:border-[4px] focus:!scale-[1.03] !outline-none mt-[15px] "  />
+    </div>
+    <div class="flex items-center  @(!isUpdate ? "!opacity-[0.5]" : "")">
         <img src="images/Instagram-Icon-Medium.png" class="mr-[28px] !w-[60px] !h-[60px]" alt="">
-        <InputText @bind-Value="UserService.CurrentUser.username" class="w-[100%] !h-[50px] lora-semibold text-[20px] text-[#000] px-[15px] !rounded-[15px] !mr-[15px] !bg-[#E8E8E8] focus:!border-[#476F95] focus:!text-[#000] focus:border-[4px] focus:!scale-[1.03] !outline-none" placeholder="Username" />
-        <button type="submit" class="!min-w-[69px] !h-[50px] !rounded-[10px] bg-[#82919F] text-[#fff] montserrat-semibold !text-[28px]">Set</button>
-    </EditForm>
-    <EditForm Model="@UserService.CurrentUser" class="flex items-center w-[500px] my-[30px]">
+        <InputText @oninput="@(e => ValidateForm(e, "instagram"))" style="@(Form.InstagramHasError ? "border: 4px red solid;":"")" @bind-Value="Form.Instagram" disabled="@(isUpdate ? false : true)" class="w-[100%] !h-[50px] lora-semibold text-[20px] text-[#000] px-[15px] !rounded-[15px]  !bg-[#E8E8E8] focus:!border-[#476F95] focus:!text-[#000] focus:border-[4px] focus:!scale-[1.03] !outline-none"  />
+    </div>
+    <div class="flex items-center my-[30px] @(!isUpdate ? "!opacity-[0.5]" : "")">
         <img src="images/X-Medium-Icon.png" class="mr-[30px] !w-[60px] !h-[60px]" alt="">
-        <InputText @bind-Value="UserService.CurrentUser.username" class="w-[100%] !h-[50px] lora-semibold text-[20px] text-[#000] px-[15px] !rounded-[15px] !mr-[15px] !bg-[#E8E8E8] focus:!border-[#476F95] focus:!text-[#000] focus:border-[4px] focus:!scale-[1.03] !outline-none" placeholder="Username" />
-        <button type="submit" class="!min-w-[69px] !h-[50px] !rounded-[10px] bg-[#476F95] text-[#fff] montserrat-semibold !text-[28px]">Set</button>
-    </EditForm>
-    <EditForm Model="@UserService.CurrentUser" class="flex items-center w-[500px]">
+        <InputText @oninput="@(e => ValidateForm(e, "twitter"))" style="@(Form.TwitterHasError ? "border: 4px red solid;":"")" @bind-Value="Form.Twitter" disabled="@(isUpdate ? false : true)" class="w-[100%] !h-[50px] lora-semibold text-[20px] text-[#000] px-[15px] !rounded-[15px]  !bg-[#E8E8E8] focus:!border-[#476F95] focus:!text-[#000] focus:border-[4px] focus:!scale-[1.03] !outline-none"  />
+    </div>
+    <div class="flex items-center @(!isUpdate ? "!opacity-[0.5]" : "")">
         <img src="images/Mail-Medium-Icon.png" class="mr-[28px] !w-[60px] !h-[44px]" alt="">
-        <InputText @bind-Value="UserService.CurrentUser.username" class="w-[100%] !h-[50px] lora-semibold text-[20px] text-[#000] px-[15px] !rounded-[15px] !mr-[15px] !bg-[#E8E8E8] focus:!border-[#476F95] focus:!text-[#000] focus:border-[4px] focus:!scale-[1.03] !outline-none" placeholder="Username" />
-        <button type="submit" class="!min-w-[69px] !h-[50px] !rounded-[10px] bg-[#F1DDBF] text-[#111] montserrat-semibold !text-[28px]">Set</button>
-    </EditForm>
-    <button class="!mt-[50px] bg-[#E8E8E8] w-[135px] h-[48px] !rounded-[10px] !mr-auto !text-[26px] montserrat-semibold hover:scale-[1.05] text-black" @onclick="@(() => HandleClick("/Dashboard/Settings"))">Close</button>
+        <InputText @oninput="@(e => ValidateForm(e, "email"))" style="@(Form.EmailHasError ? "border: 4px red solid;":"")" @bind-Value="Form.Email" disabled="@(isUpdate ? false : true)" class="w-[100%] !h-[50px] lora-semibold text-[20px] text-[#000] px-[15px] !rounded-[15px]  !bg-[#E8E8E8] focus:!border-[#476F95] focus:!text-[#000] focus:border-[4px] focus:!scale-[1.03] !outline-none"  />
+    </div>
+    <div class="flex items-center">
+        <button class="!mt-[35px] bg-[#78938A] w-[135px] h-[48px] !mr-[10px] !rounded-[10px] !text-[26px] montserrat-semibold hover:scale-[1.05] text-white @(isUpdate ? "":"hidden")" @onclick="@(() => SubmitChanges())">Save</button>
+        <button class="!mt-[35px] bg-[#525E75] w-[135px] h-[48px] !rounded-[10px] !text-[26px] montserrat-semibold hover:scale-[1.05] text-white" @onclick="@(() => HandleClick())">@( isUpdate ? "Back" : "Close")</button>
+    </div>
+    <div class="mt-[25px] flex justify-center  items-center">
+        @if(Errors.Count > 0){
+            <div class="flex items-center justify-center w-[30px] h-[30px] !bg-[#F52D2D] rounded-[5px] animate-pulse mr-[15px]">
+                <h3 class="!mb-0 text-white lora-semibold text-[26px]">!</h3>
+            </div>
+        }
+        @foreach (var error in Errors)
+        {
+            <p class="text-[#F52D2D] !text-[20px] hind-madurai-semibold mr-[10px]  !mb-0">@error</p>
+        }
+    </div>
 </article>
 
 @code {
     [CascadingParameter]
     public Action<string> OnClick { get; set; }
 
-    public void HandleClick (string href)
+    public List<string> Errors { get; set; } = new List<string>();
+
+    public class AccountUpdateFormModel {
+        public string Username { get; set; } = string.Empty;
+        public string Instagram { get; set; } = string.Empty;
+        public string Twitter { get; set; } = string.Empty;
+        public string Email { get; set; } = string.Empty;
+        public string ProfilePicture { get; set; } = "images/Avatar-Profile.png"; // Default profile picture
+
+        public bool UsernameHasError { get; set; } = false;
+        public bool InstagramHasError { get; set; } = false;
+        public bool TwitterHasError { get; set; } = false;
+        public bool EmailHasError { get; set; } = false;
+    }
+    public AccountUpdateFormModel Form { get; set; } = new AccountUpdateFormModel();
+    public bool isUpdate { get; set; } = false;
+    protected override async Task OnInitializedAsync() {
+        Form.Username = UserService.CurrentUser.Username;
+        Form.Instagram = UserService.CurrentUser.Socials[0];
+        Form.Twitter = UserService.CurrentUser.Socials[1];
+        Form.Email = UserService.CurrentUser.Email;
+        Form.ProfilePicture = UserService.CurrentUser.ProfilePicture ?? "images/Avatar-Profile.png"; // Default profile picture if not set
+    }
+
+    public void SubmitChanges () {
+        foreach (var value in Form.GetType().GetProperties()) {
+            if(string.IsNullOrEmpty(value.GetValue(Form)?.ToString()) && !Errors.Contains($"{value.Name} is required") && value.Name == "Email") {
+                Errors.Add($"{value.Name} is required");
+                Form.EmailHasError = true;
+            }
+            if(string.IsNullOrEmpty(value.GetValue(Form)?.ToString()) && !Errors.Contains($"{value.Name} is required") && value.Name == "Username") {
+                Errors.Add($"{value.Name} is required");
+                Form.UsernameHasError = true;
+            }
+            if(string.IsNullOrEmpty(value.GetValue(Form)?.ToString()) && !Errors.Contains($"{value.Name} is required") && value.Name == "Instagram") {
+                Errors.Add($"{value.Name} is required");
+                Form.InstagramHasError = true;
+            }
+            if(string.IsNullOrEmpty(value.GetValue(Form)?.ToString()) && !Errors.Contains($"{value.Name} is required") && value.Name == "Twitter") {
+                Errors.Add($"{value.Name} is required");
+                Form.TwitterHasError = true;
+            }
+        }
+        if(Errors.Count == 0) {
+            var user = Query.PostQueryAsync("https://jsonplaceholder.typicode.com/posts", System.Text.Json.JsonSerializer.Serialize(Form)); // Change to correct API endpoint
+            UserService.SetUser(user);
+        }
+    }
+
+    public async Task HandleFileSelected(InputFileChangeEventArgs e)
     {
-        OnClick?.Invoke(href);
+        var file = e.File;
+        Form.ProfilePicture = ""; // Reset to default if no file selected
+        if (file != null)
+        {
+            using var stream =  file.OpenReadStream(maxAllowedSize: 1024 * 1024 * 5); // Limit to 5MB
+            using var memoryStream = new MemoryStream();
+            await stream.CopyToAsync(memoryStream);
+            Form.ProfilePicture = "data:image/png;base64," + Convert.ToBase64String(memoryStream.ToArray()); // Store as Base64 string
+        }
+        else
+        {
+            Form.ProfilePicture = "images/Avatar-Profile.png"; // Reset to default if no file selected
+        }
+        StateHasChanged(); // Refresh the UI to show the new profile picture
+    }
+
+    public void ValidateForm(ChangeEventArgs e, string form) {
+        Errors.Clear();
+        switch (form) {
+            case "username":
+                if(e.Value.ToString().Length < 3 || e.Value.ToString().Length > 12 || !Regex.IsMatch(e.Value.ToString(), @"^[a-zA-Z0-9]+$")) {
+                    Errors.Add("Invalid Username");
+                }
+                break;
+            case "instagram":
+                if(!Regex.IsMatch(e.Value.ToString(), @"^https?://(www\.)?instagram\.com/[a-zA-Z0-9._]+/?$") || e.Value.ToString().Length == 0) {
+                    Errors.Add("Invalid Instagram URL");
+                }
+                break;
+            case "twitter":
+                if(!Regex.IsMatch(e.Value.ToString(), @"^https?://(www\.)?twitter\.com/[a-zA-Z0-9._]+/?$") || e.Value.ToString().Length == 0) {
+                    Errors.Add("Invalid Twitter URL");
+                }
+                break;
+            case "email":
+                if(!Regex.IsMatch(e.Value.ToString(), @"^[^@\s]+@[^@\s]+\.[^@\s]+$") || e.Value.ToString().Length == 0) {
+                    Errors.Add("Invalid Email");
+                }
+                break;
+        }
+    }
+
+    public void HandleClick ()
+    {
+        if (isUpdate) {
+            isUpdate = false;
+        }
+        else {
+        OnClick?.Invoke("/Dashboard/Settings");
+        }
     }
 }

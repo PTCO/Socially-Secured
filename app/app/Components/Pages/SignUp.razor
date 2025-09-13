@@ -81,13 +81,13 @@
     private List<string> GetTakenEmails()
     {
         var users = System.Text.Json.JsonSerializer.Deserialize<List<User>>(data);
-        return users?.Select(user => user.email).ToList() ?? new List<string>();
+        return users?.Select(user => user.Email).ToList() ?? new List<string>();
     }
 
     private List<string> GetTakenUsernames()
     {
         var users = System.Text.Json.JsonSerializer.Deserialize<List<User>>(data);
-        return users?.Select(user => user.username).ToList() ?? new List<string>();
+        return users?.Select(user => user.Username).ToList() ?? new List<string>();
     }
     public async Task HandleSubmit()
     {
@@ -98,11 +98,16 @@
         }
 
         if(Model.errorMessages.Count == 0){
-            var user = Query.PostQueryAsync("https://jsonplaceholder.typicode.com/posts", System.Text.Json.JsonSerializer.Serialize(Form));
-            UserService.SetUser(user);
-            await Task.Delay(3000); // Simulate a delay for the login process
-            Model.SwitchUI("Welcome");
-            NavigationManager.NavigateTo("/Dashboard");
+            try{
+                var user = Query.PostQueryAsync("https://jsonplaceholder.typicode.com/posts", System.Text.Json.JsonSerializer.Serialize(Form));
+                UserService.SetUser(user);
+                Model.SwitchUI("Welcome");
+                await Task.Delay(3000); // Simulate a delay for the login process
+                NavigationManager.NavigateTo("/Dashboard");
+            } catch(Exception ex) {
+                Model.errorMessages.Add(ex.Message);
+                Model.SwitchUI("Errors");
+            }
         }
         StateHasChanged(); // Trigger a state change to update the UI
     }

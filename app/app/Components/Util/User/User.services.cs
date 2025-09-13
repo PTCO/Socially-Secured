@@ -6,7 +6,7 @@ public class UserService
     {
         var user = System.Text.Json.JsonSerializer.Deserialize<User>(userData);
         CurrentUser = user;
-    }
+    }   
 
     public void ClearUser()
     {

@@ -3,24 +3,22 @@
 @inject IJSRuntime JS
 @inject NavigationManager NavigationManager
 @inject UserService UserService
-@using Chat
 @using System.Text.RegularExpressions;
 
     <article>
         <div class="w-[450px] h-[480px] !mb-[30px] mx-auto overflow-y-auto @(isBlocked ? "opacity-[0.5]":"")" style="scrollbar-width: none;">
-            @foreach (var message in Chat.Messages)
+            @foreach (var message in UserService.CurrentUser.Messages)
             {
                 <Message MessageText="@message.body" SenderID="@message.id" TimeStamp="@message.Timestamp"/>
             }
         </div>
-        <img src="images/Divider-XLarge-2.png" class="mb-[30px] opacity-[0.5]" alt="">
-        <div class="flex items-center">
-            <InputText @bind-value="newMessage" @onclick="@(() => {hasError = false; errorMessage = string.Empty;})"
+        <img src="images/Divider-XLarge-2.png" class="mb-[30px] @(isBlocked ? "opacity-[0.5]":"")" alt="">
+        <div class="flex items-center @(isBlocked ? "disabled" : "")">
+            <InputText @bind-value="newMessage" disabled="@isBlocked" @onclick="@(() => {hasError = false; errorMessage = string.Empty;})"
             class="@($"w-[420px] h-[50px]  lora-semibold text-[20px] text-[#fff] px-[15px] !rounded-[15px] !bg-[#525E75] focus:!border-[#476F95] focus:!text-[#fff] focus:border-[4px] focus:!scale-[1.03] !outline-none {(hasError ? "!border-[#F52D2D] !border-[4px]" : null)} {(isBlocked ? "!opacity-[0.5]" : null)}")"/>
-            <button class="flex items-center justify-center bg-[#D9D9D9] w-[50px] h-[50px] !ml-[10px] !rounded-[10px] hover:scale-[1.05] transition-all" @onclick="HandleSubmit">
+            <button class="flex items-center justify-center bg-[#D9D9D9] w-[50px] h-[50px] !ml-[10px] !rounded-[10px] hover:scale-[1.05] transition-all @(isBlocked ? "hover:scale-[1]" : "")" disabled="@isBlocked" @onclick="HandleSubmit">
                 <img src="images/Send-Arrow-Icon.png" alt="" srcset="">
             </button>
-
         </div>
         <div class="flex items-center">
             <button class="bg-[#E8E8E8] w-[135px] h-[48px] !rounded-[10px] !mt-[15px] !text-[26px] montserrat-semibold hover:scale-[1.05] text-black" @onclick="@(() => CloseChat(ChatID))">Close</button>
@@ -28,8 +26,8 @@
             <p class="text-[#F52D2D] !text-[20px] hind-madurai-semibold ml-[30px] !mt-[15px] !mb-0">@errorMessage</p>
         </div>
     </article>
-    <article class="flex items-end !h-[642px] mr-auto @(isBlocked ? "opacity-[0.5]":"")">
-        <img src="@(Chat.Users.Select(u => u.ProfilePicture).FirstOrDefault() != null ? Chat.Users.Select(u => u.ProfilePicture).FirstOrDefault() : "images/Avatar-Profile.png")" class="w-[72px] h-[72px] ml-[25px] mb-[45px]" alt="">
+    <article class="flex items-end !h-[642px] @(isBlocked ? "opacity-[0.5]":"")">
+        <img src="@(UserService.CurrentUser.Friends.Select(u => u.ProfilePicture).FirstOrDefault() != null ? UserService.CurrentUser.Friends.Select(u => u.ProfilePicture).FirstOrDefault() : "images/Avatar-Profile.png")" class="w-[72px] h-[72px] ml-[25px] mb-[45px]" alt="">
     </article>
 
 
@@ -39,7 +37,7 @@
 
     [CascadingParameter]
     public Layout.Chats? ChatLayout { get; set; }
-
+    public List<Chat.Chat.ChatMessage> Messages { get; set; } = new List<Chat.Chat.ChatMessage>();
     public bool hasError { get; set; } = false;
     public bool isBlocked { get; set; } = false;
     public string newMessage { get; set; } = string.Empty;
@@ -53,25 +51,22 @@
     }
 
     public void UpdateChat(object sender, LocationChangedEventArgs e){
-        isBlocked = UserService.CurrentUser.blockedUsers.Contains(ChatID);
-        Chat.Messages = new List<Chat.ChatMessage>()
-        {
-            new Chat.ChatMessage() { body = "Hello, how are you?", id = 1, Timestamp = DateTime.Now.AddMinutes(-10) },
-        };
+        isBlocked = UserService.CurrentUser.BlockedUsers.Contains(ChatID);
         var json = Query.GetQuery("https://jsonplaceholder.typicode.com/comments");
+        Messages = UserService.CurrentUser.Messages.Where(m => m.id == ChatID).ToList();
         StateHasChanged(); // Refresh the UI
     }
 
     public void BlockChat(int chatID)
     {
-        if (UserService.CurrentUser.blockedUsers.Contains(chatID))
+        if (UserService.CurrentUser.BlockedUsers.Contains(chatID))
         {
-            UserService.CurrentUser.blockedUsers.Remove(chatID);
+            UserService.CurrentUser.BlockedUsers.Remove(chatID);
             isBlocked = false;
         }
         else
         {
-            UserService.CurrentUser.blockedUsers.Add(chatID);
+            UserService.CurrentUser.BlockedUsers.Add(chatID);
             isBlocked = true;
         }
         ChatLayout?.UpdateChats(); // Update the chat list in the parent component
@@ -82,7 +77,6 @@
     public void CloseChat(int chatID)
     {
         ChatLayout?.setCurrentChat(0); // Reset the selected chat
-        Chat.Messages.Clear(); // Clear the messages for the chat
         NavigationManager.NavigateTo("/Dashboard/Chats");
         StateHasChanged(); // Refresh the UI
     }
@@ -113,7 +107,7 @@
             StateHasChanged(); // Refresh the UI
             return false;
         }
-        Chat.Messages.Add(new Chat.ChatMessage()
+        UserService.CurrentUser.Messages.Add(new Chat.Chat.ChatMessage()
         {
             body = newMessage,
             id = ChatID, // Assuming ChatID is the ID of the current chat

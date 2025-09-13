@@ -53,10 +53,12 @@ A:\Web Applications\Socially Secured\app\app\obj\Debug\net9.0\app.AssemblyInfoIn
 A:\Web Applications\Socially Secured\app\app\obj\Debug\net9.0\app.AssemblyInfo.cs
 A:\Web Applications\Socially Secured\app\app\obj\Debug\net9.0\app.csproj.CoreCompileInputs.cache
 A:\Web Applications\Socially Secured\app\app\obj\Debug\net9.0\app.MvcApplicationPartsAssemblyInfo.cache
+A:\Web Applications\Socially Secured\app\app\obj\Debug\net9.0\app.sourcelink.json
 A:\Web Applications\Socially Secured\app\app\obj\Debug\net9.0\scopedcss\Components\Layout\MainLayout.razor.rz.scp.css
 A:\Web Applications\Socially Secured\app\app\obj\Debug\net9.0\scopedcss\Components\Layout\NavMenu.razor.rz.scp.css
 A:\Web Applications\Socially Secured\app\app\obj\Debug\net9.0\scopedcss\bundle\app.styles.css
 A:\Web Applications\Socially Secured\app\app\obj\Debug\net9.0\scopedcss\projectbundle\app.bundle.scp.css
+A:\Web Applications\Socially Secured\app\app\obj\Debug\net9.0\compressed\yykqcags6p-nu7gnyeg3z.gz
 A:\Web Applications\Socially Secured\app\app\obj\Debug\net9.0\compressed\qjoxo1bmgg-bqjiyaj88i.gz
 A:\Web Applications\Socially Secured\app\app\obj\Debug\net9.0\compressed\562zvpi15f-c2jlpeoesf.gz
 A:\Web Applications\Socially Secured\app\app\obj\Debug\net9.0\compressed\v54tqdlggd-erw9l3u2r3.gz
@@ -118,6 +120,4 @@ A:\Web Applications\Socially Secured\app\app\obj\Debug\net9.0\refint\app.dll
 A:\Web Applications\Socially Secured\app\app\obj\Debug\net9.0\app.pdb
 A:\Web Applications\Socially Secured\app\app\obj\Debug\net9.0\app.genruntimeconfig.cache
 A:\Web Applications\Socially Secured\app\app\obj\Debug\net9.0\ref\app.dll
-A:\Web Applications\Socially Secured\app\app\obj\Debug\net9.0\compressed\yykqcags6p-nu7gnyeg3z.gz
-A:\Web Applications\Socially Secured\app\app\obj\Debug\net9.0\app.sourcelink.json
-A:\Web Applications\Socially Secured\app\app\obj\Debug\net9.0\compressed\5a6by45icv-0j1ezjhxve.gz
+A:\Web Applications\Socially Secured\app\app\obj\Debug\net9.0\compressed\5a6by45icv-uygylfoy6n.gz

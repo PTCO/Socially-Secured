@@ -1,6 +1,8 @@
  @page "/Dashboard/Settings/Security"
+@using System.ComponentModel.DataAnnotations
 @layout Layout.Settings
 @inject UserService UserService
+@inject Model Model
 @inject NavigationManager NavigationManager
 
 <article class="flex items-center">
@@ -9,31 +11,53 @@
     <button class=" bg-[#E8E8E8] w-[135px] h-[48px] !rounded-[10px] !mr-auto !text-[26px] montserrat-semibold hover:scale-[1.05] text-black" @onclick="@(() => HandleClick("/Dashboard/Settings"))">Close</button>
 </article>
 <img src="images/Divider-Horizontal-Large.png" class="mt-[20px] mb-[30px] xl:!mb-[20px]" alt="">
-<EditForm Model="@ChangePassword" class="flex flex-column items-center justify-center">
+<EditForm EditContext="@editContext" class="flex flex-column items-center justify-center">
+    <DataAnnotationsValidator />
     <label class="lora-semibold text-[30px] text-[#000] mb-[25px] xl:!mb-[15px]" for="currentPassword">Current Password</label>
     <div class="flex items-center  w-[420px]">
-        <InputText id="currentPassword" @bind-Value="@ChangePassword.CurrentPassword" @oninput="@(e => ValidateCurrentPassword())" class="w-[100%] h-[50px]  lora-semibold  text-[20px] text-[#fff] px-[15px] !rounded-[15px] bg-[#D9D9D9] focus:!border-[#000] focus:border-[4px] focus:!bg-[#82919F] focus:!scale-[1.03] !outline-none" />
-        <img src="@(!isCurrentPasswordValid ? "images/Chats-Request-Accept-Icon.png" : "images/Chats-Request-Decline-Icon.png")" class="ml-[15px]" alt="">
+        <InputText id="currentPassword" @bind-Value="@ChangePassword.CurrentPassword" @oninput="@(e => ValidateCurrentPassword(e))" class="w-[100%] h-[50px]  lora-semibold  text-[20px] text-[#fff] px-[15px] !rounded-[15px] bg-[#D9D9D9] focus:!border-[#000] focus:border-[4px] focus:!bg-[#82919F] focus:!scale-[1.03] !outline-none" />
+        <img src="@(isCurrentPasswordValid ? "images/Chats-Request-Accept-Icon.png" : "images/Chats-Request-Decline-Icon.png")" class="ml-[15px]" alt="">
     </div>
-    <img src="images/Divider-large.png" class="mt-[30px] mb-[25px]" alt="">
-    <label class="lora-semibold text-[30px] text-[#000] mb-[25px] xl:!mb-[15px]" for="newPassword">New Password</label>
-    <InputText id="newPassword" @bind-Value="@ChangePassword.NewPassword" class="w-[100%] h-[50px]  lora-semibold  text-[20px] text-[#fff] px-[15px] !rounded-[15px] bg-[#D9D9D9] focus:!border-[#000] focus:border-[4px] focus:!bg-[#82919F] focus:!scale-[1.03] !outline-none" />
-    <label class="lora-semibold text-[30px] text-[#000] mb-[25px] mt-[30px] xl:!mb-[15px]" for="confirmPassword">Confirm Password</label>
-    <InputText id="confirmPassword" @bind-Value="@ChangePassword.ConfirmPassword" class="w-[100%] h-[50px]  lora-semibold  text-[20px] text-[#fff] px-[15px] !rounded-[15px] bg-[#D9D9D9] focus:!border-[#000] focus:border-[4px] focus:!bg-[#82919F] focus:!scale-[1.03] !outline-none" />
-    <button class="bg-[#92BA92] w-[201px] h-[60px] !rounded-[10px] !mt-[40px] xl:!mt-[30px] !text-[30px] font-semibold hover:scale-[1.05] text-white">Change</button>
+    <img src="images/Divider-large.png" class="mt-[30px] mb-[25px] xl:!mt-[20px] xl:!mb-[10px]" alt="">
+    <span class="flex flex-column text-center justify-center w-[100%] @(isCurrentPasswordValid ? "":"opacity-[.5]")">
+        <label class="lora-semibold text-[30px] text-[#000] mb-[25px] xl:!mb-[15px]" for="newPassword">New Password</label>
+        <InputText id="newPassword" disabled="@(!isCurrentPasswordValid)" @bind-Value="@ChangePassword.NewPassword" class="w-[100%] h-[50px]  lora-semibold  text-[20px] text-[#fff] px-[15px] !rounded-[15px] bg-[#D9D9D9] focus:!border-[#000] focus:border-[4px] focus:!bg-[#82919F] focus:!scale-[1.03] !outline-none" />
+    </span>
+    <span class="flex flex-column text-center justify-center w-[100%] @(isCurrentPasswordValid ? "":"opacity-[.5]")">
+        <label class="lora-semibold text-[30px] text-[#000] mb-[25px] mt-[30px] xl:mt-[15px] xl:!mb-[15px]" for="confirmPassword">Confirm Password</label>
+        <InputText id="confirmPassword" disabled="@(!isCurrentPasswordValid)" @bind-Value="@ChangePassword.ConfirmPassword" class="w-[100%] h-[50px]  lora-semibold  text-[20px] text-[#fff] px-[15px] !rounded-[15px] bg-[#D9D9D9] focus:!border-[#000] focus:border-[4px] focus:!bg-[#82919F] focus:!scale-[1.03] !outline-none" />
+    </span>
+    <button class="bg-[#92BA92] w-[201px] h-[60px] !rounded-[10px] !mt-[40px] xl:!mt-[30px] !text-[30px] font-semibold hover:scale-[1.05] text-white @(isCurrentPasswordValid ? "":"opacity-[.5] hover:scale-[1]")" disabled="@(!isCurrentPasswordValid)" @onclick="@(() => SubmitChanges())">Change</button>
+    <div class="mt-[15px] flex justify-center  items-center">
+        @if(Errors.Count > 0){
+            <div class="flex items-center justify-center w-[30px] h-[30px] !bg-[#F52D2D] rounded-[5px] animate-pulse mr-[15px]">
+                <h3 class="!mb-0 text-white lora-semibold text-[26px]">!</h3>
+            </div>
+        }
+        <div class="text-center !w-fit max-w-[380px]">
+            @foreach (var error in Errors)
+            {
+                <p class="text-[#F52D2D] !text-[18px] hind-madurai-semibold mr-[10px]  !mb-0">@error</p>
+            }
+        </div>
+    </div>
 </EditForm>
 
 @code {
+    [CascadingParameter]
+    public Action<string> OnClick { get; set; }
     public class ChangePasswordForm {
         public string CurrentPassword { get; set; }
+        [Required(ErrorMessage = "New password is required")]
+        [RegularExpression("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{8,}$", ErrorMessage = "Password must be at least 8 characters long, contain at least one uppercase letter, one lowercase letter, and one number.")]
         public string NewPassword { get; set; }
+        [Required(ErrorMessage = "Confirm password is required"), Compare("NewPassword", ErrorMessage = "Passwords do not match")]
         public string ConfirmPassword { get; set; }
     }
     public ChangePasswordForm ChangePassword { get; set; } = new ChangePasswordForm();
+    public EditContext editContext { get; set; }
     public bool isCurrentPasswordValid = false;
-
-    [CascadingParameter]
-    public Action<string> OnClick { get; set; }
+    public List<string> Errors { get; set; } = new List<string>();
     public void HandleClick(string href)
     {
         OnClick?.Invoke(href);
@@ -41,14 +65,37 @@
     protected override void OnInitialized()
     {
         // Initialize any necessary data or services here
-        ValidateCurrentPassword();
-        isCurrentPasswordValid = ChangePassword.CurrentPassword == UserService.CurrentUser.password;
+        editContext = new EditContext(ChangePassword);
         StateHasChanged();
     }
 
-    public void ValidateCurrentPassword()
+    public void ValidateCurrentPassword(ChangeEventArgs e) 
     {
-        isCurrentPasswordValid = ChangePassword.CurrentPassword == UserService.CurrentUser.password;
+        isCurrentPasswordValid = e.Value.ToString() == UserService.CurrentUser.Password;
+        StateHasChanged();
+    }
+
+    public void SubmitChanges()
+    {
+        editContext.Validate();
+        Errors.Clear();
+        if(!isCurrentPasswordValid) {
+            return;
+        }
+        foreach (var error in editContext.GetValidationMessages())
+        {
+            Console.WriteLine(error);
+            if(!Errors.Contains(error))
+            {
+                Errors.Add(error);
+            }
+        }
+
+        if (isCurrentPasswordValid && ChangePassword.NewPassword == ChangePassword.ConfirmPassword && Errors.Count == 0)
+        {
+            var user = Query.PostQueryAsync("https://jsonplaceholder.typicode.com/posts", System.Text.Json.JsonSerializer.Serialize(ChangePassword)); // Change to correct API endpoint
+            UserService.SetUser(user);
+        }
         StateHasChanged();
     }
 }

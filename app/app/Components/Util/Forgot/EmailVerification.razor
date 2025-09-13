@@ -80,7 +80,7 @@
         var emailList = System.Text.Json.JsonSerializer.Deserialize<List<User>>(query);
         foreach (var user in emailList)
         {
-            if (user.email.Equals(EmailForm.Email))
+            if (user.Email.Equals(EmailForm.Email))
             {
                 verified = true; // Simulate successful verification
                 await Task.Delay(3000); // Simulate a delay for verification

@@ -41,7 +41,6 @@
 
     protected override void OnInitialized()
     {
-
         HandleLocationChanged(this, new LocationChangedEventArgs(NavigationManager.Uri, false));
     }
 
@@ -59,7 +58,7 @@
                 currentUrl = "images/Welcome-Home-Icon.png";
                 break;
             default:
-                currentUrl = UserService.CurrentUser.profilePicture;
+                currentUrl = UserService?.CurrentUser?.ProfilePicture ?? "images/Welcome-Home-Icon.png";
                 profileImage = "!w-[103px] !h-[103px] rounded-[50%]";
                 iconOne = new NavIcon { icon = "images/Chat-Search-Icon.png", title = "Search", Href="/Dashboard/Search", Class="w-[56px] !h-[56px] border-[#F1DDBF] focus:bg-[#E8E8E8] focus:border-[#E8E8E8] hover:bg-[#E8E8E8] hover:border-[#E8E8E8] !pt-[10px]" }; // Change the icon for Dashboard page
                 iconTwo = new NavIcon { icon = "images/Chats-Icon.png", title = "Chats", Href="/Dashboard/Chats", Class="w-[56px] !h-[56px] border-[#476F95] hover:bg-[#E8E8E8] hover:border-[#E8E8E8]" }; // Change the icon for Profile page 

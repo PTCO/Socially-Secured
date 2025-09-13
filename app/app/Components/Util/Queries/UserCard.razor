@@ -1,7 +1,7 @@
 @rendermode InteractiveServer
 @inject IJSRuntime JS
 @inject NavigationManager NavigationManager
-@using Chat
+@inject UserService UserService
 
 <article 
     class="mb-[20px] w-fit  flex items-center transition-all hover:cursor-pointer @(IsSelected == ChatID ? IsRequest ? "!bg-[#E8E8E8] rounded-[15px] hover:!cursor-default h-[65px] max-w-[380px]" : "!bg-[#525E75] rounded-[15px]  pl-[4px] ml-[30px] !w-[380px] relative" : "hover:scale-[1.02] ") @(IsBlocked && IsSelected == ChatID ? "!bg-[#FE5757]" : "")" @onclick="@(() => {OnChatSelected.InvokeAsync(ChatID); if(hasLink) NavigationManager.NavigateTo($"/Dashboard/Chats/Session/{ChatID}");})">
@@ -9,7 +9,7 @@
     <div class="flex items-center px-[15px] !w-[302px] !h-[65px] rounded-[15px]  shadow-md @NamePlateClass @(IsSelected == ChatID ?  IsRequest ? "shadow-none !pl-[0px]" : "!bg-[#525E75] shadow-none !h-[65px] !w-full":"") @(IsBlocked ? "!bg-[#FE5757]" : "")">
         <h2 class="montserrat-semibold w-fit  mb-0 text-[#000] !text-[26px] @(IsBlocked ? "!text-[#fff]" : "") @(IsSelected == ChatID && !IsRequest ? "!text-[#fff]" : "")">@Username</h2>
         @if(IsSearchResult && IsSelected == ChatID){
-            <button class="bg-[#F1DDBF] w-[80px] h-[37px] !rounded-[10px] !ml-[auto] !text-[18px] font-semibold hover:scale-[1.05] text-black @(isButtonClicked ? "!bg-[#E8E8E8]" : "")" @onclick="@(() => isButtonClicked = !isButtonClicked)">@(isButtonClicked ? "Sent" : "Invite")</button>
+            <button disabled="@isButtonClicked" class="bg-[#F1DDBF] w-[80px] h-[37px] !rounded-[10px] !ml-[auto] !text-[18px] font-semibold hover:scale-[1.05] text-black @(isButtonClicked || isFriend ? "!bg-[#E8E8E8] hover:scale-[1]" : "")" @onclick="@(() => InviteFriend())">@buttonTitle</button>
         }
         else if (IsRequest){
             <div class="flex items-center !justify-self-end ml-auto">
@@ -28,7 +28,7 @@
 
 @code {
     [Parameter]
-    public string Username { get; set; } = "BrandonIsHim"; // Placeholder for username
+    public string Username { get; set; } = ""; // Placeholder for username
     [Parameter]
     public string ProfilePicture { get; set; } = "images/Default-Profile-Picture.png"; // Placeholder for profile picture
     [Parameter]
@@ -54,19 +54,41 @@
     [Parameter]
     public bool IsBlocked { get; set; } = false;
 
+    public string buttonTitle = "Invite"; // Button title based on the state
     public bool isButtonClicked = false; // Flag to indicate if the button is clicked
+    public bool isFriend = false; // Flag to indicate if the user is a friend
+
+    protected override void OnInitialized()
+    {
+        isButtonClicked = UserService.CurrentUser.Requests.Any(r => r.id == ChatID);
+        isFriend = UserService.CurrentUser.Friends.Any(f => f.id == ChatID);
+        if(isFriend) {
+            buttonTitle = "Friend";
+            isButtonClicked = true; // If the user is a friend, the button is considered clicked
+        }
+        else if(isButtonClicked) {
+            buttonTitle = "Sent";
+        }
+        else {
+            buttonTitle = "Invite";
+        }
+    }
 
     public void OnAcceptRequest()
     {
-        Chat.Users.Add(new Chat.ChatUser() { username = Username, ProfilePicture = ProfilePicture, id = ChatID });
-        Chat.Requests.RemoveAll(r => r.id == ChatID);
+        UserService.CurrentUser.Friends.Add(new Chat.Chat.ChatUser() { Username = Username, ProfilePicture = ProfilePicture, id = ChatID });
+        UserService.CurrentUser.Requests.RemoveAll(r => r.id == ChatID);
         OnChatSelected.InvokeAsync(0); // Reset the selected chat
     }
     public void OnDeclineRequest()
     {
-        Chat.Users.RemoveAll(u => u.id == ChatID);
-        Chat.Requests.RemoveAll(r => r.id == ChatID);
+        UserService.CurrentUser.Friends.RemoveAll(u => u.id == ChatID);
+        UserService.CurrentUser.Requests.RemoveAll(r => r.id == ChatID);
         OnChatSelected.InvokeAsync(0); // Reset the selected chat
     }
-        
+    public void InviteFriend(){
+        UserService.CurrentUser.Requests.Add(new Chat.Chat.ChatRequest() { Username = Username, ProfilePicture = ProfilePicture, id = ChatID });
+        isButtonClicked = !isButtonClicked;
+        StateHasChanged();
+    }
 }

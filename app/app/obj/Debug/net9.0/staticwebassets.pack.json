@@ -17,6 +17,10 @@
       "PackagePath": "staticwebassets\\favicon.png"
     },
     {
+      "Id": "A:\\Web Applications\\Socially Secured\\app\\app\\wwwroot\\images\\Account-Select-File-Icon.png",
+      "PackagePath": "staticwebassets\\images\\Account-Select-File-Icon.png"
+    },
+    {
       "Id": "A:\\Web Applications\\Socially Secured\\app\\app\\wwwroot\\images\\Avatar-Profile.png",
       "PackagePath": "staticwebassets\\images\\Avatar-Profile.png"
     },
@@ -79,6 +83,14 @@
     {
       "Id": "A:\\Web Applications\\Socially Secured\\app\\app\\wwwroot\\images\\Divider-Four.png",
       "PackagePath": "staticwebassets\\images\\Divider-Four.png"
+    },
+    {
+      "Id": "A:\\Web Applications\\Socially Secured\\app\\app\\wwwroot\\images\\Divider-Horizontal-Account.png",
+      "PackagePath": "staticwebassets\\images\\Divider-Horizontal-Account.png"
+    },
+    {
+      "Id": "A:\\Web Applications\\Socially Secured\\app\\app\\wwwroot\\images\\Divider-Horizontal-Green-Small.png",
+      "PackagePath": "staticwebassets\\images\\Divider-Horizontal-Green-Small.png"
     },
     {
       "Id": "A:\\Web Applications\\Socially Secured\\app\\app\\wwwroot\\images\\Divider-Horizontal-Large.png",
@@ -181,6 +193,10 @@
       "PackagePath": "staticwebassets\\images\\Notification-Icon.png"
     },
     {
+      "Id": "A:\\Web Applications\\Socially Secured\\app\\app\\wwwroot\\images\\Notifications-Chat-Icon.png",
+      "PackagePath": "staticwebassets\\images\\Notifications-Chat-Icon.png"
+    },
+    {
       "Id": "A:\\Web Applications\\Socially Secured\\app\\app\\wwwroot\\images\\Profile.png",
       "PackagePath": "staticwebassets\\images\\Profile.png"
     },
@@ -241,6 +257,10 @@
       "PackagePath": "staticwebassets\\images\\Stop-Circle.png"
     },
     {
+      "Id": "A:\\Web Applications\\Socially Secured\\app\\app\\wwwroot\\images\\Trash-Can-Icon.png",
+      "PackagePath": "staticwebassets\\images\\Trash-Can-Icon.png"
+    },
+    {
       "Id": "A:\\Web Applications\\Socially Secured\\app\\app\\wwwroot\\images\\User-Add-Chat-Icon-Large.png",
       "PackagePath": "staticwebassets\\images\\User-Add-Chat-Icon-Large.png"
     },
@@ -263,6 +283,14 @@
     {
       "Id": "A:\\Web Applications\\Socially Secured\\app\\app\\wwwroot\\images\\Vertical-Divider-Small.png",
       "PackagePath": "staticwebassets\\images\\Vertical-Divider-Small.png"
+    },
+    {
+      "Id": "A:\\Web Applications\\Socially Secured\\app\\app\\wwwroot\\images\\View-Icon.png",
+      "PackagePath": "staticwebassets\\images\\View-Icon.png"
+    },
+    {
+      "Id": "A:\\Web Applications\\Socially Secured\\app\\app\\wwwroot\\images\\View-Inactive-Icon.png",
+      "PackagePath": "staticwebassets\\images\\View-Inactive-Icon.png"
     },
     {
       "Id": "A:\\Web Applications\\Socially Secured\\app\\app\\wwwroot\\images\\Welcome-Back-Logo.png",
