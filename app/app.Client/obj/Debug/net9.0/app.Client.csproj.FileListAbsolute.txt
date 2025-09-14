@@ -1025,10 +1025,10 @@ A:\Web Applications\Socially Secured\app\app.Client\obj\Debug\net9.0\app.Client.
 A:\Web Applications\Socially Secured\app\app.Client\obj\Debug\net9.0\refint\app.Client.dll
 A:\Web Applications\Socially Secured\app\app.Client\obj\Debug\net9.0\app.Client.pdb
 A:\Web Applications\Socially Secured\app\app.Client\obj\Debug\net9.0\ref\app.Client.dll
-A:\Web Applications\Socially Secured\app\app.Client\bin\Debug\net9.0\wwwroot\_framework\app.Client.71304xzasl.pdb
-A:\Web Applications\Socially Secured\app\app.Client\bin\Debug\net9.0\wwwroot\_framework\app.Client.pmpoalu7ce.wasm
-A:\Web Applications\Socially Secured\app\app.Client\bin\Debug\net9.0\wwwroot\_framework\app.Client.pmpoalu7ce.wasm.gz
-A:\Web Applications\Socially Secured\app\app.Client\bin\Debug\net9.0\wwwroot\_framework\app.Client.71304xzasl.pdb.gz
-A:\Web Applications\Socially Secured\app\app.Client\obj\Debug\net9.0\compressed\iz5ypwxc0s-pmpoalu7ce.gz
-A:\Web Applications\Socially Secured\app\app.Client\obj\Debug\net9.0\compressed\kl920nz29i-71304xzasl.gz
-A:\Web Applications\Socially Secured\app\app.Client\obj\Debug\net9.0\compressed\a4b5e25sap-0ptbir9prj.gz
+A:\Web Applications\Socially Secured\app\app.Client\bin\Debug\net9.0\wwwroot\_framework\app.Client.tffg1fkeou.pdb
+A:\Web Applications\Socially Secured\app\app.Client\bin\Debug\net9.0\wwwroot\_framework\app.Client.6sjxx83tdm.wasm
+A:\Web Applications\Socially Secured\app\app.Client\bin\Debug\net9.0\wwwroot\_framework\app.Client.6sjxx83tdm.wasm.gz
+A:\Web Applications\Socially Secured\app\app.Client\bin\Debug\net9.0\wwwroot\_framework\app.Client.tffg1fkeou.pdb.gz
+A:\Web Applications\Socially Secured\app\app.Client\obj\Debug\net9.0\compressed\iz5ypwxc0s-6sjxx83tdm.gz
+A:\Web Applications\Socially Secured\app\app.Client\obj\Debug\net9.0\compressed\kl920nz29i-tffg1fkeou.gz
+A:\Web Applications\Socially Secured\app\app.Client\obj\Debug\net9.0\compressed\a4b5e25sap-vm0x7v4ey0.gz
