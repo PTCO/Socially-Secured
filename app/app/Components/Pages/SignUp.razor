@@ -99,7 +99,7 @@
 
         if(Model.errorMessages.Count == 0){
             try{
-                var user = Query.PostQueryAsync("https://jsonplaceholder.typicode.com/posts", System.Text.Json.JsonSerializer.Serialize(Form));
+                var user = Query.PostQueryAsync("https://sociallysecuredapi-draya8czhpeecua5.centralus-01.azurewebsites.net/api/Auth/register", System.Text.Json.JsonSerializer.Serialize(Form));
                 UserService.SetUser(user);
                 Model.SwitchUI("Welcome");
                 await Task.Delay(3000); // Simulate a delay for the login process
